@@ -9,7 +9,7 @@ echo $header;
 
             <nav class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                 <div class="container-fluid">
-                    <img src="/assets/img/neuro_negro.png" height="40" alt=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="/assets/img/logos/apm.png" height="40" alt=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 ">
                         Sociedad Mexicana de Neurología Pediátrica
                     </a>
@@ -100,12 +100,12 @@ echo $header;
                         </ul>
                         <ul class="navbar-nav d-lg-block d-none">
                             <li class="nav-item">
-                                <button type="button" class="btn btn-sm bg-gradient-warning btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
+                                <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
                             </li>
                         </ul>
                         <ul class="navbar-nav text-center mt-3 mb-2 d-block d-lg-none">
                             <li class="nav-item">
-                                <button type="button" class="btn btn-sm bg-gradient-warning btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
+                                <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
                             </li>
                         </ul>
                     </div>
@@ -120,7 +120,7 @@ echo $header;
                         <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-7">
                                 <div class="card-header pb-0 text-start">
-                                    <h5 class="font-weight-bolder text-info text-dark text-center">XXXI Congreso Anual de la Sociedad Mexicana de Neurología Pediátrica 2022</h5>
+                                    <h5 style="color:#1B8586;" class="font-weight-bolder text-center">Congreso de la Asociación Psiquiátrica Mexicana</h5>
                                     <div id="counter" class="group text-center mt-4">
                                         <!-- <span><em>days</em></span> 
                                         <span><em>hours</em></span>
@@ -158,10 +158,10 @@ echo $header;
                                         </div> -->
 
                                         <div class="text-center">
-                                            <button  type="button" id="btnEntrar" class="btn bg-gradient-warning w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>
+                                            <button  type="button" id="btnEntrar" class="btn bg-gradient-info w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>
                                         </div>
                                     </form>
-                                    <button type="button" id="btn_modal_add" class="btn bg-gradient-info mb-0 mt-3 w-100" data-toggle="modal" data-target="#Modal_Add" disabled="">REGISTRARSE</button>
+                                    <button type="button" style="background: #1B8586; color: #ffffff;" id="btn_modal_add" class="btn mb-0 mt-3 w-100" data-toggle="modal" data-target="#Modal_Add" disabled="">REGISTRARSE</button>
                                     <!-- <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                         <p class="mb-2 text-sm mx-auto">
                                             ¿Olvido su contraseña?
@@ -183,7 +183,7 @@ echo $header;
                                 
                                 <!-- <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/assets/img/curved-images/curved9.jpg')"></div>-->
                                 <video autoplay muted loop>
-                                    <source class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" src="/assets/img/curved-images/FONDOWEB-SMNP-10FEB.mp4" type="video/mp4">
+                                    <source class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" src="/assets/vid/POSTER-VI.mp4" type="video/mp4">
                                 </video>
 
                             </div>
@@ -330,7 +330,99 @@ echo $header;
     <!-- end modal add_register-->
     <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
     <script>
-        
+        $(document).ready(function() {
+            $("#pais").on("change", function() {
+            console.log('hola');
+            var pais = $(this).val();
+            console.log(pais);
+            $.ajax({
+                url: "/Login/getEstadoPais",
+                type: "POST",
+                data: {
+                    pais
+                },
+                dataType: "json",
+                beforeSend: function() {
+                    console.log("Procesando....");
+                    $('#estado')
+                        .find('option')
+                        .remove()
+                        .end();
+
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+
+                    $('#estado').removeAttr('disabled');
+
+                    $('#estado')
+                        .append($('<option>', {
+                                value: ''
+                            })
+                            .text('Selecciona una opción'));
+
+                    $.each(respuesta, function(key, value) {
+                        //console.log(key);
+                        console.log(value);
+                        $('#estado')
+                            .append($('<option>', {
+                                    value: value.id_estado
+                                })
+                                .text(value.estado));
+                    });
+
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+
+            });
+        });
+
+        $("#form_datos").on("submit", function(event) {
+            event.preventDefault();
+            var formData = new FormData(document.getElementById("form_datos"));
+
+            // for (var value of formData.values()) {
+            //     console.log(value);
+            // }
+            $.ajax({
+                url: "/Login/saveData",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    console.log("Procesando....");
+                    // alert('Se está borrando');
+
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+
+                    if (respuesta == 'success') {
+                        Swal.fire("¡Se creo el usuario correctamente!", "", "success").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                        then((value) => {
+                            window.location.reload();
+                        });
+                    }
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                    // alert('Error');
+                    Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                    then((value) => {
+                        window.location.reload();
+                    });
+                }
+            });
+        });
+            });
         ////===========Funcion JS para el contador==========////
         //===
         // VARIABLES

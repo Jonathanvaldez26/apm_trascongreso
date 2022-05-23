@@ -46,6 +46,41 @@ sql;
         return $mysqli->queryAll($query);
     }
 
+    public static function getStateByCountry($id_pais){
+        $mysqli = Database::getInstance(true);
+        $query =<<<sql
+        SELECT * FROM estados where id_pais = '$id_pais'
+  sql;
+      
+        return $mysqli->queryAll($query);
+      }
+
+      public static function insert($data){
+        $mysqli = Database::getInstance(1);
+        $query=<<<sql
+        INSERT INTO registrados(nombre, apellidop, apellidom, email, prefijo, especialidad, telefono, id_pais, id_estado,identificador)
+        VALUES(:nombre, :apellidop,:apellidom, :email, :prefijo, :especialidad, :telefono, :pais, :estado, :identificador);
+  sql;
+  
+            $parametros = array(
+  
+            ':nombre'=>$data->_nombre,
+            ':apellidop'=>$data->_apellidop,
+            ':apellidom'=>$data->_apellidom,
+            ':email'=>$data->_email,
+            ':prefijo'=>$data->_prefijo,
+            ':especialidad'=>$data->_especialidad,
+            ':telefono'=>$data->_telefono,
+            ':pais'=>$data->_pais,
+            ':estado'=>$data->_estado,
+            ':identificador'=>$data->_identificador
+  
+            );
+            $id = $mysqli->insert($query,$parametros);
+            return $id;
+          
+      }
+
     public static function getFreeCourses(){
         $mysqli = Database::getInstance(true);
         $query =<<<sql

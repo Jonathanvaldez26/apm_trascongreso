@@ -24,7 +24,7 @@ class Inicio{
           <head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-           <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/neuro_negro.png">
+           <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
             <!--title>
                Home - MUSA
             </title-->
@@ -64,7 +64,7 @@ class Inicio{
         
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/neuro_negro.png">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
         <title>
            Login - Congreso Neuro Pediatría
         </title>

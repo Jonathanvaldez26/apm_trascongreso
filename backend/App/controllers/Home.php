@@ -82,7 +82,7 @@ html;
         $extraHeader =<<<html
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/neuro_negro.png">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
         <title>
             Home ASDF
         </title>
