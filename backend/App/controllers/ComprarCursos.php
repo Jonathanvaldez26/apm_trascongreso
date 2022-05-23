@@ -11,7 +11,7 @@ use \App\models\Talleres as TalleresDao;
 use \App\models\Transmision as TransmisionDao;
 use \App\models\Register as RegisterDao;
 
-class Talleres extends Controller
+class ComprarCursos extends Controller
 {
 
     private $_contenedor;
@@ -129,8 +129,7 @@ html;
 
 html;
 
-        $cursos = TalleresDao::getAsignaCurso($_SESSION['id_registrado']);
-
+        $cursos = TalleresDao::getAllCursosNotInUser($_SESSION['id_registrado']);
 
 
         $card_cursos = '';
@@ -176,15 +175,18 @@ html;
             }
 
             $card_cursos .= <<<html
-                        <!--<div class="row">
+                       <!-- <div class="row">
                             <div class="col-11 m-auto" id="">
                                 <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
                             </div>
                         </div>-->
                     </div>
-                    <a href="/Talleres/Video/{$value['clave']}">
-                        <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre_curso']}</h3>
-                        
+                    <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                        <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>
+                        <div style = "display: flex; justify-content:start">
+                            <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;">Comprar</button>
+                            <button class="btn btn-primary">Agregar</button>
+                        </div>
                         
 
                         <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
@@ -202,7 +204,7 @@ html;
             }
 
             $card_cursos .= <<<html
-                    </a>
+                    <!--</a>-->
 
                     <div>
                         
