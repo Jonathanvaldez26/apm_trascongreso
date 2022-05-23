@@ -120,7 +120,7 @@ echo $header;
                         <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
                             <div class="card card-plain mt-7">
                                 <div class="card-header pb-0 text-start">
-                                    <h5 style="color:#1B8586;" class="font-weight-bolder text-center">Congreso de la Asociación Psiquiátrica Mexicana</h5>
+                                    <h5 style="color:#1B8586;" class="font-weight-bolder text-center">VI Congreso Mundial de Patología Dual</h5>
                                     <div id="counter" class="group text-center mt-4">
                                         <!-- <span><em>days</em></span> 
                                         <span><em>hours</em></span>
@@ -235,7 +235,7 @@ echo $header;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para Crear Usuarios
+                        Crear Cuenta
                     </h5>
 
                     <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
@@ -243,6 +243,7 @@ echo $header;
                     </span>
                 </div>
                 <div class="modal-body">
+                    <!-- <p style="font-size: 16px">USTED NO ESTÁ REGISTRADO.</p> -->
                     <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
                     <hr>
                     <form method="POST" enctype="multipart/form-data" id="form_datos">
