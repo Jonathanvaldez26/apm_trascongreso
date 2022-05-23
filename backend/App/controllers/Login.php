@@ -3,7 +3,9 @@ namespace App\controllers;
 defined("APPPATH") OR die("Access denied");
 
 use \Core\View;
+use \Core\MasterDom;
 use App\models\Login as LoginDao;
+use App\models\Usuarios as UsuariosDao;
 
 class Login{
     private $_contenedor;
@@ -22,7 +24,7 @@ class Login{
           <head>
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-           <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/neuro_negro.png">
+           <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
             <!--title>
                Home - MUSA
             </title-->
@@ -62,7 +64,7 @@ class Login{
         
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/neuro_negro.png">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
         <title>
            Login - Congreso Neuro Pediatría
         </title>
@@ -210,8 +212,8 @@ html;
                                 response = true;
                             }else{
                                 $('#btnEntrar').attr("disabled", true);
-                                $('#btn_modal_add').attr("disabled",false);
-                                $('#Modal_Add').modal('show');
+                                //$('#btn_modal_add').attr("disabled",false);
+                                  $('#Modal_Add').modal('show');
                             }
                         }
                     });
@@ -284,15 +286,59 @@ html;
 html;
             }
 
+            foreach(LoginDao::getStateByCountry($value['id_pais']) as $key => $value){
+                $optionState = '';
+                $selectedEstado = ($value['id_estado'] == $value['id_estado']) ? 'selected' : '';  
+                $optionState .= <<<html
+                        <option value="{$value['id_estado']}" $selectedEstado>{$value['estado']}</option>
+html;
+            }
        
 
         View::set('header',$extraHeader);
         View::set('footer',$extraFooter);
         View::set('optionEspecialidad', $optionEspecialidad);
         View::set('optionPais', $optionPais);
+        View::set('optionState', $optionState);
         View::render("login");
     }
 
+    public function getEstadoPais(){
+        $pais = $_POST['pais'];
 
+        if (isset($pais)) {
+            $Paises = LoginDao::getStateByCountry($pais);
 
+            echo json_encode($Paises);
+        }
+    }
+
+    public function saveData()
+    {
+        $data = new \stdClass();            
+        $data->_nombre = MasterDom::getData('nombre');
+        $data->_apellidop = MasterDom::getData('apellidop');
+        $data->_apellidom = MasterDom::getData('apellidom');
+        $data->_email = MasterDom::getData('email');
+        $data->_prefijo = MasterDom::getData('prefijo');
+        $data->_especialidad = MasterDom::getData('especialidad');
+        $data->_telefono = MasterDom::getData('telefono');
+        $data->_pais = MasterDom::getData('pais');
+        $data->_estado = MasterDom::getData('estado');
+        $data->_identificador = MasterDom::getData('estado');
+        // $data->_utilerias_administrador_id = $_SESSION['utilerias_administradores_id'];
+
+        $id = LoginDao::insert($data);
+        if ($id >= 1) {
+            echo "success";
+            // $this->alerta($id,'add');
+            //header('Location: /PickUp');
+        } else {
+            echo "error";
+            // header('Location: /PickUp');
+            //var_dump($id);
+        }
+    }
+
+    
 }
