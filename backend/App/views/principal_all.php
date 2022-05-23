@@ -70,39 +70,56 @@
         
         <!-- End Navbar -->
         <div class="container-fluid py-0">
+
+        <div class="row mt-3">
+                <?php echo $card_cursos;?>
+        </div>        
             <div class="row">
                 <div class="col-xl-12 mt-xl-0 mt-0">
                     <div class="row mt-md-4 mt-0">
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <a href="#">
                                         <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/1.png)">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
-                                                    <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-03.png"> -->
-                                                    <!-- <span class="fas fa-home text-large"></span> -->
+                                                   
                                                 </div>
 
-                                                <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Inicio</h6> -->
-                                                <!-- <p class="opacity-8 mb-0 text-sm">Disponible <i class="fa fa-check-circle me-sm-0" style="color: #01a31c"></i></p> -->
+                                                
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </div>
+
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Talleres/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/8.png)">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-imag: url(/img/SMNP_Iconos/8.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-07.png"> -->
-                                            <!-- <span class="color-yellow fas fa-book-reader text-large"></span> -->
+                                            
+                                            <p>Mis cursos</p>
                                         </div>
                                         
-                                        <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Talleres</h6> -->
-                                        <!-- <p class="opacity-8 mb-0 text-sm">A un click</p> -->
+                                        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                            <a href="/ComprarCursos/">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-imag: url(/img/SMNP_Iconos/14.png)">
+                                    <div class="card-body mt-md-3 text-center content-card-home">
+                                        <div class="col-12 text-center">
+                                          
+                                            <p>Comprar Cursos</p>
+                                        </div>
+                                        
+                                        
                                     </div>
                                 </div>
                             </a>
@@ -115,44 +132,30 @@
                                         <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/3.png)">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
-                                                    <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-03.png"> -->
-                                                    <!-- <span class="fas fa-user-edit text-large"></span> -->
+                                          
                                                 </div>
 
-                                                <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Datos Personales</h6> -->
-                                                <!-- <p class="opacity-8 mb-0 text-sm">Disponible <i class="fa fa-check-circle me-sm-0" style="color: #01a31c"></i></p> -->
+                                             
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4" <?=$permisos_congreso;?>>
-                            <a href="/Transmission/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/14.png)">
-                                    <div class="card-body mt-md-3 text-center content-card-home">
-                                        <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-02.png"> -->
-                                        </div>
-                                        
-                                        <!-- <p class="opacity-8 mb-0 text-sm">Disponible <i class="fa fa-check-circle me-sm-0" style="color: #01a31c"></i></p> -->
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Programa/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/13.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-02.png"> -->
+                                            
                                         </div>
-                                                                                <!-- <p class="opacity-8 mb-0 text-sm">Disponible <i class="fa fa-check-circle me-sm-0" style="color: #01a31c"></i></p> -->
+                                     
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="#">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/5.png)">
@@ -168,51 +171,44 @@
                                 </div>
                             </a>
                         </div> -->
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Profesores/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/15.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-05.png"> -->
-                                            <!-- <span class="color-yellow fas fa-chalkboard-teacher text-large"></span> -->
+                                           
                                         </div>
                                         
-                                        <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Profesores</h6> -->
-                                        <!-- <p class="opacity-8 mb-0 text-sm">Disponible <i class="fa fa-check-circle me-sm-0" style="color: #01a31c"></i></p> -->
+                                   
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        </div> -->
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/TrabajosLibres/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/7.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-05.png"> -->
-                                            <!-- <span class="color-yellow fas fa-laptop-house text-large"></span> -->
+                                           
                                         </div>
                                         
-                                        <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Trabajos Libres</h6> -->
-                                        <!-- <p class="opacity-8 mb-0 text-sm">Disponible</p> -->
                                     </div>
                                 </div>
                             </a>
-                        </div>
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        </div> -->
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Patrocinadores/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/12.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-07.png"> -->
-                                            <!-- <span class="color-yellow fas fa-copyright text-large"></span> -->
+                                            
                                         </div>
                                         
-                                        <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Patrocinadores</h6> -->
-                                        <!-- <p class="opacity-8 mb-0 text-sm">A un click</p> -->
+                                      
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                         <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="#">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/9.png)">
@@ -228,21 +224,17 @@
                                 </div>
                             </a>
                         </div> -->
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                        <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/AreaComercial/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/11.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
-                                            <!-- <img class="w-30 btn-img-home" src="../../assets/img/icons/iCONOS-07.png"> -->
-                                            <!-- <span class="color-yellow fas fa-briefcase text-large"></span> -->
+                                            
                                         </div>
-                                        
-                                        <!-- <h6 class="mb-0 mt-2 mt-md-4 font-weight-bolder text-btn color-green">Sesión de Negocios</h6> -->
-                                        <!-- <p class="opacity-8 mb-0 text-sm">A un click</p> -->
                                     </div>
                                 </div>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                         
                 </div>
@@ -302,7 +294,64 @@
         $(document).bind("contextmenu",function(e){
             return true;
         });
+
+        $('.heart-not-like').on('click', function(){
+            let clave = $(this).attr('data-clave');
+            let heart = $(this);
+
+            if (heart.hasClass('heart-like')) {
+                heart.removeClass('heart-like').addClass('heart-not-like');
+            } else {
+                heart.removeClass('heart-not-like').addClass('heart-like');
+            }
+            console.log('se cambió a like: '+clave);
+            $.ajax({
+                url: "/Talleres/Likes",
+                type: "POST",
+                data: {clave},
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+            });
+        })
+
+        $('.heart-like').on('click', function(){
+            let clave = $(this).attr('data-clave');
+            let heart = $(this);
+
+            if (heart.hasClass('heart-like')) {
+                heart.removeClass('heart-like').addClass('heart-not-like');
+            } else {
+                heart.removeClass('heart-not-like').addClass('heart-like');
+            }
+            console.log('se cambió a like: '+clave);
+            $.ajax({
+                url: "/Talleres/Likes",
+                type: "POST",
+                data: {clave},
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+            });
+        })
     });
+
+   
+
     </script>
 </body>
 
