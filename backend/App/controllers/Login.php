@@ -212,8 +212,8 @@ html;
                                 response = true;
                             }else{
                                 $('#btnEntrar').attr("disabled", true);
-                                $('#btn_modal_add').attr("disabled",false);
-                                // $('#Modal_Add').modal('show');
+                                //$('#btn_modal_add').attr("disabled",false);
+                                  $('#Modal_Add').modal('show');
                             }
                         }
                     });
