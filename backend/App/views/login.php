@@ -238,7 +238,7 @@ echo $header;
                         Crear Cuenta
                     </h5>
 
-                    <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                    <span type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal" aria-label="Close">
                         X
                     </span>
                 </div>
@@ -319,7 +319,7 @@ echo $header;
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
-                                <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </form>
