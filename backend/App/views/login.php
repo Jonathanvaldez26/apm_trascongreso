@@ -9,9 +9,10 @@ echo $header;
 
             <nav class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                 <div class="container-fluid">
-                    <img src="/assets/img/logos/apm.png" height="40" alt=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <img src="/assets/img/logos/apm.png" height="40" alt=""> &nbsp;&nbsp;
+                    <img src="/assets/img/logos/wadd.png" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">&nbsp;&nbsp;
                     <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 ">
-                        Sociedad Mexicana de Neurología Pediátrica
+                    VI Congreso Mundial de Patología Dual
                     </a>
                     <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon mt-2">
@@ -101,11 +102,17 @@ echo $header;
                         <ul class="navbar-nav d-lg-block d-none">
                             <li class="nav-item">
                                 <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
+                                <a href="https://register.dualdisorderswaddmexico2022.com/Login/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
+                                    <img id="flag" src="/assets/img/united-k.png">
+                                </a>
                             </li>
                         </ul>
                         <ul class="navbar-nav text-center mt-3 mb-2 d-block d-lg-none">
                             <li class="nav-item">
                                 <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
+                                <a href="https://register.dualdisorderswaddmexico2022.com/Login/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
+                                    <img id="flag" src="/assets/img/united-k.png">
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -235,14 +242,15 @@ echo $header;
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        Asistente para crear cuenta
+                        Crear Cuenta
                     </h5>
 
-                    <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                    <span type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal" aria-label="Close">
                         X
                     </span>
                 </div>
                 <div class="modal-body">
+                    <!-- <p style="font-size: 16px">USTED NO ESTÁ REGISTRADO.</p> -->
                     <p style="font-size: 12px">A continuación ingrese los datos del usuario.</p>
                     <hr>
                     <form method="POST" enctype="multipart/form-data" id="form_datos">
@@ -318,7 +326,7 @@ echo $header;
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn bg-gradient-success" id="btn_upload" name="btn_upload">Aceptar</button>
-                                <button type="button" class="btn bg-gradient-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
                     </form>
