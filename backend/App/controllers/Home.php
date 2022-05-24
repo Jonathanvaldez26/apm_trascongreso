@@ -49,7 +49,7 @@ html;
         //}
 
         $data_user = HomeDao::getDataUser($this->__usuario);
-
+        $modalComprar = '';
         // var_dump($data_user);
 
         $permisos_congreso = $data_user['congreso'] != '1' ? "style=\"display:none;\"" : "";
@@ -218,7 +218,7 @@ html;
                     <!--<a href="/Talleres/Video/{$value['clave']}">-->
                         <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>
                         <div style = "display: flex; justify-content:start">
-                            <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;">Comprar</button>
+                            <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
                            
                         </div>
                         
@@ -258,16 +258,55 @@ html;
                 // });
             </script>
 html;
+
+            $modalComprar .= $this->generateModalComprar($value);
         }
 
         //CURSOS SIN COMPRAR
+
+        // $modalComprar = '';
+        // foreach (TalleresDao::getAll() as $key => $value) {
+        //     $modalComprar .= $this->generateModalComprar($value);
+        // }
 
         View::set('header',$this->_contenedor->header($extraHeader));
         View::set('permisos_congreso',$permisos_congreso);
         View::set('datos',$data_user['datos']);
         View::set('card_cursos', $card_cursos);
+        View::set('modalComprar',$modalComprar);
         //View::set('tabla',$tabla);
         View::render("principal_all");
+    }
+
+    public function generateModalComprar($datos){
+        $modal = <<<html
+        <div class="modal fade" id="comprar-curso{$datos['id_curso']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                Comprar curso
+                </h5>
+
+                <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                    X
+                </span>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+html;
+                                
+                              
+
+        return $modal;
     }
 
     public function getData(){

@@ -37069,9 +37069,9 @@ input#chk-6:checked ~ #lbl-6{display: block;}
 }
 
 #body-home{
-  background-image: url(/img/qro.jpg);
-  background-size: cover;
-}
+  /* background-image: url(/img/qro.jpg);
+  background-size: cover;*/
+} 
 
 /* ---- reset ---- */
 
