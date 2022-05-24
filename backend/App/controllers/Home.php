@@ -90,12 +90,12 @@ html;
 
             
             
-            <div class="col-12 col-md-3">
-                <div class="card card-body card-course p-0 border-radius-15">
+            <div class="col-12 col-md-3 mt-3">
+                <div class="card card-body card-course p-0 border-radius-15" style="height:600px;">
                     <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                     <div class="caratula-content">
                         <a href="/Talleres/Video/{$value['clave']}">
-                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}">
+                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
                         </a>
                         <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
                         <!--button class="btn btn-outline-danger"></button-->
@@ -185,12 +185,12 @@ html;
             $card_cursos .= <<<html
             
             
-            <div class="col-12 col-md-3">
-                <div class="card card-body card-course p-0 border-radius-15">
+            <div class="col-12 col-md-3 mt-3">
+                <div class="card card-body card-course p-0 border-radius-15" style="height:600px;">
                     <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                     <div class="caratula-content">
                         <a href="/Talleres/Video/{$value['clave']}">
-                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}">
+                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
                         </a>
                         <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
                         <!--button class="btn btn-outline-danger"></button-->

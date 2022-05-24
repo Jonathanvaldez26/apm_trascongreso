@@ -37029,7 +37029,7 @@ input#chk-6:checked ~ #lbl-6{display: block;}
 }
 
 .bg-gradient-yellow{
-  background-image: radial-gradient(800px at 80% 50%, rgb(208 243 238 / 80%) 0px, rgb(255 224 0 / 75%) 100%);
+  background-image: radial-gradient(800px at 80% 50%, rgb(255 255 255 / 80%) 0px, rgb(26 221 205 / 75%) 100%);
 }
 
 .text-scroll{
