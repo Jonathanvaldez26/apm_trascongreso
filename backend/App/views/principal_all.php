@@ -245,6 +245,8 @@
         <!-- <?php echo $footer; ?> -->
     </main>
 <!-- </div> -->
+    <?php echo $modalComprar?>
+
 
 
 

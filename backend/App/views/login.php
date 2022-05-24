@@ -3,7 +3,7 @@ echo $header;
 ?>
 
 <body class="">
-    
+
     <main class="main-content main-content-bg mt-0">
         <section>
 
@@ -119,7 +119,7 @@ echo $header;
                 </div>
             </nav>
 
-            
+
 
             <div class="page-header min-vh-75" style="height: 90%;">
                 <div class="container">
@@ -150,7 +150,7 @@ echo $header;
                                     </div>
                                     <p class="mb-0 mt-5">Introduzca el correo electrónico con el cual usted fue registrado para poder iniciar sesión</p>
                                 </div>
-                                <!-- Button trigger modal -->                                
+                                <!-- Button trigger modal -->
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login" action="/Inicio/crearSession" method="POST" class="form-horizontal">
                                         <label style="font-weight:bold; font-size: 15px">Correo electrónico</label>
@@ -167,7 +167,7 @@ echo $header;
                                         </div> -->
 
                                         <div class="text-center">
-                                            <button  type="button" id="btnEntrar" class="btn bg-gradient-info w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>
+                                            <button type="button" id="btnEntrar" class="btn bg-gradient-info w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>
                                         </div>
                                     </form>
                                     <!-- <button type="button" style="background: #1B8586; color: #ffffff;" id="btn_modal_add" class="btn mb-0 mt-3 w-100" data-toggle="modal" data-target="#Modal_Add" disabled="">REGISTRARSE</button> -->
@@ -189,7 +189,7 @@ echo $header;
                         <div class="col-md-6">
 
                             <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n9">
-                                
+
                                 <!-- <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('/assets/img/curved-images/curved9.jpg')"></div>-->
                                 <video autoplay muted loop>
                                     <source class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" src="/assets/vid/POSTER-VI.mp4" type="video/mp4">
@@ -216,30 +216,30 @@ echo $header;
         </div>
     </main>
     <!-- Modal -->
-        <div class="modal" id="doc_programa" role="dialog" aria-labelledby="doc_programaLabel" aria-hidden="true" >
-            <div class="modal-dialog modal-size-2" role="document" style="max-width: 590px;">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                        <h5 class="modal-title text-center" id="doc_programaLabel">Programa</h5>
-                        <button type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+    <div class="modal" id="doc_programa" role="dialog" aria-labelledby="doc_programaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-size-2" role="document" style="max-width: 590px;">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h5 class="modal-title text-center" id="doc_programaLabel">Programa</h5>
+                    <button type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <iframe src="https://www.flipbookpdf.net/web/site/481d28c4f8e8bc288524792304e2adcdc0ccdfb2FBP19835591.pdf.html" frameborder="0" style="width: -webkit-fill-available;
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="https://www.flipbookpdf.net/web/site/481d28c4f8e8bc288524792304e2adcdc0ccdfb2FBP19835591.pdf.html" frameborder="0" style="width: -webkit-fill-available;
     max-width: -webkit-fill-available; height:700px;"></iframe>
-                    </div>
-                    <!-- <div class="modal-footer">
+                </div>
+                <!-- <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary">Save changes</button>
                     </div> -->
-                </div>
             </div>
         </div>
+    </div>
 
 
-        <!-- Moodal Add Register -->
-        <div class="modal fade" id="Modal_Add" role="dialog" aria-labelledby="" aria-hidden="true">
+    <!-- Moodal Add Register -->
+    <div class="modal fade" id="Modal_Add" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -342,97 +342,97 @@ echo $header;
     <script>
         $(document).ready(function() {
             $("#pais").on("change", function() {
-            console.log('hola');
-            var pais = $(this).val();
-            console.log(pais);
-            $.ajax({
-                url: "/Login/getEstadoPais",
-                type: "POST",
-                data: {
-                    pais
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    console.log("Procesando....");
-                    $('#estado')
-                        .find('option')
-                        .remove()
-                        .end();
+                console.log('hola');
+                var pais = $(this).val();
+                console.log(pais);
+                $.ajax({
+                    url: "/Login/getEstadoPais",
+                    type: "POST",
+                    data: {
+                        pais
+                    },
+                    dataType: "json",
+                    beforeSend: function() {
+                        console.log("Procesando....");
+                        $('#estado')
+                            .find('option')
+                            .remove()
+                            .end();
 
-                },
-                success: function(respuesta) {
-                    console.log(respuesta);
+                    },
+                    success: function(respuesta) {
+                        console.log(respuesta);
 
-                    $('#estado').removeAttr('disabled');
+                        $('#estado').removeAttr('disabled');
 
-                    $('#estado')
-                        .append($('<option>', {
-                                value: ''
-                            })
-                            .text('Selecciona una opción'));
-
-                    $.each(respuesta, function(key, value) {
-                        //console.log(key);
-                        console.log(value);
                         $('#estado')
                             .append($('<option>', {
-                                    value: value.id_estado
+                                    value: ''
                                 })
-                                .text(value.estado));
-                    });
+                                .text('Selecciona una opción'));
 
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                }
-
-            });
-        });
-
-        $("#form_datos").on("submit", function(event) {
-            event.preventDefault();
-            var formData = new FormData(document.getElementById("form_datos"));
-
-            // for (var value of formData.values()) {
-            //     console.log(value);
-            // }
-            $.ajax({
-                url: "/Login/saveData",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                beforeSend: function() {
-                    console.log("Procesando....");
-                    // alert('Se está borrando');
-
-                },
-                success: function(respuesta) {
-                    console.log(respuesta);
-
-                    if (respuesta == 'success') {
-                        Swal.fire("¡Se creo el usuario correctamente!", "", "success").
-                        then((value) => {
-                            window.location.reload();
+                        $.each(respuesta, function(key, value) {
+                            //console.log(key);
+                            console.log(value);
+                            $('#estado')
+                                .append($('<option>', {
+                                        value: value.id_estado
+                                    })
+                                    .text(value.estado));
                         });
-                    } else {
+
+                    },
+                    error: function(respuesta) {
+                        console.log(respuesta);
+                    }
+
+                });
+            });
+
+            $("#form_datos").on("submit", function(event) {
+                event.preventDefault();
+                var formData = new FormData(document.getElementById("form_datos"));
+
+                // for (var value of formData.values()) {
+                //     console.log(value);
+                // }
+                $.ajax({
+                    url: "/Login/saveData",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {
+                        console.log("Procesando....");
+                        // alert('Se está borrando');
+
+                    },
+                    success: function(respuesta) {
+                        console.log(respuesta);
+
+                        if (respuesta == 'success') {
+                            Swal.fire("¡Se creo el usuario correctamente!", "", "success").
+                            then((value) => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
+                            then((value) => {
+                                window.location.reload();
+                            });
+                        }
+                    },
+                    error: function(respuesta) {
+                        console.log(respuesta);
+                        // alert('Error');
                         Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
                         then((value) => {
                             window.location.reload();
                         });
                     }
-                },
-                error: function(respuesta) {
-                    console.log(respuesta);
-                    // alert('Error');
-                    Swal.fire("¡Hubo un error al crear el usuario!", "", "warning").
-                    then((value) => {
-                        window.location.reload();
-                    });
-                }
+                });
             });
         });
-            });
         ////===========Funcion JS para el contador==========////
         //===
         // VARIABLES
@@ -454,8 +454,8 @@ echo $header;
         //===
 
         /**
-        * Method that updates the countdown and the sample
-        */
+         * Method that updates the countdown and the sample
+         */
         function updateCountdown() {
             // Calcs
             const NOW = new Date()
@@ -487,135 +487,135 @@ echo $header;
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                "value": 109,
-                "density": {
-                    "enable": true,
-                    "value_area": 710
-                }
-            },
+                    "value": 109,
+                    "density": {
+                        "enable": true,
+                        "value_area": 710
+                    }
+                },
                 "color": {
-                "value": "#ffffff"
+                    "value": "#ffffff"
                 },
                 "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#000000"
-                },
-                "polygon": {
-                    "nb_sides": 5
-                },
-                "image": {
-                    "src": "img/github.svg",
-                    "width": 100,
-                    "height": 100
-                }
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
                 },
                 "opacity": {
-                "value": 0.5,
-                "random": false,
-                "anim": {
-                    "enable": false,
-                    "speed": 1,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
                 },
                 "size": {
-                "value": 31.6,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
+                    "value": 31.6,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
                 },
                 "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#ffffff",
-                "opacity": 0.4,
-                "width": 1
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
                 },
                 "move": {
-                "enable": true,
-                "speed": 6,
-                "direction": "none",
-                "random": false,
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
                 }
             },
             "interactivity": {
                 "detect_on": "canvas",
                 "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "grab"
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push"
-                },
-                "resize": true
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
                 },
                 "modes": {
-                "grab": {
-                    "distance": 140,
-                    "line_linked": {
-                    "opacity": 1
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
                     }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
                 }
             },
             "retina_detect": true
-            });
+        });
 
 
-            /* ---- stats.js config ---- */
+        /* ---- stats.js config ---- */
 
-            var count_particles, stats, update;
-            stats = new Stats;
-            stats.setMode(0);
-            stats.domElement.style.position = 'absolute';
-            stats.domElement.style.display = 'none';
-            stats.domElement.style.left = '0px';
-            stats.domElement.style.top = '0px';
-            document.body.appendChild(stats.domElement);
-            count_particles = document.querySelector('.js-count-particles');
-            update = function() {
+        var count_particles, stats, update;
+        stats = new Stats;
+        stats.setMode(0);
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.display = 'none';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top = '0px';
+        document.body.appendChild(stats.domElement);
+        count_particles = document.querySelector('.js-count-particles');
+        update = function() {
             stats.begin();
             stats.end();
             if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
                 count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
             }
             requestAnimationFrame(update);
-            };
-            requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
     </script>
 
 </body>
