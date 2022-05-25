@@ -72,11 +72,12 @@
         <div class="container-fluid py-0">
 
         <div class="row mt-3">
-                <?php echo $card_cursos;?>
+                <?php //echo $card_cursos;?>
         </div>        
             <div class="row">
                 <div class="col-xl-12 mt-xl-0 mt-0">
                     <div class="row mt-md-4 mt-0">
+
                         <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-12">
@@ -93,7 +94,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Talleres/">
@@ -101,7 +102,7 @@
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
                                             
-                                            <p>Mis cursos</p>
+                                            <p>Cursos</p>
                                         </div>
                                         
                                         
@@ -109,14 +110,32 @@
                                 </div>
                             </a>
                         </div>
+                        
+                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+                                    <a href="/Transmission/">
+                                        <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/1.png)">
+                                            <div class="card-body mt-md-3 text-center content-card-home">
+                                                <div class="col-12 text-center">
+                                                    <p>Transmision</p>
+                                                </div>                                               
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                       
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/ComprarCursos/">
+                            <a href="/ComprobantePago/">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-imag: url(/img/SMNP_Iconos/14.png)">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
                                           
-                                            <p>Comprar Cursos</p>
+                                        <p>Comprobante pago</p>
                                         </div>
                                         
                                         
@@ -132,7 +151,7 @@
                                         <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/3.png)">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
-                                          
+                                                <p>Datos personales</p>
                                                 </div>
 
                                              
@@ -141,7 +160,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
                         
                         <!-- <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
@@ -242,7 +261,7 @@
 
         </div>
 
-        <!-- <?php echo $footer; ?> -->
+         <?php //echo $footer; ?> 
     </main>
 <!-- </div> -->
     <?php echo $modalComprar?>

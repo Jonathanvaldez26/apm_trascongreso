@@ -214,7 +214,8 @@ html;
                             }else{
                                 $('#btnEntrar').attr("disabled", true);
                                 //$('#btn_modal_add').attr("disabled",false);
-                                  $('#Modal_Add').modal('show');
+                                //$('#Modal_Add').modal('show');
+                                window.location.replace("/Register/");
                             }
                         }
                     });

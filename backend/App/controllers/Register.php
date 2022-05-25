@@ -1,39 +1,31 @@
 <?php
 namespace App\controllers;
+defined("APPPATH") OR die("Access denied");
 
 use \Core\View;
 use \Core\MasterDom;
 use \App\models\Register AS RegisterDao;
-use \App\models\LineaGeneral AS LineaGeneralDao;
-use \App\models\Data AS DataDao; 
-use \App\controllers\Mailer;
-use \App\controllers\Contenedor;
-use Core\Controller;
 
 class Register{
     private $_contenedor;
-
-    public function getUsuario(){
-        return $this->__usuario;
-    }
 
     public function index() {
         $extraHeader =<<<html
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/aso_icon.png">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/aso_icon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.ico">
+        <link rel="icon" type="image/vnd.microsoft.icon" href="/assets//img/favicon.ico">
         <title>
-            Registro Conave
+            APM Register
         </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
+         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+         <!-- Nucleo Icons -->
+         <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
+         <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
+         <!-- Font Awesome Icons -->
+         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+         <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
+         <!-- CSS Files -->
         <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Nucleo Icons -->
@@ -43,12 +35,11 @@ class Register{
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
         <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
+        <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
+        <!-- CSS Files -->
         <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
         <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
         <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-        <!--script src="../../../assets/js/plugins/choices.min.js"></script-->
-
-        
         
         
 
@@ -65,27 +56,6 @@ html;
           <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
           <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
           <script src="../../../assets/js/plugins/multistep-form.js"></script>
-          <script src="../../../assets/js/plugins/choices.min.js"></script>
-          <script type="text/javascript" wfd-invisible="true">
-            if (document.getElementById('choices-button')) {
-                var element = document.getElementById('choices-button');
-                const example = new Choices(element, {});
-            }
-            var choicesTags = document.getElementById('choices-tags');
-            var color = choicesTags.dataset.color;
-            if (choicesTags) {
-                const example = new Choices(choicesTags, {
-                delimiter: ',',
-                editItems: true,
-                maxItemCount: 5,
-                removeItemButton: true,
-                addItems: true,
-                classNames: {
-                    item: 'badge rounded-pill choices-' + color + ' me-2'
-                }
-                });
-            }
-        </script>
           <!-- Kanban scripts -->
           <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
           <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
@@ -101,1079 +71,514 @@ html;
           <!-- Github buttons -->
           <script async defer src="https://buttons.github.io/buttons.js"></script>
           <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-           
 
         <script>
-            $(document).ready(function(){
-              $('#confirm_email').attr("disabled", true);
-              $.validator.addMethod("checkUserCorreo",function(value, element) {
-                var response = false;
-                  $.ajax({
-                      type:"POST",
-                      async: false,
-                      url: "/Register/isUserValidateUser",
-                      data: {email: $("#email").val()},
-                      success: function(data) {
-                          if(data=="true"){
-                              $('#btn_registro_email').attr("disabled", false);
-                              $('#confirm_email').attr("disabled", false);
-                              $('#email').attr("disabled", true);
-
-                              response = true;
-                          }else{
-                              $('#btn_registro_email').attr("disabled", true);
-                              $('#confirm_email').attr("disabled", true);
-                              document.getElementById("confirm_email").value = "";
-                          }
-                      }
-                  });
-
-                  return response;
-              },"<b>Usted ya se encuentra registrado en la plataforma verifique su información.<b>");
-
-
-              $("#email_form").validate({
-                 rules:{
-                      email:{
-                          required: true,
-                          checkUserCorreo: true
-                      },
-                      confirm_email:{
-                          required: true,
-                          equalTo:"#email"
-                      }
-                  },
-                  messages:{
-                      email:{
-                          required: "Este campo es requerido",
-                      },
-                      confirm_email:{
-                          required: "Este campo es requerido",
-                          equalTo: "El Correo Eléctronico no coincide",
-                      }
-                  }
-              });
-              
-
-          });
+        window.addEventListener("keypress", function(event){
+            if (event.keyCode == 13){
+                event.preventDefault();
+            }
+        }, false);
+        
+          window.onload = function() {
+          var myInput = document.getElementById('confirm_email');
+          var myInput_conf = document.getElementById('confirm_email_iva');
+          myInput.onpaste = function(e) {
+            e.preventDefault();
+          }
+          myInput_conf.onpaste = function(e) {
+            e.preventDefault();
+          }
           
-        </script>
-       
+          myInput.oncopy = function(e) {
+            e.preventDefault();
+          }
+          myInput_conf.oncopy = function(e) {
+            e.preventDefault();
+          }
+        }
+        
+        $('#email').on('keypress', function() {
+            var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+            if(!re) {
+                $('#error').show();
+                 document.getElementById('confirm_email').disabled = true;
+                 
+            } else {
+                $('#error').hide();
+                document.getElementById('confirm_email').disabled = false;
+                
+            }
+        })
+        
+        
+        $('#confirm_email').on('keypress', function() {
+            document.getElementById('email').disabled = true;
+            var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+            if(!re) {
+                $('#error_confirm').show();
+            } else {
+                $('#error_confirm').hide();
+            }
+        })
+        
+         $("#confirm_email").on("keyup", function() 
+        {
+    	    var email_uno = document.getElementById('email').value;
+            var email_dos = document.getElementById('confirm_email').value;
+                  
+            if(email_uno == email_dos)
+            {
+                document.getElementById('confirm_email').disabled = true;
+                document.getElementById('title').disabled = false;
+                document.getElementById('middle_name').disabled = false;
+                document.getElementById('surname').disabled = false;
+                document.getElementById('second_surname').disabled = false;
+                document.getElementById('telephone').disabled = false;
+                document.getElementById('telephone_code').disabled = false;
+                document.getElementById('nationality').disabled = false;
+                document.getElementById('state').disabled = false;
+                document.getElementById('residence').disabled = false;
+                document.getElementById('name_user').disabled = false;
+                document.getElementById('modality').disabled = false;
+                document.getElementById('specialties').disabled = false;
+                document.getElementById("email_validado").value = email_uno;
+
+            }
+        });
+     
+        $('#email_receipt_iva').on('keypress', function() {
+            var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+            if(!re) {
+                $('#error_email_send').show();
+            } else {
+                $('#error_email_send').hide();
+            }
+        })
+        $('#confirm_email_iva').on('keypress', function() {
+            var re = /([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(this.value);
+            if(!re) {
+                $('#error_email_send_confirm').show();
+            } else {
+                $('#error_email_send_confirm').hide();
+            }
+        })
+        
+        let button_active  = document.getElementById("next_one")
+        let input_require = document.querySelectorAll(".all_input")
+        let input_require_select = document.querySelectorAll(".all_input_select")
+    
+       input_require[3].addEventListener("keyup", () => 
+       {
+          if(input_require[0].value != "" && input_require[1].value != "" && input_require[2].value != "" && input_require[3].value != "") 
+          {
+               input_require_select[3].addEventListener("change", () => 
+               {
+                  document.getElementById("next_one").disabled = false
+               })
+          } 
+          else 
+          {
+              document.getElementById("next_one").disabled = true
+          }
+        })
+        
+        button_active.addEventListener("click", (event) => {
+              event.preventDefault()
+        })
+        
+        let button_active_two  = document.getElementById("next_two")
+        let input_require_two = document.querySelectorAll(".all_input_second")
+        let input_require_second_select = document.querySelectorAll(".all_input_second_select")
+    
+       input_require_two[1].addEventListener("keyup", () => 
+       {
+          if(input_require_two[0].value != "" && input_require_two[1].value != "") 
+          {
+               input_require_second_select[2].addEventListener("change", () => 
+               {
+                  document.getElementById("next_two").disabled = false
+               })
+          } 
+          else 
+          {
+              document.getElementById("next_two").disabled = true
+          }
+        })
+        
+        button_active_two.addEventListener("click", (event) => {
+              event.preventDefault()
+        })
+        
+        function myFunction() 
+        {
+            var one = document.getElementById("card_one");
+            var two = document.getElementById("card_two");
+            var three = document.getElementById("card_three");
+            var four = document.getElementById("card_four");
+            var five = document.getElementById("card_five");
+            var card_progress = document.getElementById("card_progress");
+            var Menu_Two = document.getElementById("Menu_Two");
+            
+            if (five.style.display === 'none') 
+            {
+                one.style.display = 'none';
+                two.style.display = 'none';
+                three.style.display = 'none';
+                four.style.display = 'none';
+                card_progress.style.display = 'none';
+                five.style.display = 'block';
+                Menu_Two.style.display = 'block';
+                 $("#ModalPayOne").modal('hide');
+            }
+        }
+        
+        function myFunctionDiscardVAT() 
+        {
+            var one = document.getElementById("card_one");
+            var two = document.getElementById("card_two");
+            var three = document.getElementById("card_three");
+            var four = document.getElementById("card_four");
+            var six = document.getElementById("card_six");
+            var card_progress = document.getElementById("card_progress");
+            var Menu_Two = document.getElementById("Menu_Two");
+            
+            if (six.style.display === 'none') 
+            {
+                one.style.display = 'none';
+                two.style.display = 'none';
+                three.style.display = 'none';
+                four.style.display = 'none';
+                card_progress.style.display = 'none';
+                six.style.display = 'block';
+                Menu_Two.style.display = 'block';
+            }
+
+            
+        }
+        
+        function myFunction_TermsConditions() 
+        {
+            var five = document.getElementById("card_five");
+            var six = document.getElementById("card_six");
+             
+            if (six.style.display === 'none') 
+            {
+                six.style.display = 'block';
+                five.style.display = 'none';
+            }
+        }
+        
+        function actualizaEdos() {
+        var pais = $('#nationality').val();
+        $.ajax({
+          url: '/Register/ObtenerEstado',
+          type: 'POST',
+          dataType: 'json',
+          data: {pais:pais},
+    
+        })
+        .done(function(json) {
+            if(json.success)
+            {
+                $("#state").html(json.html);
+            }
+        })
+        .fail(function() 
+        {
+          alert("Ocurrio un error al actualizar el estado intenta de nuevo");
+        })
+      }
+        
+        $(document).ready(function(){
+                
+                $('input[type="checkbox"]').on('change', function() 
+                {
+                    $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+                    $('#ModalPayOne').show();
+                });
+                
+                $.validator.addMethod("checkUserName",function(value, element) {
+                  var response = false;
+                    $.ajax({
+                        type:"POST",
+                        async: false,
+                        url: "/Login/isUserValidate",
+                        data: {usuario: $("#usuario").val()},
+                        success: function(data) {
+                            if(data=="true"){
+                                $('#btnEntrar').attr("disabled", false);
+                                response = true;
+                            }else{
+                                $('#btnEntrar').attr("disabled", true);
+                            }
+                        }
+                    });
+
+                    return response;
+                },"El usuario no es correcto");
+            });
+      </script>
 html;
         View::set('header',$extraHeader);
         View::set('footer',$extraFooter);
+        View::set('idCountry',$this->getCountry());
         View::render("Register");
     }
 
     public function Success(){
 
-
         $register = new \stdClass();
 
-        $email = $_POST['confirm_email'];
+        $name = MasterDom::getDataAll('name_user');
+        $register->_name = $name;
+
+        $correo = $_REQUEST['email_validado'];
+
+        $email = MasterDom::getDataAll('email_validado');
         $register->_email = $email;
 
-        $codigo_rand = $this->generateRandomString();
-        $register->_code = $codigo_rand;
+        $title = MasterDom::getDataAll('title');
+        $register->_title = $title;
 
-        $id = RegisterDao::update($register);
+        $middle_name = MasterDom::getDataAll('middle_name');
+        $register->_middle_name = $middle_name;
+
+        $surname = MasterDom::getDataAll('surname');
+        $register->_surname = $surname;
+
+        $second_surname = MasterDom::getDataAll('second_surname');
+        $register->_second_surname = $second_surname;
+
+        $telephone = MasterDom::getDataAll('telephone');
+        $register->_telephone = $telephone;
+
+        $international_code = MasterDom::getDataAll('telephone_code');
+        $register->_international_code = $international_code;
+
+        $nationality = MasterDom::getDataAll('nationality');
+        $register->_nationality = $nationality;
+
+        $state = MasterDom::getDataAll('state');
+        $register->_state = $state;
+
+        foreach($_POST['group1'] as $opcion){
+            $register->_pay = $opcion;
+            $method_pay = $opcion;
+
+            $residence = $method_pay;
+            $register->_method_pay = $residence;
+        }
+
+
+        $residence = MasterDom::getDataAll('residence');
+        $register->_residence = $residence;
+
+        $organization = MasterDom::getDataAll('organization');
+        $register->_organization = $organization;
+
+        $position = MasterDom::getDataAll('position');
+        $register->_position = $position;
+
+        $address = MasterDom::getDataAll('address');
+        $register->_address = $address;
+
+        $organization_country = MasterDom::getDataAll('organization_country');
+        $register->_organization_country = $organization_country;
+
+        $organization_postal_code = MasterDom::getDataAll('organization_postal_code');
+        $register->_organization_postal_code = $organization_postal_code;
+
+        $wadd_member = MasterDom::getDataAll('wadd_member');
+        $register->_wadd_member = $wadd_member;
+
+        $apm_member = MasterDom::getDataAll('apm_member');
+        $register->_apm_member = $apm_member;
+
+        $scholarship = MasterDom::getDataAll('scholarship');
+        $register->_scholarship = $scholarship;
+
+        $business_name_iva = MasterDom::getDataAll('business_name_iva');
+        $register->_business_name_iva = $business_name_iva;
+
+        $code_iva = MasterDom::getDataAll('code_iva');
+        $register->_code_iva = $code_iva;
+
+        $payment_method_iva = MasterDom::getDataAll('payment_method_iva');
+        $register->_payment_method_iva = $payment_method_iva;
+
+        $email_receipt_iva = MasterDom::getDataAll('email_receipt_iva');
+        $register->_email_receipt_iva = $email_receipt_iva;
+
+        $postal_code_iva = MasterDom::getDataAll('postal_code_iva');
+        $register->_postal_code_iva = $postal_code_iva;
+
+        $name_register = $name." ".$middle_name." ".$surname;
+
+        $fecha_actual = date("d-m-Y");
+        $fecha_limite_pago =  date("d-m-Y",strtotime($fecha_actual."+ 5 days"));
+
+        $dia =date("d");
+        $mes = date("m");
+        $año = date("y");
+        $sub_name =  substr($name, 0, 2);  // abcd
+        $sub_name_sur =  substr($surname, 0, 2);  // abcd
+
+        $reference_user = $sub_name.$sub_name_sur.$dia.$mes.$año;
+        $register->_reference_user = $reference_user;
+
+        $res_costo = RegisterDao::getByCost($nationality);
+        $costo = $res_costo['cost_enero_marzo'];
+        $register->_costo = $costo;
+
+
+        $id = RegisterDao::insert($register);
         if($id >= 1)
         {
-            $msg = [
-                'email' => $register->_email,
-                'code' =>  $register->_code
-            ];
+            $this->alerta($id,'add',$method_pay, $name_register, $costo, $fecha_limite_pago,$reference_user);
+        }else
+        {
+            $this->alerta($id,'error',$method_pay, $name_register,"","","");
+        }
+    }
 
-            $mailer = new Mailer();
-            $mailer->mailer($msg);
+    public function alerta($id, $parametro, $type_deposit, $name_register, $costo, $limit_pay, $reference_user){
+        $regreso = "/Login/";
+        $pay = '';
+        $name = $name_register;
 
-            $this->code($register->_email);
+        if($parametro == 'add')
+        {
+
+            if($type_deposit == 'paypal')
+            {
+                $pay = 'CREDIT OR DEBIT CARD';
+                $name = $name_register;
+                $message_pay = 'Important note: Please include the reference provided by this system in the field "Concepto 
+                de pago" as per instructions above. The payment reference must be entered in capital 
+                letters. Do not add any spaces between names or include any other punctuation marks, as 
+                this may affect your bank transfer confirmation.';
+                $amount = $costo;
+                $date_pay = $limit_pay;
+                $reference = $reference_user;
+                $account_number = '021180040158530967';
+                $bank = 'HSBC';
+                $name_association = 'Asociacion Psiquiatrica Mexicana A.C';
+                $swift_account = 'BIMEMXMM';
+                $estilo = 'style="display: none;"';
+                $estilo_boton = 'style="display: block;"';
+            }
+            if($type_deposit == 'electronic')
+            {
+                $pay = 'ELECTRONIC TRANSFER';
+                $name = $name_register;
+                $addres = 'Periferico Sur No. 4194, Int. 104, Col.Jardines del Pedregal, CDMX, CP.01900 ';
+                $message_pay = '';
+                $amount = $costo;
+                $date_pay = $limit_pay;
+                $reference = $reference_user;
+                $account_number = '4015853096';
+                $bank = 'HSBC';
+                $name_association = 'Asociacion Psiquiatrica Mexicana A.C';
+                $swift_account = 'BIMEMXMM';
+                $estilo = 'style="display: block;"';
+                $estilo_boton = 'style="display: none;"';
+            }
+
+        }
+
+        if($parametro == "error")
+        {
+            $mensaje = "Al parecer ha ocurrido un problema";
+        }
+
+        View::set('regreso',$regreso);
+        View::set('pay',$pay);
+        View::set('message_pay',$message_pay);
+        View::set('amount',$amount);
+        View::set('reference',$reference);
+        View::set('account_number',$account_number);
+        View::set('bank',$bank);
+        View::set('name_association',$name_association);
+        View::set('reference',$reference);
+        View::set('date_pay',$date_pay);
+        View::set('name',$name);
+        View::set('swift',$swift_account);
+        View::set('estilo',$estilo);
+        View::set('estilo_boton',$estilo_boton);
+        View::set('address',$addres);
+        View::render("alerta");
+    }
+
+    public function getCountry(){
+        $country = '';
+        foreach (RegisterDao::getCountryAll() as $key => $value) {
+            $country.=<<<html
+        <option value="{$value['id_pais']}">{$value['country']}</option>
+html;
+        }
+        return $country;
+    }
+
+    public function ObtenerEstado(){
+        $pais=$_POST['pais'];
+
+        if($pais != 156)
+        {
+            $estados = RegisterDao::getState($pais);
+            $html="";
+            foreach ($estados as $estado){
+                $html.='<option value="'.$estado['id_estado'].'">'.$estado['estado'].'</option>';
+            }
         }
         else
         {
-            // echo "holaaaaa";
-            // exit();
-            $this->code500();
-            //$this->Success();
-            //$this->alerta($id,'error',$method_pay, $name_register);
-        }
-    }
-
-    public function code($email , $alerta = null){
-        $extraHeader =<<<html
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/Musa0-01.png">
-        <title>
-            Registro - MUSA
-        </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
-        <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-        
-        
-        
-        
-
-html;
-        $extraFooter =<<<html
-     
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/alertify/alertify.min.js"></script>
-        <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-       <!--   Core JS Files   -->
-          <script src="../../../assets/js/core/popper.min.js"></script>
-          <script src="../../../assets/js/core/bootstrap.min.js"></script>
-          <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/multistep-form.js"></script>
-         
-          <!-- Kanban scripts -->
-          <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
-          <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
-          <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-              var options = {
-                damping: '0.5'
-              }
-              Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-          </script>
-          <!-- Github buttons -->
-          <script async defer src="https://buttons.github.io/buttons.js"></script>
-          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-          <script>
-            $(document).ready(function(){
-                $.validator.addMethod("checkUserCorreo",function(value, element) {
-                  var response = false;
-                    $.ajax({
-                        type:"POST",
-                        async: false,
-                        url: "/Register/isUserValidate",
-                        data: {email: $("#email").val()},
-                        success: function(data) {
-                            if(data=="true"){
-                                $('#btn_registro_email').attr("disabled", false);
-                                $('#confirm_email').attr("disabled", false);
-                                $('#email').attr("disabled", true);
-                                response = true;
-                            }else{
-                                $('#btn_registro_email').attr("disabled", true);
-                                $('#confirm_email').attr("disabled", true);
-                                document.getElementById("confirm_email").value = "";
-                            }
-                        }
-                    });
-
-                    return response;
-                },"Usted no está registrado en la Base de Datos MUSA 2022, verifique con su área y reintente.");
-
-                $("#email_form").validate({
-                   rules:{
-                        email:{
-                            required: true,
-                            checkUserCorreo: true
-                        },
-                        confirm_email:{
-                            required: true,
-                            equalTo:"#email"
-                        }
-                    },
-                    messages:{
-                        email:{
-                            required: "Este campo es requerido",
-                        },
-                        confirm_email:{
-                            required: "Este campo es requerido",
-                            equalTo: "El Correo Eléctronico no coincide",
-                        }
-                    }
-                });
-
-            });
-          
-            var uno = document.getElementById("uno"),
-                dos = document.getElementById("dos"),
-                tres = document.getElementById("tres"),
-                cuatro = document.getElementById("cuatro");
-
-            uno.onkeyup = function() {
-                if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
-                    dos.focus();
-                }
-            }
-
-            dos.onkeyup = function() {
-                if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
-                    tres.focus();
-                }
-            }
-            tres.onkeyup = function() {
-                if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
-                    cuatro.focus();
-                }
-            }
-           
-        </script>
-      
-html;
-
-       
-        $code = $email;
-        View::set('header',$extraHeader);
-        View::set('footer',$extraFooter);
-        View::set('code',$code);
-        View::set('alerta',$alerta);
-        View::render("code");
-    }
-
-    public function ValidationEmail($email){
-        $extraHeader =<<<html
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/Musa0-01.png">
-        <title>
-            Registro - MUSA
-        </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
-        <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-        <!--script src="../../../assets/js/plugins/choices.min.js"></script-->
-
-        
-        
-        
-
-html;
-        $extraFooter =<<<html
-     
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/alertify/alertify.min.js"></script>
-        <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-       <!--   Core JS Files   -->
-          <script src="../../../assets/js/core/popper.min.js"></script>
-          <script src="../../../assets/js/core/bootstrap.min.js"></script>
-          <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/multistep-form.js"></script>
-          <script src="../../../assets/js/plugins/choices.min.js"></script>
-          <script type="text/javascript" wfd-invisible="true">
-            if (document.getElementById('choices-button')) {
-                var element = document.getElementById('choices-button');
-                const example = new Choices(element, {});
-            }
-            var choicesTags = document.getElementById('choices-tags');
-            var color = choicesTags.dataset.color;
-            if (choicesTags) {
-                const example = new Choices(choicesTags, {
-                delimiter: ',',
-                editItems: true,
-                maxItemCount: 5,
-                removeItemButton: true,
-                addItems: true,
-                classNames: {
-                    item: 'badge rounded-pill choices-' + color + ' me-2'
-                }
-                });
-            }
-        </script>
-          <!-- Kanban scripts -->
-          <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
-          <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
-          <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-              var options = {
-                damping: '0.5'
-              }
-              Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-          </script>
-          <!-- Github buttons -->
-          <script async defer src="https://buttons.github.io/buttons.js"></script>
-          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-          <script>
-            $(document).ready(function(){
-                $.validator.addMethod("checkUserCorreo",function(value, element) {
-                  var response = false;
-                    $.ajax({
-                        type:"POST",
-                        async: false,
-                        url: "/Register/isUserValidate",
-                        data: {email: $("#email").val()},
-                        success: function(data) {
-                            if(data=="true"){
-                                $('#btn_registro_email').attr("disabled", false);
-                                $('#confirm_email').attr("disabled", false);
-                                $('#email').attr("disabled", true);
-
-                                response = true;
-                            }else{
-                                $('#btn_registro_email').attr("disabled", true);
-                                $('#confirm_email').attr("disabled", true);
-                                document.getElementById("confirm_email").value = "";
-                            }
-                        }
-                    });
-
-                    return response;
-                },"Usted no está registrado en la Base de Datos MUSA 2022, verifique con su área y reintente.");
-
-                $("#email_form").validate({
-                   rules:{
-                        email:{
-                            required: true,
-                            checkUserCorreo: true
-                        },
-                        confirm_email:{
-                            required: true,
-                            equalTo:"#email"
-                        }
-                    },
-                    messages:{
-                        email:{
-                            required: "Este campo es requerido",
-                        },
-                        confirm_email:{
-                            required: "Este campo es requerido",
-                            equalTo: "El Correo Eléctronico no coincide",
-                        }
-                    }
-                });
-
-            });
-            
-          
-        </script>
-      
-html;
-        $code = $email;
-        View::set('header',$extraHeader);
-        View::set('footer',$extraFooter);
-        View::set('code',$code);
-        View::render("formulario");
-    }
-
-    public function Data(){
-        $extraHeader =<<<html
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-            <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/Musa0-01.png">
-            <title>
-                Registro - MUSA
-            </title>
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-            <!-- Nucleo Icons -->
-            <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-            <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-            <!-- Font Awesome Icons -->
-            <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-            <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-            <!-- CSS Files -->
-            <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-            <!-- Nucleo Icons -->
-            <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-            <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-            <!-- Font Awesome Icons -->
-            <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-            <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-            <!-- CSS Files -->
-            <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-            <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
-            <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-            <!--script src="../../../assets/js/plugins/choices.min.js"></script-->
-
-
-html;
-        $extraFooter =<<<html
-     
-            <script src="/js/jquery.min.js"></script>
-            <script src="/js/validate/jquery.validate.js"></script>
-            <script src="/js/alertify/alertify.min.js"></script>
-            <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-        <!--   Core JS Files   -->
-            <script src="../../../assets/js/core/popper.min.js"></script>
-            <script src="../../../assets/js/core/bootstrap.min.js"></script>
-            <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-            <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-            <script src="../../../assets/js/plugins/multistep-form.js"></script>
-            <script src="../../../assets/js/plugins/choices.min.js"></script>
-            <script type="text/javascript" wfd-invisible="true">
-                if (document.getElementById('choices-button')) {
-                    var element = document.getElementById('choices-button');
-                    const example = new Choices(element, {});
-                }
-                var choicesTags = document.getElementById('choices-tags');
-                var color = choicesTags.dataset.color;
-                if (choicesTags) {
-                    const example = new Choices(choicesTags, {
-                    delimiter: ',',
-                    editItems: true,
-                    maxItemCount: 5,
-                    removeItemButton: true,
-                    addItems: true,
-                    classNames: {
-                        item: 'badge rounded-pill choices-' + color + ' me-2'
-                    }
-                    });
-                }
-            </script>
-            <!-- Kanban scripts -->
-            <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
-            <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
-            <script>
-                var win = navigator.platform.indexOf('Win') > -1;
-                if (win && document.querySelector('#sidenav-scrollbar')) {
-                var options = {
-                    damping: '0.5'
-                }
-                Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-                }
-            </script>
-            <!-- Github buttons -->
-            <script async defer src="https://buttons.github.io/buttons.js"></script>
-            <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-            <script>
-                $(document).ready(function(){
-                    $.validator.addMethod("checkUserCorreo",function(value, element) {
-                    var response = false;
-                        $.ajax({
-                            type:"POST",
-                            async: false,
-                            url: "/Register/isUserValidate",
-                            data: {email: $("#email").val()},
-                            success: function(data) {
-                                if(data=="true"){
-                                    $('#btn_registro_email').attr("disabled", false);
-                                    $('#confirm_email').attr("disabled", false);
-                                    $('#email').attr("disabled", true);
-                                    response = true;
-                                }else{
-                                    $('#btn_registro_email').attr("disabled", true);
-                                    $('#confirm_email').attr("disabled", true);
-                                    document.getElementById("confirm_email").value = "";
-                                }
-                            }
-                        });
-
-                        return response;
-                    },"Usted no está registrado en la Base de Datos MUSA 2022, verifique con su área y reintente.");
-
-                    $("#email_form").validate({
-                    rules:{
-                            email:{
-                                required: true,
-                                checkUserCorreo: true
-                            },
-                            confirm_email:{
-                                required: true,
-                                equalTo:"#email"
-                            }
-                        },
-                        messages:{
-                            email:{
-                                required: "Este campo es requerido",
-                            },
-                            confirm_email:{
-                                required: "Este campo es requerido",
-                                equalTo: "El Correo Eléctronico no coincide",
-                            }
-                        }
-                    });
-
-                });
-                
-            
-            </script>
-      
-html;
-        if (strlen((date('y')-18))!=1) {
-            $fecha_min = '20'.(date('y')-18).'-'.date('m').'-'.date('d');
-        } else {
-            $fecha_min = '200'.(date('y')-18).'-'.date('m').'-'.date('d');
-        }
-
-        $fecha_max = '20'.date('y').'-'.date('m').'-'.date('d');
-        
-
-        $email = $_POST['email'];
-        $digit1 =  $_POST['uno'];
-        $digit2 =  $_POST['dos'];
-        $digit3 =  $_POST['tres'];
-        $digit4 =  $_POST['cuatro'];
-        $code_received  = $digit1.$digit2.$digit3.$digit4;
-        $optionsGenero = '';
-        $optionsLineaPrincipal = '';
-        $especialidad = '';
-
-        $lineaGeneral = LineaGeneralDao::getLineaPrincialAll();
-
-        foreach ($lineaGeneral as $key => $value) {
-
-            
-            if ($value['id_linea_principal'] == 1 ) {
-                $optionsLineaPrincipal.=<<<html
-                    <option value="" disabled >Selecciona una opción</option>
-                    <option value="{$value['id_linea_principal']}"selected>{$value['nombre']}</option>
-html;
-            } else {
-                $optionsLineaPrincipal.=<<<html
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="{$value['id_linea_principal']}" >{$value['nombre']}</option>
-html;
-            }
-        }   
-        
-        $userData = RegisterDao::getUserRegister($email)[0];
-
-        if($userData['genero'] == 'Hombre'){
-            $optionsGenero =<<<html
-                <option value="Hombre" selected>Hombre</option>
-                <option value="Mujer">Mujer</option>
-                <option value="Otro">Otro</option>
-html;
-
-        }elseif($userData['genero'] == 'Mujer'){
-            $optionsGenero =<<<html
-                <option value="Hombre">Hombre</option>
-                <option value="Mujer" selected>Mujer</option>
-                <option value="Otro">Otro</option>
-html;
-
-        }else{
-            $optionsGenero =<<<html
-                <option value="Hombre">Hombre</option>
-                <option value="Mujer">Mujer</option>
-                <option value="Otro" selected>Otro</option>
-html;
-
+            $html="";
+            $html.='
+                <option value="" disabled selected>Selecciona una Opción</option>
+                <option value="2537">Aguascalientes</option>
+                <option value="2538">Baja California</option>
+                <option value="2539">Baja California Sur</option>
+                <option value="2540">Campeche</option>
+                <option value="2541">Chiapas</option>
+                <option value="2542">Chihuahua</option>
+                <option value="2543">Coahuila de Zaragoza</option>
+                <option value="2544">Colima</option>
+                <option value="2545">Ciudad de Mexico</option>
+                <option value="2546">Durango</option>
+                <option value="2547">Guanajuato</option>
+                <option value="2548">guerrero</option>
+                <option value="2549">Hidalgo</option>
+                <option value="2550">Jalisco</option>
+                <option value="2551">Estado de Mexico</option>
+                <option value="2552">Michoacan de Ocampo</option>
+                <option value="2553">Morelos</option>
+                <option value="2554">Nayarit</option>
+                <option value="2555">Nuevo Leon</option>
+                <option value="2556">Oaxaca</option>
+                <option value="2557">Puebla</option>
+                <option value="2558">Queretaro de Artiaga</option>
+                <option value="2559">Quinta Roo</option>
+                <option value="2560">San Lusi Potosi</option>
+                <option value="2561">Sonora</option>
+                <option value="2562">Tabasco</option>
+                <option value="2563">Tamaulipas</option>
+                <option value="2564">Tlaxcala</option>
+                <option value="2565">Veracruz-Llave</option>
+                <option value="2566">Yucatan</option>
+                <option value="2567">Zacatecas</option>
+                ';
         }
 
 
-        if($userData['code'] === $code_received){
-            //echo "Se verifico codigo correctamente";
-            View::set('optionsLineaPrincipal',$optionsLineaPrincipal);
-            View::set('userData', $userData);
-            View::set('fecha_min', $fecha_min);
-            View::set('fecha_max', $fecha_max);
-            View::set('optionsGenero',$optionsGenero);
-           // View::set('optionActividad',$optionActividad);
-            View::set('email',$email);
-            View::set('header',$extraHeader);
-            View::set('footer',$extraFooter);
-            View::render('update_data_register');
-        }else{
+        $respuesta = new respuesta();
+        $respuesta->success = true;
+        $respuesta->html = $html;
 
-            $alerta =<<<html
-            <div class="alert alert-danger text-white" role="alert" >
-                ¡El código de verificación no coincide, Intenta nuevamente!
-            </div>
-html;
-            $this->code($email,$alerta);
-        }
-
-        // print_r($user_register);
-
-    }
-
-    public function Politicas(){
-
-        $extraHeader =<<<html
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/Musa0-01.png">
-        <title>
-            Registro - MUSA
-        </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
-        <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-        <!--script src="../../../assets/js/plugins/choices.min.js"></script-->
-        
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>  
-
-html;
-        $extraFooter =<<<html
-     
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/alertify/alertify.min.js"></script>
-        <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-       <!--   Core JS Files   -->
-          <script src="../../../assets/js/core/popper.min.js"></script>
-          <script src="../../../assets/js/core/bootstrap.min.js"></script>
-          <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/multistep-form.js"></script>
-          <script src="../../../assets/js/plugins/choices.min.js"></script>
-          <script type="text/javascript" wfd-invisible="true">
-            if (document.getElementById('choices-button')) {
-                var element = document.getElementById('choices-button');
-                const example = new Choices(element, {});
-            }
-            var choicesTags = document.getElementById('choices-tags');
-            var color = choicesTags.dataset.color;
-            if (choicesTags) {
-                const example = new Choices(choicesTags, {
-                delimiter: ',',
-                editItems: true,
-                maxItemCount: 5,
-                removeItemButton: true,
-                addItems: true,
-                classNames: {
-                    item: 'badge rounded-pill choices-' + color + ' me-2'
-                }
-                });
-            }
-        </script>
-          <!-- Kanban scripts -->
-          <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
-          <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
-          <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-              var options = {
-                damping: '0.5'
-              }
-              Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-          </script>
-          <!-- Github buttons -->
-          <script async defer src="https://buttons.github.io/buttons.js"></script>
-          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-           
-
-          <script>
-            $(document).ready(function(){
-                $("#pass_form").validate({
-                   rules:{
-                        password:{
-                            required: true,
-                            minlength: 6
-                            
-                            
-                        },
-                        confirm_password:{
-                            required: true,
-                            equalTo:"#password"
-                        }
-                    },
-                    messages:{
-                        password:{
-                            required: "Este campo es requerido",
-                            minlength: "El password debe tener al menos 6 caracteres"
-                        },
-                        confirm_password:{
-                            required: "Este campo es requerido",
-                            equalTo: "El password no coincide",
-                        }
-                    }
-                });
-
-                
-
-
-            });
-        </script>
-       
-html;
-        
-
-        $documento = new \stdClass();
-  
-  
-          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-              $id_registro = $_POST['id_registro'];
-              $nombre = $_POST['nombre'];
-              $segundo_nombre = $_POST['segundo_nombre'];
-              $apellido_paterno = $_POST['apellido_paterno'];
-              $apellido_materno = $_POST['apellido_materno'];
-              $genero = $_POST['genero'];
-              $pais = $_POST['pais'];
-              $email = $_POST['email'];
-              $telefono = $_POST['telefono'];
-              $especialidad = $_POST['especialidad'];
-              $alergia = $_POST['alergia'];
-              $alergia_cual = $_POST['alergia_cual'];
-  
-              $documento->_nombre = $nombre;
-              $documento->_segundo_nombre = $segundo_nombre;
-              $documento->_apellido_paterno = $apellido_paterno;
-              $documento->_apellido_materno = $apellido_materno;
-              $documento->_genero = $genero;
-              $documento->_pais = $pais;
-              $documento->_email = $email;
-              $documento->_telefono = $telefono;
-              $documento->_especialidad = $especialidad;
-              $documento->_alergia = $alergia;
-              $documento->_alergia_cual = $alergia_cual;
-
-
-              $id = DataDao::update($documento);
-  
-              if ($id) {
-                  View::set('email',$email);
-                  View::set('header',$extraHeader);
-                  View::set('footer',$extraFooter);
-                  View::render('politicas');
-                  //echo 'success';
-              } else {
-
-                //quitar esta parte
-                
-                  View::set('email',$email);
-                  View::set('header',$extraHeader);
-                  View::set('footer',$extraFooter);
-                  View::render('politicas');
-               // print_r($id);
-                 // $this->code500();
-                  //echo 'fail';
-              }
-          } else {
-              echo 'fail REQUEST';
-          }
-
-    }
-
-    public function DataPassword(){
-        $extraHeader =<<<html
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicon.png">
-        <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/Musa0-01.png">
-        <title>
-            Registro - MUSA
-        </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="../../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-        <!-- Nucleo Icons -->
-        <link href="../../../assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- Font Awesome Icons -->
-        <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="../../../assets/css/nucleo-svg.css" rel="stylesheet" />
-        <!-- CSS Files -->
-        <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
-        <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
-        <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
-        <!--script src="../../../assets/js/plugins/choices.min.js"></script-->
-
-        
-        
-        
-
-html;
-        $extraFooter =<<<html
-     
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/validate/jquery.validate.js"></script>
-        <script src="/js/alertify/alertify.min.js"></script>
-        <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-       <!--   Core JS Files   -->
-          <script src="../../../assets/js/core/popper.min.js"></script>
-          <script src="../../../assets/js/core/bootstrap.min.js"></script>
-          <script src="../../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-          <script src="../../../assets/js/plugins/multistep-form.js"></script>
-          <script src="../../../assets/js/plugins/choices.min.js"></script>
-          <script type="text/javascript" wfd-invisible="true">
-            if (document.getElementById('choices-button')) {
-                var element = document.getElementById('choices-button');
-                const example = new Choices(element, {});
-            }
-            var choicesTags = document.getElementById('choices-tags');
-            var color = choicesTags.dataset.color;
-            if (choicesTags) {
-                const example = new Choices(choicesTags, {
-                delimiter: ',',
-                editItems: true,
-                maxItemCount: 5,
-                removeItemButton: true,
-                addItems: true,
-                classNames: {
-                    item: 'badge rounded-pill choices-' + color + ' me-2'
-                }
-                });
-            }
-        </script>
-          <!-- Kanban scripts -->
-          <script src="../../../assets/js/plugins/dragula/dragula.min.js"></script>
-          <script src="../../../assets/js/plugins/jkanban/jkanban.js"></script>
-          <script>
-            var win = navigator.platform.indexOf('Win') > -1;
-            if (win && document.querySelector('#sidenav-scrollbar')) {
-              var options = {
-                damping: '0.5'
-              }
-              Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-            }
-          </script>
-          <!-- Github buttons -->
-          <script async defer src="https://buttons.github.io/buttons.js"></script>
-          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-           
-
-          <script>
-            $(document).ready(function(){
-                $("#pass_form").validate({
-                   rules:{
-                        password:{
-                            required: true,
-                            minlength: 6
-                            
-                            
-                        },
-                        confirm_password:{
-                            required: true,
-                            equalTo:"#password"
-                        }
-                    },
-                    messages:{
-                        password:{
-                            required: "Este campo es requerido",
-                            minlength: "El password debe tener al menos 6 caracteres"
-                        },
-                        confirm_password:{
-                            required: "Este campo es requerido",
-                            equalTo: "El password no coincide",
-                        }
-                    }
-                });
-
-            });
-        </script>
-       
-html;
-
-$documento = new \stdClass();
-  
-  
-          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-              $id_registro = $_POST['id_registro'];
-              $nombre = $_POST['nombre'];
-              $segundo_nombre = $_POST['segundo_nombre'];
-              $apellido_paterno = $_POST['apellido_paterno'];
-              $apellido_materno = $_POST['apellido_materno'];
-              $genero = $_POST['genero'];
-              $pais = $_POST['pais'];
-              $email = $_POST['email'];
-              $telefono = $_POST['telefono'];
-              $especialidad = $_POST['especialidad'];
-              $alergia = $_POST['alergia'];
-              $alergia_cual = $_POST['alergia_cual'];
-              $btn_politicas = 1;
-  
-              $documento->_nombre = $nombre;
-              $documento->_segundo_nombre = $segundo_nombre;
-              $documento->_apellido_paterno = $apellido_paterno;
-              $documento->_apellido_materno = $apellido_materno;
-              $documento->_genero = $genero;
-              $documento->_pais = $pais;
-              $documento->_email = $email;
-              $documento->_telefono = $telefono;
-              $documento->_especialidad = $especialidad;
-              $documento->_alergia = $alergia;
-              $documento->_alergia_cual = $alergia_cual;
-
-
-               //$id = DataDao::update($documento);
-  
-            //   if ($id) {
-                View::set('politica',$btn_politicas);
-                View::set('email',$email);
-                View::set('header',$extraHeader);
-                View::set('footer',$extraFooter);
-                View::set('data',$documento);
-                View::render('confirm_pass');
-                //   //echo 'success';
-            //   } else {
-
-            //     //quitar esta parte
-                
-            //     View::set('politica',$btn_politicas);
-            //     View::set('email',$email);
-            //     View::set('header',$extraHeader);
-            //     View::set('footer',$extraFooter);
-            //     View::render('confirm_pass');
-            //    // print_r($id);
-            //      // $this->code500();
-            //       //echo 'fail';
-            //   }
-          } else {
-              echo 'fail REQUEST';
-          }
-        
-    }
-
-    public function finalize(){
-
-        $register = new \stdClass();
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-                $password = $_POST['password'];
-                $email = $_POST['email'];
-                $politica = $_POST['politica'];
-               
-
-                $userData = RegisterDao::getUserRegister($email)[0];
-                
-                
-                $id_registro_acceso = $userData['id_registro_acceso'];
-                
-                // $register->_password = md5($password);
-                $register->_password = $password;
-                $register->_email = $email;
-                $register->_politica = $politica;
-                $register->_id_registro_acceso = $id_registro_acceso;
-
-                $id = DataDao::insert($register);
-
-
-                $nombre = $_POST['nombre'];
-                $segundo_nombre = $_POST['segundo_nombre'];
-                $apellido_paterno = $_POST['apellido_paterno'];
-                $apellido_materno = $_POST['apellido_materno'];
-                $genero = $_POST['genero'];
-                $pais = $_POST['pais'];
-                $email = $_POST['email'];
-                $telefono = $_POST['telefono'];
-                $especialidad = $_POST['especialidad'];
-                $alergia = $_POST['alergia'];
-                $alergia_cual = $_POST['alergia_cual'];
-                $politica = 1;
-
-                $documento = new \stdClass();
-                $documento->_nombre = $nombre;
-                $documento->_segundo_nombre = $segundo_nombre;
-                $documento->_apellido_paterno = $apellido_paterno;
-                $documento->_apellido_materno = $apellido_materno;
-                $documento->_genero = $genero;
-                $documento->_pais = $pais;
-                $documento->_email = $email;
-                $documento->_telefono = $telefono;
-                $documento->_especialidad = $especialidad;
-                $documento->_alergia = $alergia;
-                $documento->_alergia_cual = $alergia_cual;
-                $documento->_politica = $politica;
-
-                if ($id) {
-
-                   DataDao::update($documento);                    
-                   //RegisterDao::updatePolitica($register);
-                    
-                    $msg = [
-                        'email' => $email,
-                        'name' =>  $userData['nombre']
-                    ];
-        
-                    $mailer = new Mailer();
-                    $mailer->mailerRegister($msg);
-
-                    echo 'success';
-                    
-
-                } else {
-
-                
-                    echo 'fail';
-                }
-        }    
-      
-
-    }
-    
-    public function code500(){
-        View::render("500");
-    }
-
-    public function isUserValidate(){
-        echo (count(RegisterDao::getUserRegister($_POST['email']))>=1)? 'true' : 'false';
-    }
-
-    public function isUserValidateRegistrate(){
-        echo (count(RegisterDao::getUserRegistrate($_POST['email']))>=1)? 'true' : 'false';
-    }
-
-    public function isUserValidateUser(){
-        echo (count(RegisterDao::getUserRegisterTrue($_POST['email']))>=1)? 'true' : 'false';
-    }
-
-    function generateRandomString($length = 4) {
-        return substr(str_shuffle("0123456789"), 0, $length);
+        echo json_encode($respuesta);
     }
 
 }
-
-
+class respuesta {
+    public $success;
+    public $html;
+}

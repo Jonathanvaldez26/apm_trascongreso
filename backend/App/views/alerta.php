@@ -32,31 +32,54 @@
     <link href="../../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="../../assets/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
+    <style>
+        .oval {
+            width: 185px;
+            height: 185px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            /*background: #fff;*/
+            border: 10px solid rgb(26 221 205 / 75%);
+            /* opacity: 0.5;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .crono {
+            color: #000000;
+            font-family: 'Agency FB', arial;
+            font-size: 600%;
+            text-shadow: 4px 4px 4px #aaa;
+            /* padding-left: 49px; */
+
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-        <div class="container-fluid">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 ">
-                <img src="/assets/img/logos/apmn.png" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">
-                <img src="/assets/img/logos/waddn.png" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">
-                VI World Congress on Dual Disorders
-            </a>
-            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-                <ul class="navbar-nav navbar-nav-hover mx-auto">
-                </ul>
-                <ul class="navbar-nav d-lg-block d-none">
-                    <li class="nav-item">
-                        <a href="/Login/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">SIGN IN</a>
-                    </li>
-                </ul>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg  blur blur-rounded top-0  z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+            <div class="container-fluid">
+                <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 ">
+                    <img src="/assets/img/logos/apmn.png" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">
+                    <img src="/assets/img/logos/waddn.png" style="width: 40px; height: 40px; margin-left: 5px; margin-right: 5px;">
+                    VI World Congress on Dual Disorders
+                </a>
+                <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+                    <ul class="navbar-nav navbar-nav-hover mx-auto">
+                    </ul>
+                    <ul class="navbar-nav d-lg-block d-none">
+                        <li class="nav-item">
+                            <a href="/Login/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">SIGN IN</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav
-
-    <div class="page-header min-vh-75">
+        </nav 
+        <div class="page-header min-vh-75">
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 col-lg-10 col-md-12 d-flex flex-column mx-auto">
@@ -67,89 +90,158 @@
                                     <div class="multisteps-form">
                                         <!--form panels-->
                                         <div class="row">
-                                            <div class="col-12 col-lg-12 m-auto"><div id="card_one" class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" id="card_one"data-animation="FadeIn">
-                                                        <h5 class="font-weight-bolder mb-0">Thank you for submitting your pre-registration form!</h5>
+                                            <div class="col-12 col-lg-12 m-auto">
+                                                <div id="card_one" class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" id="card_one" data-animation="FadeIn">
+                                                    <h5 class="font-weight-bolder mb-0">¡Gracias por completar su formulario de pre-registro!</h5>
 
-                                                        <div class="multisteps-form__content">
-                                                            <br>
-                                                            <p class="mb-0 text-sm">
-                                                                Dear: <?php echo $name; ?>
-                                                            </p>
-                                                            <br>
-                                                            <p>
-                                                                Payment method: <?php echo $pay; ?>
-                                                            </p>
-                                                            <br>
-                                                            <p class="mb-0 text-sm">
-                                                                Print this form and make your deposit at any bank
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                a) Account number: XXXXXXXXX
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                b) Bank: XXXXXX
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                c) Name:
-                                                            </p>
-                                                            <br>
-                                                            <p class="mb-0 text-sm">
-                                                                Reference:(Generate a referenci with the ID and name)
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                Amount due: (According to fee’s table)
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                Payment deadline: (5 days after register)
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
-                                                                <b><?php echo $message_pay; ?><b>
-                                                            </p>
-                                                            <p class="mb-0 text-sm">
+                                                    <div class="multisteps-form__content">
+                                                        <br>
+                                                        <p class="mb-0 text-sm">
+                                                            Estimado: <?php echo $name; ?>
+                                                        </p>
+                                                        <br>
 
-                                                                Remember that your place at the conference will not be booked until full payment is received,
-                                                                and a confirmation email has been sent to you. Incomplete bookings will be cancelled after the
-                                                                payment deadline as indicated above.
-                                                                If you have any enquiries or you do not receive your confirmation code within two working days
-                                                                of making your payment, please email your bank slip to dualdisorders@grupolahe.com
-                                                                </p>
-                                                            <div class="button-row d-flex mt-4">
-                                                                <a href="<?php echo ($regreso) ? $regreso : '/'?>" class="btn btn-sm btn bg-gradient-info ms-auto mb-0 js-btn-next" type="button" title="Next">Back To Website</a>
-                                                            </div>
-                                                        </div>
-                                                    <?php $redireccion ?>
-                                                    <?php
-                                                    ob_start();
-                                                    //header("refresh: 10; url = $regreso");
-                                                    //header("url = $regreso");
-                                                    ob_end_flush();
-                                                    ?>
                                                     </div>
+
+                                                    <div>En breve sera redireccionado al inicio</div>
+
+                                                    <div style="display: flex; justify-content: center;">
+                                                        
+                                                        <section class="oval">
+                                                            <div id="cronometro">
+                                                                <div class="crono">
+                                                                    <span id="reloj_sg">00</span>
+                                                                    <!-- <span id="reloj_cs">00</span> -->
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                        
+                                                        
+                                                    </div>
+
+
+                                                    <div id="paypal-button-container"></div>
+                                                    <div id="paypal-button" <?php echo $estilo_boton; ?>></div>
+                                                    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+                                                    <script>
+                                                        paypal.Button.render({
+                                                            env: '<?php echo PayPalENV; ?>',
+                                                            client: {
+                                                                <?php if (ProPayPal) { ?>
+                                                                    production: '<?php echo PayPalClientId; ?>'
+                                                                <?php } else { ?>
+                                                                    sandbox: '<?php echo PayPalClientId; ?>'
+                                                                <?php } ?>
+                                                            },
+                                                            payment: function(data, actions) {
+                                                                return actions.payment.create({
+                                                                    transactions: [{
+                                                                        amount: {
+                                                                            total: '<?php echo $productPrice; ?>',
+                                                                            currency: '<?php echo $currency; ?>'
+                                                                        }
+                                                                    }]
+                                                                });
+                                                            },
+                                                            onAuthorize: function(data, actions) {
+                                                                return actions.payment.execute()
+                                                                    .then(function() {
+                                                                        alert("sucess");
+                                                                    });
+                                                            }
+                                                        }, '#paypal-button');
+                                                    </script>
+
+                                                    <div class="button-row d-flex mt-4">
+                                                        <a href="<?php echo ($regreso) ? $regreso : '/' ?>" class="btn btn-sm btn bg-gradient-info ms-auto mb-0 js-btn-next" type="button" title="Next">Regresar al Sitio</a>
+                                                    </div>
+                                                </div>
+                                                <?php $redireccion ?>
+                                                <?php
+                                                ob_start();
+                                                //header("refresh: 10; url = $regreso");
+                                                //header("url = $regreso");
+                                                ob_end_flush();
+                                                ?>
                                             </div>
                                         </div>
-
                                     </div>
+
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-<!--   Core JS Files   -->
-<script src="../../assets/js/core/popper.min.js"></script>
-<script src="../../assets/js/core/bootstrap.min.js"></script>
-<script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
-<script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
-<!-- Kanban scripts -->
-<script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
-<script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
-<script src="../../assets/js/plugins/chartjs.min.js"></script>
-<script src="../../assets/js/plugins/threejs.js"></script>
-<script src="../../assets/js/plugins/orbit-controls.js"></script>
+        </div>
+        </div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="../../assets/js/core/popper.min.js"></script>
+    <script src="../../assets/js/core/bootstrap.min.js"></script>
+    <script src="../../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <!-- Kanban scripts -->
+    <script src="../../assets/js/plugins/dragula/dragula.min.js"></script>
+    <script src="../../assets/js/plugins/jkanban/jkanban.js"></script>
+    <script src="../../assets/js/plugins/chartjs.min.js"></script>
+    <script src="../../assets/js/plugins/threejs.js"></script>
+    <script src="../../assets/js/plugins/orbit-controls.js"></script>
+    <script>
+        document.onkeydown = function(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+            alert(tecla)
+            if (tecla == 116) {
+                if (confirm("Seguro que quieres refrescar la página ") == true) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        window.onload = function() {
+            // cs_visor = document.getElementById("reloj_cs"); //localizar pantalla del reloj
+            sg_visor = document.getElementById("reloj_sg"); //localizar pantalla del reloj
+            empezar();
+        }
+
+        //variables de inicio:
+        var marcha;
+        var cro = 0;
+
+        function empezar() {
+            emp = Date.now() + 4000; //fecha actual
+            //emp.setMinutes(emp.getMinutes() + 10); // agrego 1 min a la fecha actual
+            elcrono = setInterval(tiempo, 10); //función ejecutada cada decima de segundo
+            marcha = 1 //indicamos que se ha puesto en marcha.
+        }
+
+        //función del temporizador
+        function tiempo() {
+            actual = new Date() //fecha en el instante
+            cro = emp - actual //resto fecha+60seg - fecha actual
+            cr = new Date() //fecha donde guardamos el tiempo transcurrido
+            cr.setTime(cro)
+            cs = cr.getMilliseconds() //milisegundos del cronómetro
+            cs = cs / 10; //paso a centésimas de segundo.
+            cs = Math.round(cs)
+            sg = cr.getSeconds(); //segundos del cronómetro
+            if (cs < 10) {
+                cs = "0" + cs;
+            } //poner siempre 2 cifras en los números
+            if (sg < 10) {
+                sg = "0" + sg;
+            }
+
+            if(sg <= 0){
+                window.location.replace("/Login/");
+            }
+            // cs_visor.innerHTML = cs; //pasar a pantalla.
+            sg_visor.innerHTML = sg; //pasar a pantalla.
+        }
+    </script>>
 </body>
 
 </html>

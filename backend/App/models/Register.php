@@ -4,154 +4,86 @@ namespace App\models;
 defined("APPPATH") or die("Access denied");
 
 use \Core\Database;
+use \Core\MasterDom;
+use \App\interfaces\Crud;
+use \App\controllers\UtileriasLog;
+
 class Register
 {
 
-    public static function getUserRegister($email){
-        $mysqli = Database::getInstance(true);
-        $query =<<<sql
-        SELECT r.*, p.pais, e.estado
-        FROM registrados r 
-        INNER JOIN paises p
-        ON p.id_pais = r.id_pais
-        INNER JOIN estados e
-        ON e.id_estado = r.id_estado
-        WHERE email = '$email'
+    public static function insert($register)
+    {
+        $mysqli = Database::getInstance();
+        $query = <<<sql
+        INSERT INTO utilerias_administradores(nombre,usuario,title,name_user,middle_name,surname,second_surname,telephone,international_code,id_nationality,id_state,id_country,organization,position_organization,address,organization_country,organization_postal_code,wadd_member,apm_member,scholarship,business_name_iva,code_iva,payment_method_iva,email_receipt_iva,postal_code_iva,pay_ticket,status,envio_email,date,method_pay,reference,amout_due) VALUES(:nombre,:usuario,:title,:name_user,:middle_name,:surname,:second_surname,:telephone,:international_code,:id_nationality,:id_state, :id_country,:organization,:position_organization,:address,:organization_country,:organization_postal_code,:wadd_member,:apm_member,:scholarship,:business_name_iva,:code_iva,:payment_method_iva,:email_receipt_iva,:postal_code_iva, null, 0,0,now(),:method_pay, :reference, :amout_due)                        
 sql;
 
-        return $mysqli->queryAll($query);
-    }
-
-    public static function getUser($email){
-      $mysqli = Database::getInstance(true);
-      $query =<<<sql
-      SELECT * FROM registrados  WHERE email = '$email'
-sql;
-
-      return $mysqli->queryAll($query);
-  }
-
-  public static function getUserByClave($clave){
-    $mysqli = Database::getInstance(true);
-    $query =<<<sql
-    SELECT * FROM registrados  WHERE clave = '$clave'
-sql;
-
-    return $mysqli->queryAll($query);
-}
-
-    public static function getUserRegistrate($email){
-      $mysqli = Database::getInstance(true);
-      $query =<<<sql
-      SELECT * FROM utilerias_asistenes WHERE email = '$email'
-sql;
-
-      return $mysqli->queryAll($query);
-  }
-
-  public static function getUserRegisterTrue($email){
-    $mysqli = Database::getInstance(true);
-    $query =<<<sql
-    SELECT * FROM registros_acceso WHERE email = '$email' and politica is NULL
-sql;
-
-    return $mysqli->queryAll($query);
-}
-
-    public static function update($registro){
-        $mysqli = Database::getInstance(true);
-        $query=<<<sql
-      UPDATE registros_acceso SET code = :code WHERE email = :email
-sql;
         $parametros = array(
-            ':code'=>$registro->_code,
-            ':email'=>$registro->_email
+            ':nombre' => $register->_name,
+            ':usuario' => $register->_email,
+            ':title' => $register->_title,
+            ':name_user' => $register->_name,
+            ':middle_name' => $register->_middle_name,
+            ':surname' => $register->_surname,
+            ':second_surname' => $register->_second_surname,
+            ':telephone' => $register->_telephone,
+            ':international_code' => $register->_international_code,
+            ':id_nationality' => $register->_nationality,
+            ':id_state' => $register->_state,
+            ':method_pay' => $register->_method_pay,
+            ':id_country' => $register->_residence,
+            ':organization' => $register->_organization,
+            ':position_organization' => $register->_position,
+            ':address' => $register->_address,
+            ':organization_country' => $register->_organization_country,
+            ':organization_postal_code' => $register->_organization_postal_code,
+            ':wadd_member' => $register->_wadd_member,
+            ':apm_member' => $register->_apm_member,
+            ':scholarship' => $register->_scholarship,
+            ':business_name_iva' => $register->_business_name_iva,
+            ':code_iva' => $register->_code_iva,
+            ':payment_method_iva' => $register->_payment_method_iva,
+            ':email_receipt_iva' => $register->_email_receipt_iva,
+            ':postal_code_iva' => $register->_postal_code_iva,
+            ':reference' => $register->_reference_user,
+            ':amout_due' => $register->_costo
         );
+
+        $id = $mysqli->insert($query, $parametros);
         $accion = new \stdClass();
-        $accion->_sql= $query;
+        $accion->_sql = $query;
         $accion->_parametros = $parametros;
-        $accion->_id = $registro->_email;
-        return $mysqli->update($query, $parametros);
+        $accion->_id = $id;
+
+        return $id;
     }
 
-    public static function updatePolitica($registro){
-      $mysqli = Database::getInstance(true);
-      $query=<<<sql
-    UPDATE registros_acceso SET politica = :politica WHERE email = :email
-sql;
-      $parametros = array(
-          ':politica'=>$registro->_politica,
-          ':email'=>$registro->_email
-      );
-      $accion = new \stdClass();
-      $accion->_sql= $query;
-      $accion->_parametros = $parametros;
-      $accion->_id = $registro->_email;
-      return $mysqli->update($query, $parametros);
-  }
-
-    public static function updateImg($user){
-        $mysqli = Database::getInstance(true);
-        // var_dump($user);
-        $query=<<<sql
-        UPDATE registrados SET avatar_img = ''  WHERE email = :email;
-sql;
-        $parametros = array(
-          ':email'=>$user->_email
-        );
-  
-  
-          $accion = new \stdClass();
-          $accion->_sql= $query;
-          $accion->_parametros = $parametros;
-          $accion->_id = $user->_administrador_id;
-          // UtileriasLog::addAccion($accion);
-         $mysqli->update($query, $parametros);
-
-
-
-        $query1=<<<sql
-        UPDATE registrados SET avatar_img = :img  WHERE email = :email;
-sql;
-        $parametros1 = array(
-          ':img'=>$user->_img,
-          ':email'=>$user->_email
-          
-        );
-  
-  
-          $accion = new \stdClass();
-          $accion->_sql= $query1;
-          $accion->_parametros = $parametros1;
-          $accion->_id = $user->_administrador_id;
-          // UtileriasLog::addAccion($accion);
-          return $mysqli->update($query1, $parametros1);
-      }
-
-      public static function getPais(){       
-        $mysqli = Database::getInstance();
-        $query=<<<sql
-        SELECT * FROM paises
-sql;
-        return $mysqli->queryAll($query);
-      }
-
-      public static function getStateByCountry($id_pais){
+    public static function getByCost($pais){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
-        SELECT * FROM estados where id_pais = '$id_pais'
-sql;
-      
-        return $mysqli->queryAll($query);
-      }
+         SELECT c.cost_enero_marzo FROM categorias c 
+         JOIN categorias_costos cc ON cc.id_categoria = c.id_categoria 
+         WHERE cc.id_pais = $pais;
 
-      public static function getAllEspecialidades(){
-        $mysqli = Database::getInstance();
-        $query=<<<sql
-        SELECT * FROM especialidades
 sql;
-        return $mysqli->queryAll($query);
-        
+        return $mysqli->queryOne($query);
     }
 
+    public static function getCountryAll()
+    {
+        $mysqli = Database::getInstance();
+        $query = <<<sql
+      SELECT * FROM paises ORDER BY country ASC
+sql;
+        return $mysqli->queryAll($query);
+    }
+
+    public static function getState($pais)
+    {
+        $mysqli = Database::getInstance();
+        $query = <<<sql
+     SELECT * FROM estados WHERE id_pais = $pais;
+sql;
+        return $mysqli->queryAll($query);
+    }
 }
