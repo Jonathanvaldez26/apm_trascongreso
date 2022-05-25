@@ -128,6 +128,8 @@ echo $header;
                             <div class="card card-plain mt-7">
                                 <div class="card-header pb-0 text-start">
                                     <h5 style="color:#1B8586;" class="font-weight-bolder text-center">Congreso de la Asociación Psiquiátrica Mexicana</h5>
+                                    <hr>
+                                    <h4 style="color: #a19a9a;" class="font-weight-bolder text-center">"VI Congreso Mundial de Patología Dual"</h4>
                                     <div id="counter" class="group text-center mt-4">
                                         <!-- <span><em>days</em></span> 
                                         <span><em>hours</em></span>
