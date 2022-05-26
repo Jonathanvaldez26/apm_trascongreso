@@ -27,6 +27,16 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getAllProductCursosNotInUser($id){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT p.*
+      FROM productos p
+      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id) and p.es_curso = 1 ORDER BY p.id_producto ASC
+sql;
+      return $mysqli->queryAll($query);
+    }
+
     public static function getById($id){
       return "getById"+$id;
     }
@@ -41,6 +51,16 @@ sql;
       return $mysqli->queryOne($query);
     }
 
+    public static function getProductCursoByClave($clave){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT * 
+      FROM productos 
+      WHERE clave = '$clave'
+sql;
+      return $mysqli->queryOne($query);
+    }
+
     public static function getPreguntasByCursoUsuario($curso){
       $mysqli = Database::getInstance();
       $query=<<<sql
@@ -50,6 +70,18 @@ sql;
       ON c.id_curso = pe.id_curso
 
       WHERE c.id_curso = $curso
+sql;
+      return $mysqli->queryAll($query);
+    }
+
+    public static function getPreguntasByProductCursoUsuario($curso){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT pe.*
+      FROM preguntas_encuesta_curso pe
+      INNER JOIN productos p
+      ON p.id_producto = pe.id_producto
+      WHERE p.id_producto = $curso
 sql;
       return $mysqli->queryAll($query);
     }
@@ -116,6 +148,19 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getContenidoProdductCursoByAsignacion($id_registrado,$clave_taller){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT p.nombre, uad.nombre as nombre_usuario, ap.* FROM asigna_producto ap
+      INNER JOIN utilerias_administradores uad
+      ON ap.user_id = uad.user_id
+      INNER JOIN productos p
+      ON p.id_producto = ap.id_producto      
+      WHERE uad.user_id = $id_registrado and p.clave = '$clave_taller'
+sql;
+      return $mysqli->queryAll($query);
+    }
+
     public static function getByIdUser($id){
       $mysqli = Database::getInstance();
       $query=<<<sql
@@ -130,6 +175,16 @@ sql;
         SELECT * 
         FROM likes
         WHERE id_registrado = $registrado AND id_curso = '$id_curso'
+sql;
+      return $mysqli->queryOne($query);
+    }
+
+    public static function getlikeProductCurso($id_curso, $registrado){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+        SELECT * 
+        FROM  likes_product_curso
+        WHERE user_id = $registrado AND id_producto = '$id_curso'
 sql;
       return $mysqli->queryOne($query);
     }
@@ -175,6 +230,19 @@ sql;
 sql;
     return $mysqli->queryAll($query);
   }
+
+  public static function getRespuestasCurso($id_registrado,$id_curso){
+    $mysqli = Database::getInstance();
+    $query=<<<sql
+      SELECT * 
+      FROM respuestas_encuesta_productcurso re
+      INNER JOIN preguntas_encuesta_curso pe
+      ON pe.id_pregunta_encuesta = re.id_pregunta_encuesta      
+      WHERE user_id = $id_registrado and pe.id_producto = $id_curso
+sql;
+    return $mysqli->queryAll($query);
+  }
+
     public static function insert($data){
         $fecha_carga_documento = date("Y-m-d");
         $mysqli = Database::getInstance(1);
@@ -252,6 +320,16 @@ sql;
     return $mysqli->queryOne($query);
   }
 
+  public static function getProductProgreso($id,$num_curso){
+    $mysqli = Database::getInstance(true);
+    $query =<<<sql
+    SELECT * FROM progresos_productocursos
+    WHERE id_producto = $num_curso AND user_id = $id
+sql;
+
+    return $mysqli->queryOne($query);
+  }
+
   public static function insertProgreso($registrado,$curso){
       $mysqli = Database::getInstance(1);
       $query=<<<sql
@@ -263,6 +341,18 @@ sql;
 
     return $id;
   }
+
+  public static function insertProductCursoProgreso($registrado,$curso){
+    $mysqli = Database::getInstance(1);
+    $query=<<<sql
+    INSERT INTO progresos_productocursos (id_producto, user_id, segundos,fecha_ultima_vista) 
+    VALUES ('$curso','$registrado','0', NOW())
+sql;
+
+  $id = $mysqli->insert($query);
+
+  return $id;
+}
 
   public static function updateProgreso($id_curso, $registrado, $segundos){
       $mysqli = Database::getInstance();

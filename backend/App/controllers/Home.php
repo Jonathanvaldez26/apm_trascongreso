@@ -54,27 +54,27 @@ html;
 
         $permisos_congreso = $data_user['congreso'] != '1' ? "style=\"display:none;\"" : "";
 
-        $usuarios = HomeDao::getAllUsers();
-        $free_courses = HomeDao::getFreeCourses();
+        // $usuarios = HomeDao::getAllUsers();
+        // $free_courses = HomeDao::getFreeCourses();
 
 
-        foreach ($free_courses as $key => $value) {
-            // HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
-            $hay = HomeDao::getAsignaCursoByUser($_SESSION['id_registrado'],$value['id_curso']);
-            // var_dump($hay);
-            if ($hay == NULL || $hay == 'NULL ') {
-              HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
-            }
-        }
+        // foreach ($free_courses as $key => $value) {
+        //     // HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
+        //     $hay = HomeDao::getAsignaCursoByUser($_SESSION['id_registrado'],$value['id_curso']);
+        //     // var_dump($hay);
+        //     if ($hay == NULL || $hay == 'NULL ') {
+        //       HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
+        //     }
+        // }
 
         //CURSOS COMPRADOS
         // $cursos = TalleresDao::getAll();
-        $cursos = TalleresDao::getAsignaCurso($_SESSION['id_registrado']);
+        $cursos = TalleresDao::getAsignaProducto($_SESSION['user_id']);
 
         $card_cursos = '';
 
         foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProgreso($_SESSION['id_registrado'], $value['id_curso']);
+            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
@@ -102,7 +102,7 @@ html;
                         
 html;
 
-            $like = TalleresDao::getlike($value['id_curso'], $_SESSION['id_registrado']);
+            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
             if ($like['status'] == 1) {
                 $card_cursos .= <<<html
                     <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
@@ -168,10 +168,10 @@ html;
 
         //CURSOS SIN COMPRAR
 
-        $cursos = TalleresDao::getAllCursosNotInUser($_SESSION['id_registrado']);
+        $cursos = TalleresDao::getAllProductCursosNotInUser($_SESSION['user_id']);
 
         foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProgreso($_SESSION['id_registrado'], $value['id_curso']);
+            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
@@ -197,7 +197,7 @@ html;
                         
 html;
 
-            $like = TalleresDao::getlike($value['id_curso'], $_SESSION['id_registrado']);
+            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
             if ($like['status'] == 1) {
                 $card_cursos .= <<<html
                     <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>

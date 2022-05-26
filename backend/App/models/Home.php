@@ -41,7 +41,7 @@ sql;
   public static function getDataUser($user){
     $mysqli = Database::getInstance(true);
     $query=<<<sql
-    SELECT * FROM registrados WHERE email = '$user'
+    SELECT * FROM utilerias_administradores WHERE usuario = '$user'
 sql;
     return $mysqli->queryOne($query);
   }

@@ -151,12 +151,12 @@ html;
 
         //CURSOS COMPRADOS
         // $cursos = TalleresDao::getAll();
-        $cursos = TalleresDao::getAsignaCurso($_SESSION['id_registrado']);
+        $cursos = TalleresDao::getAsignaProducto($_SESSION['user_id']);
 
         $card_cursos = '';
 
         foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProgreso($_SESSION['id_registrado'], $value['id_curso']);
+            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
@@ -184,7 +184,7 @@ html;
                 
 html;
 
-            $like = TalleresDao::getlike($value['id_curso'], $_SESSION['id_registrado']);
+            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
             if ($like['status'] == 1) {
                 $card_cursos .= <<<html
             <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
@@ -250,10 +250,10 @@ html;
 
         //CURSOS SIN COMPRAR
 
-        $cursos = TalleresDao::getAllCursosNotInUser($_SESSION['id_registrado']);
+        $cursos = TalleresDao::getAllProductCursosNotInUser($_SESSION['user_id']);
 
         foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProgreso($_SESSION['id_registrado'], $value['id_curso']);
+            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
@@ -279,7 +279,7 @@ html;
                 
 html;
 
-            $like = TalleresDao::getlike($value['id_curso'], $_SESSION['id_registrado']);
+            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
             if ($like['status'] == 1) {
                 $card_cursos .= <<<html
             <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
@@ -491,17 +491,17 @@ html;
 
 html;
 
-        $curso = TalleresDao::getCursoByClave($clave);
+        $curso = TalleresDao::getProductCursoByClave($clave);
         $contenido_taller = '';
 
-        $permiso_taller = TalleresDao::getContenidoByAsignacion($_SESSION['id_registrado'], $clave);
+        $permiso_taller = TalleresDao::getContenidoProdductCursoByAsignacion($_SESSION['user_id'], $clave);
 
-        $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+        $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         if ($progreso_curso) {
-            $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+            $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         } else {
-            TalleresDao::insertProgreso($_SESSION['id_registrado'], $curso['id_curso']);
-            $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+            TalleresDao::insertProductCursoProgreso($_SESSION['user_id'], $curso['id_producto']);
+            $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         }
 
         $duracion = $curso['duracion'];
@@ -512,21 +512,21 @@ html;
 
         $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
 
-        $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+        $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         if ($progreso_curso) {
-            $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+            $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         } else {
-            TalleresDao::insertProgreso($_SESSION['id_registrado'], $curso['id_curso']);
-            $progreso_curso = TalleresDao::getProgreso($_SESSION['id_registrado'], $curso['id_curso']);
+            TalleresDao::insertProductCursoProgreso($_SESSION['user_id'], $curso['id_producto']);
+            $progreso_curso = TalleresDao::getProductProgreso($_SESSION['user_id'], $curso['id_producto']);
         }
 
         $porcentaje = round(($progreso_curso['segundos'] * 100) / $secs_totales);
 
         if ($curso) {
-            $id_curso = TalleresDao::getCursoByClave($clave)['id_curso'];
-            $url = TalleresDao::getCursoByClave($clave)['url'];
-            $nombre_taller = TalleresDao::getCursoByClave($clave)['nombre'];
-            $descripcion = TalleresDao::getCursoByClave($clave)['descripcion'];
+            $id_curso = TalleresDao::getProductCursoByClave($clave)['id_producto'];
+            $url = TalleresDao::getProductCursoByClave($clave)['url'];
+            $nombre_taller = TalleresDao::getProductCursoByClave($clave)['nombre'];
+            $descripcion = TalleresDao::getProductCursoByClave($clave)['descripcion'];
 
             if ($permiso_taller) {
                 $contenido_taller .= <<<html
@@ -573,8 +573,8 @@ html;
 
             $encuesta = '';
 
-            $preguntas  = TalleresDao::getPreguntasByCursoUsuario($id_curso);
-            $ha_respondido = TalleresDao::getRespuestas($_SESSION['id_registrado'], $id_curso);
+            $preguntas  = TalleresDao::getPreguntasByProductCursoUsuario($id_curso);
+            $ha_respondido = TalleresDao::getRespuestasCurso($_SESSION['user_id'], $id_curso);
 
             if ($preguntas) {
 
@@ -1021,7 +1021,7 @@ html;
         $respuestas = $_POST['list_r'];
         $id_curso = $_POST['id_curso'];
 
-        $ha_respondido = TalleresDao::getRespuestas($_SESSION['id_registrado'], $id_curso);
+        $ha_respondido = TalleresDao::getRespuestasCurso($_SESSION['user_id'], $id_curso);
 
         // var_dump($respuestas);
         $userData = RegisterDao::getUser($this->getUsuario())[0];
