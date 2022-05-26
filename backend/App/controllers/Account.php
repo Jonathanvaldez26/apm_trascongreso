@@ -169,7 +169,6 @@ html;
 
         $userData = LoginDao::getUser($_SESSION['usuario'])[0];
 
-        // var_dump($userData);
 
         $lineaGeneral = LineaGeneralDao::getLineaPrincialAll();
         $optionsGenero = '';
@@ -220,19 +219,22 @@ html;
 
 
 
-        $userData = RegisterDao::getUserRegister($userData['email'])[0];
+        // $userData = RegisterDao::getUserRegister($userData['usuario'])[0];
 
-        if($userData['avatar_img'] != ''){
-            $imgUser=<<<html
-            <img src="../../../img/users_musa/{$userData['avatar_img']}" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
-html;
+        // var_dump($userData);
+        // exit;
 
-        }else{
-            $imgUser=<<<html
-            <img src="../../../img/user.png" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
-html;
+//         if($userData['avatar_img'] != ''){
+//             $imgUser=<<<html
+//             <img src="../../../img/users_musa/{$userData['avatar_img']}" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
+// html;
 
-        }
+//         }else{
+//             $imgUser=<<<html
+//             <img src="../../../img/user.png" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
+// html;
+
+//         }
 
 //         if ($userData['alergia'] != 'Otro') {
 //             $restricciones =<<<html
@@ -245,7 +247,7 @@ html;
 //         }
         $select_pais = '';
         foreach(RegisterDao::getPais() as $key => $value){
-            $selectedPais = ($value['id_pais'] == $userData['id_pais']) ? 'selected' : '';  
+            $selectedPais = ($value['id_pais'] == $userData['id_nationality']) ? 'selected' : '';  
             $select_pais .= <<<html
                     <option value="{$value['id_pais']}" $selectedPais>{$value['pais']}</option>
 html;

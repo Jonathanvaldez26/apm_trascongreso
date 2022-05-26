@@ -50,7 +50,6 @@ html;
 
         $data_user = HomeDao::getDataUser($this->__usuario);
         $modalComprar = '';
-        // var_dump($data_user);
 
         $permisos_congreso = $data_user['congreso'] != '1' ? "style=\"display:none;\"" : "";
 
@@ -271,7 +270,7 @@ html;
 
         View::set('header',$this->_contenedor->header($extraHeader));
         View::set('permisos_congreso',$permisos_congreso);
-        View::set('datos',$data_user['datos']);
+        View::set('datos',$data_user);
         View::set('card_cursos', $card_cursos);
         View::set('modalComprar',$modalComprar);
         //View::set('tabla',$tabla);

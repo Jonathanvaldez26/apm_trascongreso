@@ -7,20 +7,35 @@ use \Core\Database;
 class Register
 {
 
+//     public static function getUserRegister($email){
+//         $mysqli = Database::getInstance(true);
+//         $query =<<<sql
+//         SELECT r.*, p.pais, e.estado
+//         FROM registrados r 
+//         INNER JOIN paises p
+//         ON p.id_pais = r.id_pais
+//         INNER JOIN estados e
+//         ON e.id_estado = r.id_estado
+//         WHERE email = '$email'
+// sql;
+
+//         return $mysqli->queryAll($query);
+//     }
+
     public static function getUserRegister($email){
-        $mysqli = Database::getInstance(true);
-        $query =<<<sql
-        SELECT r.*, p.pais, e.estado
-        FROM registrados r 
+      $mysqli = Database::getInstance(true);
+      $query =<<<sql
+      SELECT uad.*, p.pais, e.estado
+        FROM utilerias_administradores uad 
         INNER JOIN paises p
-        ON p.id_pais = r.id_pais
+        ON p.id_pais = uad.id_nationality
         INNER JOIN estados e
-        ON e.id_estado = r.id_estado
-        WHERE email = '$email'
+        ON e.id_estado = uad.id_state
+        WHERE usuario = '$email'
 sql;
 
-        return $mysqli->queryAll($query);
-    }
+      return $mysqli->queryAll($query);
+  }
 
 //     public static function getUser($email){
 //       $mysqli = Database::getInstance(true);

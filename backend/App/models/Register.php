@@ -95,4 +95,30 @@ sql;
 sql;
         return $mysqli->queryAll($query);
     }
+
+    public static function getPais(){       
+        $mysqli = Database::getInstance();
+        $query=<<<sql
+        SELECT * FROM paises
+sql;
+        return $mysqli->queryAll($query);
+      }
+
+      public static function getStateByCountry($id_pais){
+        $mysqli = Database::getInstance(true);
+        $query =<<<sql
+        SELECT * FROM estados where id_pais = '$id_pais'
+sql;
+      
+        return $mysqli->queryAll($query);
+      }
+
+      public static function getAllEspecialidades(){
+        $mysqli = Database::getInstance();
+        $query=<<<sql
+        SELECT * FROM especialidades
+sql;
+        return $mysqli->queryAll($query);
+        
+    }
 }

@@ -151,8 +151,8 @@ sql;
         $mysqli = Database::getInstance(true);
         $query =<<<sql
         SELECT *
-        FROM registrados  
-        WHERE email = '$usuario'
+        FROM utilerias_administradores  
+        WHERE usuario = '$usuario'
 sql;
 
         return $mysqli->queryAll($query);

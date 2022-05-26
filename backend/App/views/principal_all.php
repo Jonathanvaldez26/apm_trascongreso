@@ -7,7 +7,7 @@
 
 <!-- <div id="content"> -->
     
-    <main style ="background: #ffffffa8!important;">
+    <main>
         <!-- <video class="video-fondo" autoplay="true" muted="false" loop="true" src="/videos/dfic.mp4" type="video/mp4">
         </video> -->
 
@@ -51,7 +51,13 @@
                         <li class="nav-item d-flex align-items-center">
                             <a href="/Account" class="nav-link text-body font-weight-bold mx-lg-4 mx-0  px-0">
                                 <i class="fa fa-user me-sm-0"></i>
-                                <span class="d-sm-inline d-none">Mi Cuenta</span>
+                                <!-- <span class="d-sm-inline d-none">Mi Cuenta</span> -->
+                                <?php
+                                    $apellido = $datos['surname'];                                    
+                                    $arr1 = str_split($apellido);                         
+                                   
+                                ?>
+                                <span class="d-sm-inline d-none"><?php echo $datos['name_user'] ." ".$arr1[0].".";?></span>
                             </a>
                         </li>
                     </ul>

@@ -126,7 +126,8 @@
             <div class="card col-lg-10 mt-lg-5 mt-1" >
                 <div class="card-header pb-0 p-3">
                     <div class="row">
-                    <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt="">
+                    <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
+                    <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                     </div>
                     <h4 class="mb-1 mt-4 text-left"><i class="fa fa-desktop"></i> Talleres</h4>
                     <p>(Usted tiene disponible los siguientes cursos)</p>

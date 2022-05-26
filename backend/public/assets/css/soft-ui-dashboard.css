@@ -37069,8 +37069,8 @@ input#chk-6:checked ~ #lbl-6{display: block;}
 }
 
 #body-home{
-  /* background-image: url(/img/qro.jpg);
-  background-size: cover;*/
+ background-image: url(/img/a.png);
+  background-size: cover;
 } 
 
 /* ---- reset ---- */
@@ -37390,6 +37390,9 @@ iframe.video_programa{
   left: auto;
 }
 
+.card{
+  background-color: transparent!important;
+}
 /* .heart-like:hover{
   color: #ffffff80;
   text-shadow: 0px 0px 5px #aaa;

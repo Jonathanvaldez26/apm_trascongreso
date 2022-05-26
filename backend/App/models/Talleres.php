@@ -32,7 +32,7 @@ sql;
       $query=<<<sql
       SELECT p.*
       FROM productos p
-      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id) and p.es_curso = 1 ORDER BY p.id_producto ASC
+      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id)  ORDER BY p.id_producto ASC
 sql;
       return $mysqli->queryAll($query);
     }
@@ -323,7 +323,7 @@ sql;
     ON ap.user_id = uad.user_id
     INNER JOIN productos p
     ON p.id_producto = ap.id_producto
-    WHERE ap.user_id = $usuario and p.es_curso = 1
+    WHERE ap.user_id = $usuario 
 sql;
 
     return $mysqli->queryAll($query);

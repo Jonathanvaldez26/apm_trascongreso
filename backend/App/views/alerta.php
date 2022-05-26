@@ -227,7 +227,7 @@
         function empezar() {
             emp = Date.now() + 4000; //fecha actual
             //emp.setMinutes(emp.getMinutes() + 10); // agrego 1 min a la fecha actual
-            elcrono = setInterval(tiempo, 1000); //función ejecutada cada milecima de segundo
+            elcrono = setInterval(tiempo, 10); //función ejecutada cada milecima de segundo
             marcha = 1 //indicamos que se ha puesto en marcha.
         }
 
@@ -250,9 +250,9 @@
                 sg = "0" + sg;
             }
 
-            if(sg == 0){
+            if(sg == 1){
 
-                console.log("se activa boton");
+             
                 document.getElementById("btn_crearSesion").click();
                 
                 // let usuario = localStorage.getItem("email");
