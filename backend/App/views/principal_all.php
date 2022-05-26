@@ -98,11 +98,11 @@
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Talleres/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-imag: url(/img/SMNP_Iconos/8.png)">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/5.png); background-size: contain;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
                                             
-                                            <p>Cursos</p>
+                                            
                                         </div>
                                         
                                         
@@ -115,10 +115,10 @@
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <a href="/Transmission/">
-                                        <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/1.png)">
+                                        <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/7.png); background-size: contain;">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
-                                                    <p>Transmision</p>
+                                                  
                                                 </div>                                               
                                             </div>
                                         </div>
@@ -131,11 +131,11 @@
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/ComprobantePago/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-imag: url(/img/SMNP_Iconos/14.png)">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/11.png); background-size: contain;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
                                           
-                                        <p>Comprobante pago</p>
+                                        
                                         </div>
                                         
                                         
@@ -148,10 +148,10 @@
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <a href="/Account/">
-                                        <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/3.png)">
+                                        <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/6.png); background-size: contain;  object-position: center center;">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
-                                                <p>Datos personales</p>
+                                               
                                                 </div>
 
                                              

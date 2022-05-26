@@ -22,7 +22,7 @@ sql;
       $query=<<<sql
       SELECT c.*
       FROM cursos c
-      WHERE c.id_curso not in (SELECT id_curso FROM asigna_curso WHERE  id_registrado = $id) 
+      WHERE c.id_curso not in (SELECT id_curso FROM asigna_curso WHERE  id_registrado = $id) ORDER BY c.id_curso ASC
 sql;
       return $mysqli->queryAll($query);
     }
@@ -219,12 +219,28 @@ sql;
       ON ac.id_registrado = r.id_registrado
       INNER JOIN cursos c
       ON c.id_curso = ac.id_curso
-
-      WHERE ac.id_registrado = $usuario
+      WHERE ac.id_registrado = $usuario ORDER BY c.id_curso
 sql;
 
       return $mysqli->queryAll($query);
   }
+
+  public static function getAsignaProducto($usuario){
+    $mysqli = Database::getInstance(true);
+    $query =<<<sql
+    SELECT uad.*, p.nombre AS nombre_curso, p.*
+    FROM asigna_producto ap
+    INNER JOIN utilerias_administradores uad
+    ON ap.user_id = uad.user_id
+    INNER JOIN productos p
+    ON p.id_producto = ap.id_producto
+    WHERE ap.user_id = $usuario and p.es_curso = 1
+sql;
+
+    return $mysqli->queryAll($query);
+}
+
+ 
 
   public static function getProgreso($id,$num_curso){
     $mysqli = Database::getInstance(true);
@@ -269,4 +285,15 @@ sql;
 sql;
     return $mysqli->update($query);
   } 
+
+  public static function getAsignaCursoByUser($registrado, $curso){
+    $mysqli = Database::getInstance(true);
+    $query =<<<sql
+    SELECT *
+    FROM asigna_curso
+    WHERE id_registrado = '$registrado' AND id_curso = '$curso'
+sql;
+
+    return $mysqli->queryOne($query);
+  }
 }

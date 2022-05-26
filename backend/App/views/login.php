@@ -152,7 +152,7 @@ echo $header;
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
-                                    <form role="form" class="text-start" id="login" action="/Inicio/crearSession" method="POST" class="form-horizontal">
+                                    <form role="form" class="text-start" id="login" action="/Login/crearSession" method="POST" class="form-horizontal">
                                         <label style="font-weight:bold; font-size: 15px">Correo electrónico</label>
                                         <div class="mb-5">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">

@@ -204,7 +204,7 @@ html;
                     $.ajax({
                         type:"POST",
                         async: false,
-                        url: "/Inicio/isUserValidate",
+                        url: "/Login/isUserValidate",
                         data: {usuario: $("#usuario").val()},
                         success: function(data) {
                             console.log(data);
@@ -246,15 +246,19 @@ html;
                 $("#btnEntrar").click(function(){
                     $.ajax({
                         type: "POST",
-                        url: "/Inicio/verificarUsuario",
+                        url: "/Login/verificarUsuario",
                         data: $("#login").serialize(),
+                        dataType: 'json',
                         success: function(response){
+                            console.log(response);
+                            console.log(response.nombre);
                             if(response!=""){
-                                var usuario = jQuery.parseJSON(response);
+                                var usuario = response;
                                 if(usuario.nombre!=""){
                                     $("#login").append('<input type="hidden" name="autentication" id="autentication" value="OK"/>');
                                     $("#login").append('<input type="hidden" name="nombre" id="nombre" value="'+usuario.nombre+'"/>');
                                     $("#login").submit();
+
                             }else{
                                 alertify.alert("Error de autenticación <br> El usuario o contraseña es incorrecta");
                             }
@@ -263,6 +267,10 @@ html;
                             }
                         }
                     });
+                });
+
+                $("#login").on("submit",function(event){
+                    // event.preventDefault();
                 });
 
             });
@@ -348,6 +356,41 @@ html;
         // session_unset();
         session_destroy();
         header("Location: /Login/");
+    }
+
+    public function verificarUsuario(){
+        $usuario = new \stdClass();
+        $usuario->_usuario = MasterDom::getData("usuario");
+        // $usuario->_password = MD5(MasterDom::getData("password"));
+        $usuario->_password = MasterDom::getData("password");
+        // var_dump($usuario);
+        $user = LoginDao::getUserRAById($usuario);
+        // 
+
+        if (count($user)>=1) {
+            $user['nombre'] = utf8_encode($user['nombre']);
+            echo json_encode($user);
+        }
+    }
+
+    public function isUserValidate(){
+        echo (count(LoginDao::getUserByEmail($_POST['usuario']))>=1)? 'true' : 'false';
+    }
+
+    public function crearSession(){
+        $usuario = new \stdClass();
+        $usuario->_usuario = MasterDom::getData("usuario");
+        // $usuario->_password = MD5(MasterDom::getData("password"));
+        $usuario->_password = MasterDom::getData("password");
+        $user = LoginDao::getUserRAById($usuario);
+        
+        session_start();
+        $_SESSION['usuario'] = $user['email'];
+        $_SESSION['nombre'] = $user['nombre'];
+        $_SESSION['id_registrado'] = $user['id_registrado'];
+
+        header("location: /Home/");
+        // echo "Hola";
     }
 
     

@@ -175,6 +175,7 @@
     </div>
 
 </main>
+<?php echo $modalComprar?>
 
 
 <script>
