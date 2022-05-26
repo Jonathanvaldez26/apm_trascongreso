@@ -37,7 +37,7 @@
                                 </svg>
                             </a>
                         </li>
-                        <li class="breadcrumb-item text-sm"><a class="opacity-10 text-dark" href="javascript:;">Regresar al Inicio</a></li>
+                        <li class="breadcrumb-item text-sm"><a class="opacity-10 text-dark" href="javascript:;"></a></li>
                     </ol>
                 </nav>
 
