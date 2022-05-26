@@ -531,7 +531,10 @@ html;
             if ($permiso_taller) {
                 $contenido_taller .= <<<html
                 <div class="row">
-                    <iframe id="iframe" class="bg-gradient-warning iframe-course" src="{$url}" allow="autoplay; fullscreen; width="640" height="521" frameborder="0">a</iframe>
+                <div class="embed-responsive embed-responsive-16by9">
+         <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="{$url}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div>
+        </div>
+                   <!-- <iframe id="iframe" class="bg-gradient-warning iframe-course" src="{$url}" allow="autoplay; fullscreen; style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"></iframe>-->
                     <!-- <iframe src="{$url}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:640;height:521;"></iframe>-->
                 </div>
     
@@ -861,7 +864,7 @@ html;
             $data->_sala = 1;
             $data->_id_tipo = $id_curso;
 
-            $chat_taller = TransmisionDao::getChatByID($data);
+            $chat_taller = TransmisionDao::getNewChatByID($data);
             $cont_chat = '';
             $avatar = '';
 
@@ -921,7 +924,7 @@ html;
         $data->_id_tipo = $id_tipo;
         $data->_sala = $sala;
 
-        $id = TransmisionDao::insertChat($data);
+        $id = TransmisionDao::insertNewChat($data);
 
         if ($id) {
             echo "success";
@@ -935,13 +938,13 @@ html;
         $id_tipo = $_POST['id_tipo'];
         $sala = $_POST['sala'];
 
-        $taller = TalleresDao::getTallerById($id_tipo);
+        $taller = TalleresDao::getPorductById($id_tipo);
         $data = new \stdClass();
         $data->_tipo = 2;
         $data->_sala = $sala;
         $data->_id_tipo = $taller['id_curso'];
 
-        $chat_taller = TransmisionDao::getChatByID($data);
+        $chat_taller = TransmisionDao::getNewChatByID($data);
 
         echo json_encode($chat_taller);
     }
@@ -1041,7 +1044,7 @@ html;
             foreach ($respuestas as $key => $value) {
                 $id_pregunta = $value[0];
                 $respuesta = $value[1];
-                TalleresDao::insertRespuesta($_SESSION['id_registrado'], $id_pregunta, $respuesta);
+                TalleresDao::insertRespuestaProductCurso($_SESSION['user_id'], $id_pregunta, $respuesta);
             }
             // echo 'success';
             $data = [

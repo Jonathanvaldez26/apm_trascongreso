@@ -197,7 +197,7 @@ html;
 
         <script>
             $(document).ready(function(){
-
+                localStorage.clear();
                
                 $.validator.addMethod("checkUserName",function(value, element) {
                   var response = false;
@@ -216,6 +216,7 @@ html;
                                 //$('#btn_modal_add').attr("disabled",false);
                                 //$('#Modal_Add').modal('show');
                                 window.location.replace("/Register/");
+                                localStorage.setItem("email",$("#usuario").val());
                             }
                         }
                     });
@@ -382,6 +383,26 @@ html;
         $usuario->_usuario = MasterDom::getData("usuario");
         // $usuario->_password = MD5(MasterDom::getData("password"));
         $usuario->_password = MasterDom::getData("password");
+        $user = LoginDao::getUserRAById($usuario);
+        
+        session_start();
+        $_SESSION['usuario'] = $user['usuario'];
+        $_SESSION['nombre'] = $user['nombre'];
+        $_SESSION['user_id'] = $user['user_id'];
+
+        // var_dump($usuario);
+        // echo "<br>";
+        // var_dump($_SESSION);
+        // exit;
+
+        header("location: /Home/");
+        // echo "Hola";
+    }
+
+    public function crearSessionFinalize(){
+        $usuario = new \stdClass();
+        $usuario->_usuario = $_POST['usuario'];
+    
         $user = LoginDao::getUserRAById($usuario);
         
         session_start();

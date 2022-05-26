@@ -86,15 +86,25 @@ sql;
       return $mysqli->queryAll($query);
     }
 
-    public static function getTallerById($id){
+//     public static function getTallerById($id){
+//       $mysqli = Database::getInstance(true);
+//       $query =<<<sql
+//       SELECT * FROM cursos
+//       WHERE id_curso = $id
+// sql;
+
+//       return $mysqli->queryOne($query);
+//   }
+
+    public static function getPorductById($id){
       $mysqli = Database::getInstance(true);
       $query =<<<sql
-      SELECT * FROM cursos
-      WHERE id_curso = $id
+      SELECT * FROM productos
+      WHERE id_producto = $id
 sql;
 
-      return $mysqli->queryOne($query);
-  }
+    return $mysqli->queryOne($query);
+}
 
     public static function getRespuestasPorUsuraioTaller($id_registrado,$id_curso){
 
@@ -216,6 +226,17 @@ sql;
 
     $id = $mysqli->insert($query);
     return $id;
+}
+
+public static function insertRespuestaProductCurso($id_registrado,$id_pregunta_encuesta,$respuesta_registrado){
+  $mysqli = Database::getInstance(1);
+  $query=<<<sql
+    INSERT INTO respuestas_encuesta_productcurso(id_pregunta_encuesta, user_id, respuesta_registrado) 
+    VALUES ('$id_pregunta_encuesta','$id_registrado','$respuesta_registrado')
+sql;
+
+  $id = $mysqli->insert($query);
+  return $id;
 }
 
   public static function getRespuestas($id_registrado,$id_curso){

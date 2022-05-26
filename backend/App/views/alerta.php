@@ -174,6 +174,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row" style="display: none;">
+                <div class="col">
+                <form role="form" class="text-start" id="login" action="/Login/crearSession" method="POST" class="form-horizontal">                                      
+                        <input type="email" name="usuario" id="usuario" class="form-control" aria-label="Email" value="">
+                        <button type="submit" id="btn_crearSesion"></button>
+                </form>
+                </div>
+            </div>
         </div>
         </div>
         </div>
@@ -190,6 +199,10 @@
     <script src="../../assets/js/plugins/threejs.js"></script>
     <script src="../../assets/js/plugins/orbit-controls.js"></script>
     <script>
+
+        var user = document.getElementById('usuario');
+        user.value = localStorage.getItem("email");;
+
         document.onkeydown = function(e) {
             tecla = (document.all) ? e.keyCode : e.which;
             alert(tecla)
@@ -214,9 +227,11 @@
         function empezar() {
             emp = Date.now() + 4000; //fecha actual
             //emp.setMinutes(emp.getMinutes() + 10); // agrego 1 min a la fecha actual
-            elcrono = setInterval(tiempo, 10); //función ejecutada cada decima de segundo
+            elcrono = setInterval(tiempo, 1000); //función ejecutada cada milecima de segundo
             marcha = 1 //indicamos que se ha puesto en marcha.
         }
+
+        
 
         //función del temporizador
         function tiempo() {
@@ -235,8 +250,29 @@
                 sg = "0" + sg;
             }
 
-            if(sg <= 0){
-                window.location.replace("/Login/");
+            if(sg == 0){
+
+                console.log("se activa boton");
+                document.getElementById("btn_crearSesion").click();
+                
+                // let usuario = localStorage.getItem("email");
+                // console.log(usuario);
+                // const url = "/Login/crearSessionFinalize"
+                // let xhr = new XMLHttpRequest()
+                
+                // xhr.open('POST', url, true)
+                // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+                // xhr.send(usuario);
+
+                // xhr.onreadystatechange = function() {//Call a function when the state changes.
+                //     if(xhr.readyState == 4 && xhr.status == 200) {
+                //         console.log(xhr.response);
+                        
+                //         console.log("Post successfully created!");
+                //         window.location.replace("/Home/");
+                //     }
+                // }
+            
             }
             // cs_visor.innerHTML = cs; //pasar a pantalla.
             sg_visor.innerHTML = sg; //pasar a pantalla.

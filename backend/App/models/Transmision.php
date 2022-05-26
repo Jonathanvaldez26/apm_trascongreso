@@ -69,14 +69,33 @@ sql;
         return $id;
     }
 
-    public static function insertChat($data){
+//     public static function insertChat($data){
+//         $mysqli = Database::getInstance(1);
+//         $query=<<<sql
+//         INSERT INTO chat (id_registrado, chat, 	fecha, tipo, id_tipo, sala) 
+//         VALUES (:id_registrado,:chat,NOW(),:tipo,:id_tipo,:sala)
+// sql;
+//         $parametros = array(
+//             ':id_registrado'=>$data->_id_registrado,
+//             ':chat'=>$data->_chat,
+//             ':tipo'=>$data->_tipo,
+//             ':id_tipo'=>$data->_id_tipo,
+//             ':sala'=>$data->_sala
+//         );      
+  
+//         $id = $mysqli->insert($query, $parametros);
+    
+//         return $id;
+//    }
+
+    public static function insertNewChat($data){
         $mysqli = Database::getInstance(1);
         $query=<<<sql
-        INSERT INTO chat (id_registrado, chat, 	fecha, tipo, id_tipo, sala) 
-        VALUES (:id_registrado,:chat,NOW(),:tipo,:id_tipo,:sala)
+        INSERT INTO chat (user_id, chat, 	fecha, tipo, id_tipo, sala) 
+        VALUES (:user_id,:chat,NOW(),:tipo,:id_tipo,:sala)
 sql;
         $parametros = array(
-            ':id_registrado'=>$data->_id_registrado,
+            ':user_id'=>$data->_id_registrado,
             ':chat'=>$data->_chat,
             ':tipo'=>$data->_tipo,
             ':id_tipo'=>$data->_id_tipo,
@@ -89,13 +108,30 @@ sql;
     }
 
 
-    public static function getChatByID($data){
+//     public static function getChatByID($data){
+//         $mysqli = Database::getInstance(true);
+//         $query =<<<sql
+//         SELECT c.*, reg.nombre, reg.apellidop, reg.apellidom, reg.avatar_img
+//         FROM chat c
+//         INNER JOIN registrados reg ON (reg.id_registrado = c.id_registrado)
+//         WHERE c.tipo = :tipo and c.sala = :sala and c.id_tipo = :id_tipo;
+// sql;
+
+//         $parametros = array(
+//             ':tipo'=>$data->_tipo,
+//             ':sala'=>$data->_sala,
+//             ':id_tipo'=>$data->_id_tipo
+//         );
+//         return $mysqli->queryAll($query, $parametros);
+//     }
+
+    public static function getNewChatByID($data){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
-        SELECT c.*, reg.nombre, reg.apellidop, reg.apellidom, reg.avatar_img
-        FROM chat c
-        INNER JOIN registrados reg ON (reg.id_registrado = c.id_registrado)
-        WHERE c.tipo = :tipo and c.sala = :sala and c.id_tipo = :id_tipo;
+        SELECT nc.*, uad.name_user, uad.surname, uad.second_surname
+        FROM new_chat nc
+        INNER JOIN utilerias_administradores uad ON (uad.user_id = nc.user_id)
+        WHERE nc.tipo = :tipo and nc.sala = :sala and nc.id_tipo = :id_tipo;
 sql;
 
         $parametros = array(

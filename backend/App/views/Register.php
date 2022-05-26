@@ -282,7 +282,7 @@ echo $header;
                                                                     <div class="col-sm-3 ms-auto">
                                                                         <input type="checkbox" class="btn-check" id="btncheck2" name="group1[]" value="Si" onclick="myFunction()">
                                                                         <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck2">
-                                                                       
+                                                                        <i class="fas fa-check" style="color: green;"></i>
                                                                         </label>
                                                                         <h6>SI
                                                                             </h6>
@@ -290,7 +290,7 @@ echo $header;
                                                                     <div class="col-sm-3 me-auto">
                                                                         <input type="checkbox" class="btn-check" id="btncheck3" name="group1[]" value="No" onclick="myFunctionDiscardVAT()">
                                                                         <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="btncheck3">
-                                                                            
+                                                                        <i class="fas fa-times"  style="color: red;"></i>
                                                                         </label>
                                                                         <h6>NO</h6>
                                                                     </div>
@@ -584,4 +584,15 @@ enlace a continuación a nuestro Aviso de privacidad.
 
 
 </body>
+
+<script>
+    $(document).ready(function(){
+        let email = localStorage.getItem("email");
+        
+        $("#email").val(email);
+        if($("#email").val() != ''){
+            $("#confirm_email").removeAttr('disabled');
+        }
+    });
+</script>
 

@@ -69,6 +69,15 @@ sql;
         return $mysqli->queryOne($query);
     }
 
+    public static function getUser($email){
+        $mysqli = Database::getInstance(true);
+        $query =<<<sql
+        SELECT * FROM utilerias_administradores  WHERE usuario = '$email'
+sql;
+    
+        return $mysqli->queryAll($query);
+    }
+
     public static function getCountryAll()
     {
         $mysqli = Database::getInstance();
