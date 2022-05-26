@@ -385,9 +385,14 @@ html;
         $user = LoginDao::getUserRAById($usuario);
         
         session_start();
-        $_SESSION['usuario'] = $user['email'];
+        $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['nombre'] = $user['nombre'];
-        $_SESSION['id_registrado'] = $user['id_registrado'];
+        $_SESSION['user_id'] = $user['user_id'];
+
+        // var_dump($usuario);
+        // echo "<br>";
+        // var_dump($_SESSION);
+        // exit;
 
         header("location: /Home/");
         // echo "Hola";

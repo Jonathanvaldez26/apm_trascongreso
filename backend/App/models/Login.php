@@ -23,17 +23,16 @@ sql;
     public static function getUserRAById($usuario){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
-        SELECT * FROM registrados
-        WHERE email LIKE :usuario
+        SELECT * FROM utilerias_administradores
+        WHERE usuario LIKE :usuario
 sql;
         $params = array(
             ':usuario'=> $usuario->_usuario,
             // ':password'=>$usuario->_password
         );
 
-        // var_dump($params);
-
         return $mysqli->queryOne($query,$params);
+        
     }
 
     public static function getAllUsers(){
@@ -163,8 +162,8 @@ sql;
         $mysqli = Database::getInstance(true);
         $query =<<<sql
         SELECT *
-        FROM registrados 
-        WHERE email = '$email'
+        FROM utilerias_administradores 
+        WHERE usuario = '$email'
 sql;
 
         return $mysqli->queryAll($query);
