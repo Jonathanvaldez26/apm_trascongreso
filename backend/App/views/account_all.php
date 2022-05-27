@@ -85,7 +85,7 @@
                         <div class="col-sm-auto col-8 my-auto">
                             <div class="h-100">
                                 <h5 class="mb-1 font-weight-bolder">
-                                    <?= $userData['prefijo'] . " " . $userData['nombre'] . " " . $userData['apellidop'] . " " . $userData['apellidom'] ?>
+                                    <?= $userData['prefijo'] . " " . $userData['name_user'] . " " . $userData['apellidop'] . " " . $userData['apellidom'] ?>
                                 </h5>
                                 <p class="mb-0 font-weight-bold text-sm">
                                     <span class="badge badge-info"><?php echo $userData['nombre_modalidad']; ?></span>
