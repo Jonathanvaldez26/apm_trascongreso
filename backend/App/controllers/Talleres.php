@@ -307,8 +307,6 @@ html;
             </div>
             <!--<a href="/Talleres/Video/{$value['clave']}">-->
                 <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
-                <p></p>              
-                
 
                 <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
                     {$value['descripcion']}<br>
@@ -332,6 +330,7 @@ html;
             </div>
         </div>
         <div class="card-footer">
+        <p style="font-size: 14px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
         <div style = "display: flex; justify-content:start">
         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
        
