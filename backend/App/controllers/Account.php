@@ -353,6 +353,51 @@ html;
 
     }
 
+    public function ActualizarFiscal(){
+
+
+        $documento = new \stdClass();
+
+
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            
+            $business_name_iva = $_POST['business_name_iva'];
+            $code_iva = $_POST['code_iva'];
+            $payment_method_iva = $_POST['payment_method_iva'];
+            $email_receipt_iva = $_POST['email_receipt_iva'];
+            $postal_code_iva = $_POST['postal_code_iva'];
+            $email_user = $_POST['email_user'];
+            
+
+            $documento->_business_name_iva = $business_name_iva;
+            $documento->_code_iva = $code_iva;
+            $documento->_payment_method_iva = $payment_method_iva;
+            $documento->_postal_code_iva = $postal_code_iva;
+            $documento->_email_receipt_iva = $email_receipt_iva;
+            $documento->_email_user = $email_user;
+
+
+              $id = DataDao::updateAccountFiscal($documento);
+
+
+              if($id){
+                // $user = new \stdClass();
+                // $user->_email = $email;
+                //   $update = DataDao::updateSatatusDatos($user);
+                  echo "success";
+                //header("Location: /Home");
+              }else{
+                  echo "fail";
+               // header("Location: /Home/");
+              }
+
+          } else {
+              echo 'fail REQUEST';
+          }
+
+    }
+
     public function uploadImage(){
 
 

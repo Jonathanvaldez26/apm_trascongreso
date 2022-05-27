@@ -94,9 +94,11 @@
                         </div>
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
                             <label class="form-check-label mb-0">
+                                
                             </label>
                         </div>
                     </div>
+                    
                 </div>
 
 
@@ -218,6 +220,66 @@
                         </div>
                     </form>
                 </div>
+
+
+                <!-- Card Basic Info -->
+                <div class="card mt-4" id="fiscal-info">
+                <div class="card-header">
+                        <h5>Información Fiscal</h5>
+                        
+                    </div>
+
+                    <form class="form-horizontal" id="update_form_fiscal" action="" method="POST">
+                        <div class="card-body pt-0">
+                            <div class="row">
+                            <input id="email_user" name="email_user" maxlength="49" class="form-control" type="hidden" placeholder="example@email.com" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['usuario'] ?>">
+
+                                <div class="col-12 col-sm-4">
+                                    <label>Razón Social *</label>
+                                    <input class="multisteps-form__input form-control" type="text" id="business_name_iva" name="business_name_iva" placeholder="eg. Christopher Prior Jones" maxlength="20" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['business_name_iva'] ?>">
+                                </div>                             
+                         
+
+                                <div class="col-12 col-sm-4 mt-1 mt-sm-0">
+                                    <label>RFC *</label>
+                                    <input class="multisteps-form__input form-control" type="text" id="code_iva" name="code_iva" placeholder="eg. CPJ41250AS" maxlength="13" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['code_iva'] ?>">
+                                </div>
+
+                                <div class="col-12 col-sm-4 mt-1 mt-sm-0">
+                                    <label>Payment method *</label>
+                                    <input class="multisteps-form__input form-control" type="text" id="payment_method_iva" name="payment_method_iva" placeholder="eg. CPJ41250AS" maxlength="13" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['payment_method_iva'] ?>">
+                                    <!-- <select class="multisteps-form__select form-control all_input_select" name="payment_method_iva" id="payment_method_iva">
+                                        <option value="" disabled selected>Selecciona una Opción</option>
+                                        <option value="ELECTRONIC TRANSFER">ELECTRONIC TRANSFER</option>
+                                        <option value="CREDIT OR DEBIT CARD">CREDIT OR DEBIT CARD</option>
+                                    </select> -->
+                                </div>
+
+                                <div class="col-12 col-sm-5">
+                                    <label>Correo Electrónico facturación * </label>
+                                    <input class="multisteps-form__input form-control" type="text"  id="email_receipt_iva" name="email_receipt_iva" placeholder="eg. user@domain.com" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['email_receipt_iva'] ?>">
+                                    <span class="mb-0 text-sm" id="error_email_send" style="display:none;color:red;">Wrong email</span>
+                                </div>
+                                <div class="col-12 col-sm-2">
+                                    <label>C.P *</label>
+                                    <input class="multisteps-form__input form-control" type="text" id="postal_code_iva" name="postal_code_iva" maxlength="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" placeholder="eg. 50398"  value="<?= $userData['postal_code_iva'] ?>">
+                                </div>
+
+                                <div class="row">
+                                    <div class="button-row d-flex mt-4 col-12">
+                                        <a class="btn bg-gradient-light mb-0 js-btn-prev" href="/Home/" title="Prev">Regresar</a>
+                                        <button class="btn bg-gradient-dark ms-auto mb-0" type="submit" title="Actualizar">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </form>
+                                                         
+                                                           
+
+                                                        </div>
+
+
             </div>
 
         </div>
@@ -264,6 +326,48 @@
                                 .text(value.estado));
                     });
 
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+
+            });
+        });
+
+        
+        $("#update_form_fiscal").on("submit", function(event) {
+            event.preventDefault();
+
+            var formData = new FormData(document.getElementById("update_form_fiscal"));
+            for (var value of formData.values()) {
+               console.log(value);
+            }
+
+            $.ajax({
+                url: "/Account/ActualizarFiscal",
+                type: "POST",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    console.log("Procesando....");
+
+
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    if (respuesta == 'success') {
+                        swal("¡Se actualizaron tus datos correctamente!", "", "success").
+                        then((value) => {
+                            window.location.replace("/Home/");
+                        });
+                    } else {
+                        swal("¡Usted No Actualizo Nada!", "", "warning").
+                        then((value) => {
+                            window.location.replace("/Account/")
+                        });
+                    }
                 },
                 error: function(respuesta) {
                     console.log(respuesta);

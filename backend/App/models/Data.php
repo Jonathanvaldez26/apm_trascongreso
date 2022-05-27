@@ -70,6 +70,32 @@ sql;
     return $mysqli->update($query, $parametros);
   }
 
+  public static function updateAccountFiscal($user)
+  {
+    $mysqli = Database::getInstance(true);
+    $query = <<<sql
+    UPDATE utilerias_administradores SET business_name_iva = :business_name_iva, code_iva = :code_iva, payment_method_iva = :payment_method_iva,postal_code_iva = :postal_code_iva, email_receipt_iva = :email_receipt_iva  WHERE usuario = :email_user;
+sql;
+    $parametros = array(
+      ':business_name_iva' => $user->_business_name_iva,
+      ':code_iva'=>$user->_code_iva,
+      ':payment_method_iva' => $user->_payment_method_iva,
+      ':postal_code_iva' => $user->_postal_code_iva,
+      ':email_receipt_iva' => $user->_email_receipt_iva,      
+      ':email_user' => $user->_email_user
+
+    );
+
+
+
+    // $accion = new \stdClass();
+    // $accion->_sql = $query;
+    // $accion->_parametros = $parametros;
+    // $accion->_id = $user->_administrador_id;
+    // UtileriasLog::addAccion($accion);
+    return $mysqli->update($query, $parametros);
+  }
+
   public static function updateSatatusDatos($user)
   {
     $mysqli = Database::getInstance(true);
