@@ -32,7 +32,17 @@ sql;
       $query=<<<sql
       SELECT p.*
       FROM productos p
-      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id)  ORDER BY p.id_producto ASC
+      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id) and p.es_curso = 1 ORDER BY p.id_producto ASC
+sql;
+      return $mysqli->queryAll($query);
+    }
+
+    public static function getAllProductCongresosNotInUser($id){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT p.*
+      FROM productos p
+      WHERE p.id_producto not in (SELECT id_producto FROM asigna_producto WHERE  user_id = $id) and p.es_congreso = 1 ORDER BY p.id_producto ASC
 sql;
       return $mysqli->queryAll($query);
     }
@@ -323,10 +333,25 @@ sql;
     ON ap.user_id = uad.user_id
     INNER JOIN productos p
     ON p.id_producto = ap.id_producto
-    WHERE ap.user_id = $usuario 
+    WHERE ap.user_id = $usuario and p.es_curso = 1
 sql;
 
     return $mysqli->queryAll($query);
+}
+
+public static function getAsignaProductoCongreso($usuario){
+  $mysqli = Database::getInstance(true);
+  $query =<<<sql
+  SELECT uad.*, p.nombre AS nombre_curso, p.*
+  FROM asigna_producto ap
+  INNER JOIN utilerias_administradores uad
+  ON ap.user_id = uad.user_id
+  INNER JOIN productos p
+  ON p.id_producto = ap.id_producto
+  WHERE ap.user_id = $usuario and p.es_congreso = 1
+sql;
+
+  return $mysqli->queryAll($query);
 }
 
  

@@ -124,15 +124,60 @@
             <div class="col-lg-1">
             </div>
             <div class="card col-lg-10 mt-lg-5 mt-1" >
+                
+            <!--Congreso  -->
+            <div class="card-header pb-0 p-3">
+                    <div class="row">
+                    <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
+                    <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
+                    </div>
+                    <h4 class="mb-1 mt-4 text-left"><i class="fa fa-desktop"></i> IV CONGRESO MUNDIAL DE PATOLOGÍA DUAL</h4>
+                    <p>(CONGRESOS)</p>
+                    
+                </div>
+                
+                <div class="card-body p-3">
+
+                    <div class="row mt-3">
+                        <?php echo $card_congresos ?>
+                    </div>
+
+                    <div hidden class="row mt-4">
+                        <div class="col-xl-4 col-md-3 mb-xl-0 mb-4 "></div>
+                        <table class="table align-items-center mb-0 table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Nombre</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Fecha de curso</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">¿Tiene costo?</th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Modalidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php echo $tabla_cursos ?>
+                            </tbody>
+                        </table>
+                        <div class="col-xl-4 col-md-0 mb-xl-0 mb-4"></div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="button-row d-flex mt-4 col-12">
+                            <a class="btn bg-gradient-light mb-0 js-btn-prev" href="/Home/" title="Prev">Regresar</a>
+                        </div>
+                    </div> -->
+                </div>
+            <!-- Fin congreso -->
+
+
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                     <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
                     <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                     </div>
                     <h4 class="mb-1 mt-4 text-left"><i class="fa fa-desktop"></i> IV CONGRESO MUNDIAL DE PATOLOGÍA DUAL</h4>
-                    <p>(CONGRESO Y CURSOS TRASCONGRESO)</p>
+                    <p>(CURSOS TRASCONGRESO)</p>
                     
                 </div>
+                
                 <div class="card-body p-3">
 
                     <div class="row mt-3">
@@ -162,6 +207,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
         <br>
