@@ -591,7 +591,7 @@ html;
           <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                Comprar curso
+                Completa tu compra
                 </h5>
 
                 <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
