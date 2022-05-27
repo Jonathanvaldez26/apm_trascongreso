@@ -285,105 +285,55 @@
                                                             
                                                             
 
-                                                            </div>
-
-
                 </div>
 
-                <div id="card_two" class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                                            <h5 class="font-weight-bolder">INFORMACIÓN ADICIONAL</h5>
-                                                            <div class="multisteps-form__content">
-                                                                <div class="row mt-3">
-                                                                    <div class="col">
-                                                                        <label>Organización *</label>
-                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="35" id="organization" name="organization" placeholder="eg. Associated APM">
-                                                                    </div>
-                                                                    <div class="col">
-                                                                        <label>Puesto *</label>
-                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="25" id="position" name="position" placeholder="eg. Associated">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row mt-3">
-                                                                    <div class="col-12 col-sm-6">
-                                                                        <label>Dirección</label>
-                                                                        <input class="multisteps-form__input form-control" type="text" id="address" maxlength="50" name="address" placeholder="eg. 1388 Sutter Street
-                                                                                San Francisco 94109 California USA">
-                                                                    </div>
-                                                                    <div class="col-6 col-sm-3 mt-3 mt-sm-0">
-                                                                        <label>País *</label>
-                                                                        <select class="multisteps-form__select form-control all_input_second_select" id="organization_country" name="organization_country">
-                                                                            <option value="" disabled selected>Selecciona una Opción</option>
-                                                                            <?php echo $idCountry; ?>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-6 col-sm-3 mt-3 mt-sm-0">
-                                                                        <div class="col-12 col-sm-6">
-                                                                            <label>C.P *</label>
-                                                                            <input class="multisteps-form__input form-control" type="text" id="organization_postal_code" name="organization_postal_code" maxlength="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" placeholder="eg. 50398">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <h5 class="font-weight-bolder">ACERCA DE SUS SUSCRIPCIONES</h5>
-                                                            <div class="multisteps-form__content">
-                                                                <div class="row mt-3">
-                                                                    <div class="col-4">
-                                                                        <label>¿Eres miembro de la WADD? *</label>
-                                                                        <select class="multisteps-form__select form-control all_input_second_select" id="wadd_member" name="wadd_member">
-                                                                            <option value="" disabled selected>Selecciona una Opción</option>
-                                                                            <option value="1">Si</option>
-                                                                            <option value="2">No</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <label>¿Eres socio de la APM? *</label>
-                                                                        <select class="multisteps-form__select form-control all_input_second_select" id="apm_member" name="apm_member">
-                                                                            <option value="" disabled selected>Selecciona una Opción</option>
-                                                                            <option value="1">Si</option>
-                                                                            <option value="2">No</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="col-4">
-                                                                        <label>¿Eres miembro de alguna otra asociación?</label>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL">
-                                                                            <label class="form-check-label" for="APAL">APAL</label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP">
-                                                                            <label class="form-check-label" for="APAL">AILANCYP</label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI">
-                                                                            <label class="form-check-label" for="AMPI">AMPI</label>
-                                                                        </div>
-                                                                        <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC">
-                                                                            <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <br>
-                                                            <h5 class="font-weight-bolder">CÓDIGO DE DESCUENTO</h5>
-                                                            <h6>Si tienes un código de beca o un código de descuento, favor de escribirlo en el siguiente espacio.</h6>
-                                                            <div class="multisteps-form__content mt-3">
-                                                                <div class="row mt-3">
-                                                                    <div class="col-12 col-sm-4"></div>
-                                                                    <div class="col-12 col-sm-4">
-                                                                        <label>Beca/Código de descuento</label>
-                                                                        <input class="multisteps-form__input form-control" type="text" id="scholarship" name="scholarship" maxlength="10" placeholder="eg. XXX0X0X0X0">
-                                                                    </div>
-                                                                    <div class="col-12 col-sm-4 mt-3 mt-sm-0"></div>
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="button-row d-flex mt-4">
-                                                                    <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" id="next_two" type="button" title="Next" disabled>Siguiente</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
+                
+
+                <div class="card mt-4" id="adicional-info">
+                    <div class="card-header">
+                        <h5>INFORMACIÓN ADICIONAL</h5>
+                        
+                    </div>
+
+                    <form class="form-horizontal" id="update_form_fiscal" action="" method="POST">
+                        <div class="card-body pt-0">
+                            <div class="row mt-3">
+                                    <div class="col">
+                                        <label>Organización *</label>
+                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="35" id="organization" name="organization" placeholder="eg. Associated APM">
+                                    </div>
+                                    <div class="col">
+                                        <label>Puesto *</label>
+                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="25" id="position" name="position" placeholder="eg. Associated">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-12 col-sm-6">
+                                        <label>Dirección</label>
+                                        <input class="multisteps-form__input form-control" type="text" id="address" maxlength="50" name="address" placeholder="eg. 1388 Sutter Street
+                                                San Francisco 94109 California USA">
+                                    </div>
+                                    <div class="col-6 col-sm-3 mt-3 mt-sm-0">
+                                        <label>País *</label>
+                                        <select class="multisteps-form__select form-control all_input_second_select" id="organization_country" name="organization_country">
+                                            <option value="" disabled selected>Selecciona una Opción</option>
+                                            <?php echo $idCountry; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-sm-3 mt-3 mt-sm-0">
+                                        <div class="col-12 col-sm-6">
+                                            <label>C.P *</label>
+                                            <input class="multisteps-form__input form-control" type="text" id="organization_postal_code" name="organization_postal_code" maxlength="5" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" placeholder="eg. 50398">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    
+                    
+                </div>
 
         </div>
         <?php echo $footer; ?>
