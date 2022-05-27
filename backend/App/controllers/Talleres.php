@@ -602,9 +602,33 @@ html;
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-8">
-                <div style="display:flex; justify-content:center;">
-                <img src="/caratulas/{$datos['caratula']}" style="width:60%; border-radius: 10px;" alt="" />
-                </div>
+                    <div style="display:flex; justify-content:center;">
+                        <img src="/caratulas/{$datos['caratula']}" style="width:60%; border-radius: 10px;" alt="" />
+                    </div>
+
+                    <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
+
+                    <p class="text-center" style="color: #2B932B;"><b>{$datos['precio_publico']}</b></p>
+
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-4">
+                            <label>Elige tu metodo de pago *</label>
+                            <select class="multisteps-form__select form-control all_input_second_select" id="metodo_pago" name="metodo_pago">
+                                <option value="" disabled selected>Selecciona una Opción</option>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Efectivo">Efectivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center mt-3">
+                        <div class="col-md-4">
+                            <button class="btn btn-primary" style="width: 100%;" >Comprar</button>
+                        </div>
+                    </div>
+                    
+                    
+                
                 </div>
                 <div class="col-md-4">
                 </div>
