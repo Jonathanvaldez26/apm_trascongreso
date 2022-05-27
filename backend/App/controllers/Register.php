@@ -330,6 +330,7 @@ html;
         $register = new \stdClass();
 
         $name = MasterDom::getDataAll('name_user');
+        $name = MasterDom::procesoAcentosNormal($name);
         $register->_name = $name;
 
         $correo = $_REQUEST['email_validado'];
@@ -338,15 +339,19 @@ html;
         $register->_email = $email;
 
         $title = MasterDom::getDataAll('title');
+        $title = MasterDom::procesoAcentosNormal($title);
         $register->_title = $title;
 
         $middle_name = MasterDom::getDataAll('middle_name');
+        $middle_name = MasterDom::procesoAcentosNormal($middle_name);
         $register->_middle_name = $middle_name;
 
         $surname = MasterDom::getDataAll('surname');
+        $surname = MasterDom::procesoAcentosNormal($surname);
         $register->_surname = $surname;
 
         $second_surname = MasterDom::getDataAll('second_surname');
+        $second_surname = MasterDom::procesoAcentosNormal($second_surname);
         $register->_second_surname = $second_surname;
 
         $telephone = MasterDom::getDataAll('telephone');
@@ -357,6 +362,12 @@ html;
 
         $nationality = MasterDom::getDataAll('nationality');
         $register->_nationality = $nationality;
+
+        $specialties = MasterDom::getDataAll('specialties');
+        $register->_specialties = $specialties;
+
+        $modality = MasterDom::getDataAll('modality');
+        $register->_modality = $modality;
 
         $state = MasterDom::getDataAll('state');
         $register->_state = $state;
@@ -374,12 +385,14 @@ html;
         $register->_residence = $residence;
 
         $organization = MasterDom::getDataAll('organization');
+        $organization = MasterDom::procesoAcentosNormal($organization);
         $register->_organization = $organization;
 
         $position = MasterDom::getDataAll('position');
         $register->_position = $position;
 
         $address = MasterDom::getDataAll('address');
+        $address = MasterDom::procesoAcentosNormal($address);
         $register->_address = $address;
 
         $organization_country = MasterDom::getDataAll('organization_country');
@@ -393,6 +406,49 @@ html;
 
         $apm_member = MasterDom::getDataAll('apm_member');
         $register->_apm_member = $apm_member;
+
+        $APM_radio = $_POST["APM_radio"];
+
+        if ($APM_radio == 'APAL')
+        {
+            $APAL = 2;//No es socio
+        }
+        else
+        {
+            $APAL = 1;//Es Socio
+        }
+        $register->_APAL = $APAL;
+
+        if ($APM_radio == '$AILANCYP')
+        {
+            $AILANCYP = 2;//No es socio
+        }
+        else
+        {
+            $AILANCYP = 1;//Es Socio
+        }
+        $register->_AILANCYP = $AILANCYP;
+
+
+        if ($APM_radio == 'AMPI')
+        {
+            $AMPI = 2;//No es socio
+        }
+        else
+        {
+            $AMPI = 1;//Es Socio
+        }
+        $register->_AMPI = $AMPI;
+
+        if ($APM_radio == 'LC')
+        {
+            $LC = 2;//No es socio
+        }
+        else
+        {
+            $LC = 1;//Es Socio
+        }
+        $register->_LC = $LC;
 
         $scholarship = MasterDom::getDataAll('scholarship');
         $register->_scholarship = $scholarship;
@@ -426,18 +482,118 @@ html;
         $reference_user = $sub_name.$sub_name_sur.$dia.$mes.$año;
         $register->_reference_user = $reference_user;
 
-        $res_costo = RegisterDao::getByCost($nationality);
-        $costo = $res_costo['cost_enero_marzo'];
-        $register->_costo = $costo;
 
+
+        if($register->_specialties == 'Students')
+        {
+            $costo = '250'; //Costo estudiante para Mexico e Internacional
+        }
+        else
+        {
+            if($register->_specialties == 'Residents')
+            {
+                if($register->_wadd_member == '1' ||  $register->_apm_member == '1' || $register->_APAL == '1' || $register->_AILANCYP == '1' || $register->_AMPI = $AMPI == '1')
+                {
+                    if($register->_LC = $LC == '2')
+                    {
+                        $costo = '250'; //Costo Residente si es socio
+                    }
+                    else
+                    {
+                        $costo = '250'; //Costo Residente si es socio
+                    }
+
+                }
+                else
+                {
+                    $costo = '300'; //Costo residente si no es socio
+                }
+            }
+            else
+            {
+                if($register->_specialties == 'Psychiatrist' || $register->_specialties == 'Child_Psychiatry' || $register->_specialties == 'Neurology'
+                    || $register->_specialties == 'Pediatric_Neurology' || $register->_specialties == 'Paidapsychiatry' || $register->_specialties == 'Pedagogy'
+                    || $register->_specialties == 'Psychogeriatrics' || $register->_specialties == 'Psychology' || $register->_specialties == 'Clinical_psychology'
+                )
+                {
+                    if($register->_wadd_member == '1' ||  $register->_apm_member == '1' || $register->_APAL == '1' || $register->_AILANCYP == '1' || $register->_AMPI = $AMPI == '1' || $register->_LC = $LC == '1')
+                    {
+                        $costo = '450'; //Costo para socios de especialidades
+                    }
+                    else
+                    {
+                        if($register->_nationality == '156')
+                        {
+                            $costo = '600';
+                        }
+                        else
+                        {
+                            $res_costo = RegisterDao::getByCost($register->_nationality);
+                            $costo = $res_costo['cost_abril_junio'];//costo para no socios de otras especialidades
+
+                            if($register->_nationality == '156')
+                            {
+                                $costo = '600';
+                            }
+                        }
+
+                    }
+
+                }
+                else
+                {
+                    if($register->_specialties == 'Others')
+                    {
+                        if($register->_nationality != '156')
+                        {
+                            if($register->_wadd_member == '2' ||  $register->_apm_member == '2' || $register->_APAL == '2' || $register->_AILANCYP == '2' || $register->_AMPI = $AMPI == '2' || $register->_LC = $LC == '2')
+                            {
+                                $costo = $res_costo['cost_abril_junio'];//costo para no socios de otras especialidades
+
+                            }
+                            else
+                            {
+                                if($register->_wadd_member == '1' ||  $register->_apm_member == '1' || $register->_APAL == '1' || $register->_AILANCYP == '1' || $register->_AMPI = $AMPI == '1' || $register->_LC = $LC == '1')
+                                {
+                                    $costo = '450'; //Costo para otros socios internacionales
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if($register->_nationality == '156')
+                            {
+                                if($register->_wadd_member == '2' ||  $register->_apm_member == '2' || $register->_APAL == '2' || $register->_AILANCYP == '2' || $register->_AMPI = $AMPI == '2' || $register->_LC = $LC == '2')
+                                {
+                                    $costo = '600'; //Costo para otros no socios Mexicanos
+                                }
+                                else
+                                {
+                                    if($register->_wadd_member == '1' ||  $register->_apm_member == '1' || $register->_APAL == '1' || $register->_AILANCYP == '1' || $register->_AMPI = $AMPI == '1' || $register->_LC = $LC == '1')
+                                    {
+                                        $costo = '450'; //Costo para otros socios Mexicanos
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+
+        $register->_costo = $costo;
+        //var_dump($_POST["APM_radio"]);
 
         $id = RegisterDao::insert($register);
         if($id >= 1)
         {
-            $this->alerta($id,'add',$method_pay, $name_register, $costo, $fecha_limite_pago,$reference_user);
+            $this->alerta($id,'add',$method_pay, $name_register, $costo, $fecha_limite_pago,$reference_user, $modality,$email);
+
         }else
         {
-            $this->alerta($id,'error',$method_pay, $name_register,"","","");
+            $this->alerta($id,'error',$method_pay, $name_register,"","","", "","");
         }
     }
 

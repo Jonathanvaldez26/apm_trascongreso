@@ -101,20 +101,20 @@ echo $header;
                         </ul>
                         <ul class="navbar-nav d-lg-block d-none">
                             <li class="nav-item">
-                                <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
-                                <a href="https://register.dualdisorderswaddmexico2022.com/Login/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
+                                <!-- <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button> -->
+                                <a href="#" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
                                     <img id="flag" src="/assets/img/united-k.png">
                                 </a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav text-center mt-3 mb-2 d-block d-lg-none">
+                        <!-- <ul class="navbar-nav text-center mt-3 mb-2 d-block d-lg-none">
                             <li class="nav-item">
                                 <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button>
-                                <a href="https://register.dualdisorderswaddmexico2022.com/Login/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
+                                <a href="#" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
                                     <img id="flag" src="/assets/img/united-k.png">
                                 </a>
                             </li>
-                        </ul>
+                        </ul>  -->
                     </div>
                 </div>
             </nav>
