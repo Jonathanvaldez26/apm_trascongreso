@@ -82,7 +82,7 @@ html;
         
                         },
                         success: function(respuesta) {
-        
+                            console.log(respuesta);
                             if (respuesta == 'success') {
                                 swal("¡Se actualizaron tus datos correctamente!", "", "success").
                                 then((value) => {
@@ -224,17 +224,17 @@ html;
         // var_dump($userData);
         // exit;
 
-//         if($userData['avatar_img'] != ''){
-//             $imgUser=<<<html
-//             <img src="../../../img/users_musa/{$userData['avatar_img']}" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
-// html;
+        if($userData['avatar_img'] != ''){
+            $imgUser=<<<html
+            <img src="../../../img/users_musa/{$userData['avatar_img']}" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
+html;
 
-//         }else{
-//             $imgUser=<<<html
-//             <img src="../../../img/user.png" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
-// html;
+        }else{
+            $imgUser=<<<html
+            <img src="../../../img/user.png" alt="img" id="img-user" class="w-100 h-100 border-radius-lg shadow-sm">
+html;
 
-//         }
+        }
 
 //         if ($userData['alergia'] != 'Otro') {
 //             $restricciones =<<<html
@@ -253,8 +253,8 @@ html;
 html;
 }
         $select_estado = '';
-        foreach(RegisterDao::getStateByCountry($userData['id_pais']) as $key => $value){
-            $selectedEstado = ($value['id_estado'] == $userData['id_estado']) ? 'selected' : '';  
+        foreach(RegisterDao::getStateByCountry($userData['id_nationality']) as $key => $value){
+            $selectedEstado = ($value['id_estado'] == $userData['id_state']) ? 'selected' : '';  
             $select_estado .= <<<html
                     <option value="{$value['id_estado']}" $selectedEstado>{$value['estado']}</option>
 html;
@@ -264,7 +264,7 @@ html;
         $select_especialidad = '';
 
         foreach(RegisterDao::getAllEspecialidades() as $key => $value){
-            $selectedEspecialidad = ($value['id_especialidad'] == $userData['especialidad']) ? 'selected' : '';
+            $selectedEspecialidad = ($value['id_especialidad'] == $userData['specialties']) ? 'selected' : '';
             $select_especialidad .= <<<html
                 <option value="{$value['id_especialidad']}" $selectedEspecialidad>{$value['nombre']}</option>
 html;
@@ -307,9 +307,9 @@ html;
 
           if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            $id_registro = $_POST['id_registro'];
+            
             $nombre = $_POST['nombre'];
-            // $segundo_nombre = $_POST['segundo_nombre'];
+            $segundo_nombre = $_POST['segundo_nombre'];
             $apellido_paterno = $_POST['apellido_paterno'];
             $apellido_materno = $_POST['apellido_materno'];
             // $genero = $_POST['genero'];
@@ -321,7 +321,7 @@ html;
             // $alergia = $_POST['alergia'];
 
             $documento->_nombre = $nombre;
-            // $documento->_segundo_nombre = $segundo_nombre;
+            $documento->_segundo_nombre = $segundo_nombre;
             $documento->_apellido_paterno = $apellido_paterno;
             $documento->_apellido_materno = $apellido_materno;
             // $documento->_genero = $genero;
@@ -332,12 +332,14 @@ html;
             $documento->_especialidad = $especialidad;
             // $documento->_alergia = $alergia;
 
+            // var_dump($documento);
+
               $id = DataDao::updateAccount($documento);
 
               if($id){
-                $user = new \stdClass();
-                $user->_email = $email;
-                  $update = DataDao::updateSatatusDatos($user);
+                // $user = new \stdClass();
+                // $user->_email = $email;
+                //   $update = DataDao::updateSatatusDatos($user);
                   echo "success";
                 //header("Location: /Home");
               }else{
