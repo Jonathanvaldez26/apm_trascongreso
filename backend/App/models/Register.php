@@ -15,11 +15,11 @@ class Register
     {
         $mysqli = Database::getInstance();
         $query = <<<sql
-        INSERT INTO utilerias_administradores(nombre,usuario,title,name_user,middle_name,surname,second_surname,telephone,international_code,id_nationality,id_state,id_country,organization,position_organization,address,organization_country,organization_postal_code,wadd_member,apm_member,scholarship,business_name_iva,code_iva,payment_method_iva,email_receipt_iva,postal_code_iva,pay_ticket,status,envio_email,date,method_pay,reference,amout_due) VALUES(:nombre,:usuario,:title,:name_user,:middle_name,:surname,:second_surname,:telephone,:international_code,:id_nationality,:id_state, :id_country,:organization,:position_organization,:address,:organization_country,:organization_postal_code,:wadd_member,:apm_member,:scholarship,:business_name_iva,:code_iva,:payment_method_iva,:email_receipt_iva,:postal_code_iva, null, 0,0,now(),:method_pay, :reference, :amout_due)                        
+        INSERT INTO utilerias_administradores(socio,usuario,title,name_user,middle_name,surname,second_surname,telephone,international_code,id_nationality,specialties,modality,id_state,id_country,organization,position_organization,address,organization_country,organization_postal_code,wadd_member,apm_member,APAL, AILANCYP, AMPI, LC,scholarship,business_name_iva,code_iva,payment_method_iva,email_receipt_iva,postal_code_iva,pay_ticket,status,envio_email,date,method_pay,reference,amout_due) VALUES(:socio,:usuario,:title,:name_user,:middle_name,:surname,:second_surname,:telephone,:international_code,:id_nationality,:specialties,:modality,:id_state, :id_country,:organization,:position_organization,:address,:organization_country,:organization_postal_code,:wadd_member,:apm_member,:APAL, :AILANCYP, :AMPI, :LC, :scholarship,:business_name_iva,:code_iva,:payment_method_iva,:email_receipt_iva,:postal_code_iva, null, 0,0,now(),:method_pay, :reference, :amout_due)                        
 sql;
 
         $parametros = array(
-            ':nombre' => $register->_name,
+            ':socio' => '',
             ':usuario' => $register->_email,
             ':title' => $register->_title,
             ':name_user' => $register->_name,
@@ -29,6 +29,8 @@ sql;
             ':telephone' => $register->_telephone,
             ':international_code' => $register->_international_code,
             ':id_nationality' => $register->_nationality,
+            ':specialties' => $register->_specialties,
+            ':modality' => $register->_modality,
             ':id_state' => $register->_state,
             ':method_pay' => $register->_method_pay,
             ':id_country' => $register->_residence,
@@ -39,7 +41,11 @@ sql;
             ':organization_postal_code' => $register->_organization_postal_code,
             ':wadd_member' => $register->_wadd_member,
             ':apm_member' => $register->_apm_member,
-            ':scholarship' => $register->_scholarship,
+            ':APAL' => $register->_APAL,
+            ':AILANCYP' => $register->_AILANCYP,
+            ':AMPI' => $register->_AMPI,
+            ':LC' => $register->_LC,
+            ':scholarship' => '',
             ':business_name_iva' => $register->_business_name_iva,
             ':code_iva' => $register->_code_iva,
             ':payment_method_iva' => $register->_payment_method_iva,
