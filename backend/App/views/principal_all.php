@@ -104,11 +104,26 @@
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <a href="/Talleres/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/9.png); background-size: contain;">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/9_1.png); background-size: contain;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
                                             
                                             
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
+                            <a href="/ComprobantePago/">
+                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/11.png); background-size: contain;">
+                                    <div class="card-body mt-md-3 text-center content-card-home">
+                                        <div class="col-12 text-center">
+                                          
+                                        
                                         </div>
                                         
                                         
@@ -135,20 +150,7 @@
 
                        
 
-                        <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/ComprobantePago/">
-                                <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/11.png); background-size: contain;">
-                                    <div class="card-body mt-md-3 text-center content-card-home">
-                                        <div class="col-12 text-center">
-                                          
-                                        
-                                        </div>
-                                        
-                                        
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                       
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <div class="row">
