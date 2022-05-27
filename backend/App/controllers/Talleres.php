@@ -173,7 +173,7 @@ html;
 
             <div class="col-12 col-md-4 mt-3">
             <div class="card card-course p-0 border-radius-15">
-                <div class="card-body " style="height:260px;">
+                <div class="card-body " style="height:235px;">
                     <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                     <div class="caratula-content">
                        <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
@@ -276,7 +276,7 @@ html;
     
     <div class="col-12 col-md-4 mt-3">
     <div class="card card-course p-0 border-radius-15">
-        <div class="card-body " style="height:260px;">
+        <div class="card-body " style="height:235px;">
             <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
             <div class="caratula-content">
                <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
