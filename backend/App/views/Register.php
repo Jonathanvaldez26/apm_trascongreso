@@ -225,19 +225,19 @@ echo $header;
                                                                     <div class="col-4">
                                                                         <label>¿Eres miembro de alguna otra asociación?</label>
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL">
+                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="APAL" aria-label="APAL">
                                                                             <label class="form-check-label" for="APAL">APAL</label>
                                                                         </div>
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP">
-                                                                            <label class="form-check-label" for="APAL">AILANCYP</label>
+                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="AILANCYP" aria-label="AILANCYP">
+                                                                            <label class="form-check-label" for="AILANCYP">AILANCYP</label>
                                                                         </div>
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI">
+                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="AMPI" aria-label="AMPI">
                                                                             <label class="form-check-label" for="AMPI">AMPI</label>
                                                                         </div>
                                                                         <div class="form-check">
-                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC">
+                                                                            <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="LC" aria-label="LC">
                                                                             <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
                                                                         </div>
                                                                     </div>

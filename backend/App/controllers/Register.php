@@ -409,46 +409,87 @@ html;
 
         $APM_radio = $_POST["APM_radio"];
 
+        ///1 = SOCIO; 2= NO SOCIO
+
         if ($APM_radio == 'APAL')
         {
-            $APAL = 2;//No es socio
+            $APAL = 1;//ES SOCIO
         }
         else
         {
-            $APAL = 1;//Es Socio
+            $APAL = 2;//NO ES SOCIO
         }
         $register->_APAL = $APAL;
 
-        if ($APM_radio == '$AILANCYP')
+        if ($APM_radio == 'AILANCYP')
         {
-            $AILANCYP = 2;//No es socio
+            $AILANCYP = 1;//ES SOCIO
         }
         else
         {
-            $AILANCYP = 1;//Es Socio
+            $AILANCYP = 2;//NO ES SOCIO
         }
         $register->_AILANCYP = $AILANCYP;
 
 
         if ($APM_radio == 'AMPI')
         {
-            $AMPI = 2;//No es socio
+            $AMPI = 1;//ES SOCIO
         }
         else
         {
-            $AMPI = 1;//Es Socio
+            $AMPI = 2;//NO ES SOCIO
         }
         $register->_AMPI = $AMPI;
 
         if ($APM_radio == 'LC')
         {
-            $LC = 2;//No es socio
+            $LC = 1;//ES SOCIO
         }
         else
         {
-            $LC = 1;//Es Socio
+            $LC = 2;//NO ES SOCIO
         }
         $register->_LC = $LC;
+
+        if ($APM_radio == 'APAL')
+        {
+            $register->_APAL = '1';
+            $register->_AILANCYP = '2';
+            $register->_AMPI = '2';
+            $register->_LC = '2';
+        }
+        if ($APM_radio == '$AILANCYP')
+        {
+            $register->_APAL = '2';
+            $register->_AILANCYP = '1';
+            $register->_AMPI = '2';
+            $register->_LC = '2';
+        }
+        if ($APM_radio == 'AMPI')
+        {
+            $register->_APAL = '2';
+            $register->_AILANCYP = '2';
+            $register->_AMPI = '1';
+            $register->_LC = '2';
+        }
+        if ($APM_radio == 'LC')
+        {
+            $register->_APAL = '2';
+            $register->_AILANCYP = '2';
+            $register->_AMPI = '2';
+            $register->_LC = '1';
+        }
+
+        if ($APM_radio == 'NULL')
+        {
+            $register->_APAL = '2';
+            $register->_AILANCYP = '2';
+            $register->_AMPI = '2';
+            $register->_LC = '2';
+        }
+
+
 
         $scholarship = MasterDom::getDataAll('scholarship');
         $register->_scholarship = $scholarship;
@@ -583,8 +624,10 @@ html;
             }
         }
 
+
+
         $register->_costo = $costo;
-        //var_dump($_POST["APM_radio"]);
+        var_dump($_POST["APM_radio"]);
 
         $id = RegisterDao::insert($register);
         if($id >= 1)
