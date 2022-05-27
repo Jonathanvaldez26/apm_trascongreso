@@ -202,7 +202,7 @@ html;
                             </div>
                         </div>-->
                     </div>
-                    <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                    <a href="/Talleres/Video/{$value['clave']}">
                         <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>               
                         
         
@@ -221,7 +221,7 @@ html;
                     }
         
                     $card_cursos .= <<<html
-                    <!--</a>-->
+                    </a>
         
                     <div>
                         
