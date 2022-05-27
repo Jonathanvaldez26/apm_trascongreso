@@ -333,7 +333,7 @@ html;
         <div class="card-footer">
         <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
         <div style = "display: flex; justify-content:start">
-        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
+        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
        
     </div>
   </div>
@@ -543,7 +543,7 @@ html;
         <div class="card-footer">
         <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
         <div style = "display: flex; justify-content:start">
-        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
+        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
        
     </div>
   </div>
@@ -586,8 +586,8 @@ html;
     public function generateModalComprar($datos)
     {
         $modal = <<<html
-        <div class="modal fade" id="comprar-curso{$datos['id_curso']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal fade" id="comprar-curso{$datos['id_producto']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
