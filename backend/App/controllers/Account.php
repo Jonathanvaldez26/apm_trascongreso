@@ -269,6 +269,98 @@ html;
                 <option value="{$value['id_especialidad']}" $selectedEspecialidad>{$value['nombre']}</option>
 html;
         }
+
+        $pais_fiscal = RegisterDao::getPaisById($userData['organization_country'])[0];
+
+        $radio = '';
+
+        if($userData['APAL'] == 1){
+            $radio .= <<<html
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL" checked readonly>
+                <label class="form-check-label" for="APAL">APAL</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP">
+                <label class="form-check-label" for="APAL">AILANCYP</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI">
+                <label class="form-check-label" for="AMPI">AMPI</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC">
+                <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
+            </div>
+html;
+        }
+
+        else if($userData['AILANCYP'] == 1){
+            $radio .= <<<html
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL" >
+                <label class="form-check-label" for="APAL">APAL</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP" checked>
+                <label class="form-check-label" for="APAL">AILANCYP</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI">
+                <label class="form-check-label" for="AMPI">AMPI</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC">
+                <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
+            </div>
+html;
+        }
+
+        else if($userData['AMPI'] == 1){
+            $radio .= <<<html
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL" >
+                <label class="form-check-label" for="APAL">APAL</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP" >
+                <label class="form-check-label" for="APAL">AILANCYP</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI" checked>
+                <label class="form-check-label" for="AMPI">AMPI</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC">
+                <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
+            </div>
+html;
+        }
+
+        else if($userData['LC'] == 1){
+            $radio .= <<<html
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="APAL" value="1" aria-label="APAL" >
+                <label class="form-check-label" for="APAL">APAL</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AILANCYP" value="1" aria-label="AILANCYP" >
+                <label class="form-check-label" for="APAL">AILANCYP</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="AMPI" value="1" aria-label="AMPI" >
+                <label class="form-check-label" for="AMPI">AMPI</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="APM_radio" id="LC" value="1" aria-label="LC" checked>
+                <label class="form-check-label" for="LC">Países de América Latina y el Caribe</label>
+            </div>
+html;
+        }
        
 
       View::set('imgUser',$imgUser);
@@ -285,6 +377,8 @@ html;
       View::set('select_pais',$select_pais);
       View::set('select_estado',$select_estado);
       View::set('select_especialidad',$select_especialidad);
+      View::set('pais_fiscal',$pais_fiscal);
+      View::set('radio',$radio);
       View::render("account_all");
     }
 

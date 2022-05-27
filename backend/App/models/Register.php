@@ -110,6 +110,14 @@ sql;
         return $mysqli->queryAll($query);
       }
 
+      public static function getPaisById($id){       
+        $mysqli = Database::getInstance();
+        $query=<<<sql
+        SELECT * FROM paises WHERE id_pais = $id 
+sql;
+        return $mysqli->queryAll($query);
+      }
+
       public static function getStateByCountry($id_pais){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
