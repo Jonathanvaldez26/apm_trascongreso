@@ -332,7 +332,7 @@ html;
         </div>
         <div class="card-footer">
         <div style = "display: flex; justify-content:start">
-        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
+        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
        
     </div>
   </div>
