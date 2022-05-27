@@ -160,7 +160,7 @@
                                 </div>
 
                                 <div class="col-lg-7 col-12">
-                                    <label class="form-label mt-4">Correo electrónico</label>
+                                    <label class="form-label mt-4">Correo electrónico *</label>
                                     <div class="input-group">
                                         <input id="email" name="email" maxlength="49" class="form-control" type="email" placeholder="example@email.com" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['usuario'] ?>" readonly>
                                     </div>
@@ -179,9 +179,9 @@
                                    
                                     
                                     <div class="col-lg-4 col-12">
-                                        <label class="form-label mt-4">Especialidad</label>
+                                        <label class="form-label mt-4">Especialidad *</label>
                                         
-                                            <select class="form-control" style="cursor: pointer;" name="especialidad" id="especialidad" tabindex="-1" data-choice="active">
+                                            <select class="form-control" style="cursor: pointer;" name="especialidad" id="especialidad" tabindex="-1" data-choice="active" disabled>
                                                 <?php echo $select_especialidad; ?>
                                             </select>
                                             <!-- <input class="form-control" id="especialidad" maxlength="149" required name="especialidad" data-color="dark" type="text" value="<?= $userData['especialidad'] ?>" placeholder="Ej: México" readonly/> -->
