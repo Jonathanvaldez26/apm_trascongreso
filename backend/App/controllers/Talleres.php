@@ -603,7 +603,7 @@ html;
               <div class="row">
                 <div class="col-md-8">
                 <div style="display:flex; justify-content:center;">
-                <img src="/caratulas/{$datos['caratula']}" style="width:70%;" alt="" />
+                <img src="/caratulas/{$datos['caratula']}" style="width:60%; border-radius: 10px;" alt="" />
                 </div>
                 </div>
                 <div class="col-md-4">
