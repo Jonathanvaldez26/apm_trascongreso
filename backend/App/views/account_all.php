@@ -85,42 +85,19 @@
                         <div class="col-sm-auto col-8 my-auto">
                             <div class="h-100">
                                 <h5 class="mb-1 font-weight-bolder">
-                                    <?= $userData['prefijo'] . " " . $userData['name_user'] . " " . $userData['apellidop'] . " " . $userData['apellidom'] ?>
+                                    <?= $userData['title'] . " " . $userData['name_user'] . " " . $userData['middle_name'] . " " . $userData['surname']. " " . $userData['second_surname'] ?>
                                 </h5>
                                 <p class="mb-0 font-weight-bold text-sm">
                                     <span class="badge badge-info"><?php echo $userData['nombre_modalidad']; ?></span>
                                 </p>
                             </div>
                         </div>
+                       
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-                            <div class="form-check form-switch ms-2">
-                                <div class="row text-center">
-                                    <div class="col-lg-12 col-md-12 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-                                        <div class="nav-wrapper position-relative end-0">
-                                            <ul class="nav nav-pills nav-fill p-1 bg-transparent-yellow" role="tablist">
-                                                <li class="nav-item transmisiones px-3" data-transmision="1">
-                                                    <a class="nav-link mb-0 px-0 py-1 active" href="#transmision_1" data-bs-toggle="tab" role="tab" aria-selected="true">
-                                                        <span class="fa fa-video"></span>
-                                                        <span class="ms-1">Sala 1</span>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item transmisiones px-3" data-transmision="2">
-                                                    <a class="nav-link mb-0 px-0 py-1" href="#transmision_2" data-bs-toggle="tab" role="tab" aria-selected="false">
-                                                        <span class="fa fa-video"></span>
-                                                        <span class="ms-1">Sala 2</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
                             <label class="form-check-label mb-0">
                                 
                             </label>
-                        </div> -->
+                        </div>
                     </div>
                     
                 </div>
@@ -129,7 +106,7 @@
                 <!-- Card Basic Info -->
                 <div class="card mt-4" id="basic-info">
                     <div class="card-header">
-                        <h5>Información Básica</h5>
+                        <h5>INFORMACIÓN BÁSICA</h5>
                         
                     </div>
                     <form class="form-horizontal" id="update_form" action="" method="POST">
@@ -249,7 +226,7 @@
                 <!-- Card Basic Info -->
                 <div class="card mt-4" id="fiscal-info">
                 <div class="card-header">
-                        <h5>Información Fiscal</h5>
+                        <h5>INFORMACIÓN FISCAL</h5>
                         
                     </div>
 
@@ -260,7 +237,7 @@
 
                                 <div class="col-12 col-sm-4">
                                     <label>Razón Social *</label>
-                                    <input class="multisteps-form__input form-control" type="text" id="business_name_iva" name="business_name_iva" placeholder="eg. Christopher Prior Jones" maxlength="20" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['business_name_iva'] ?>">
+                                    <input class="multisteps-form__input form-control" type="text" id="business_name_iva" name="business_name_iva" placeholder="eg. Christopher Prior Jones" maxlength="49" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['business_name_iva'] ?>">
                                 </div>                             
                          
 
@@ -270,7 +247,7 @@
                                 </div>
 
                                 <div class="col-12 col-sm-4 mt-1 mt-sm-0">
-                                    <label>Payment method *</label>
+                                    <label>Metodo de Pago *</label>
                                     <input class="multisteps-form__input form-control" type="text" id="payment_method_iva" name="payment_method_iva" placeholder="eg. CPJ41250AS" maxlength="13" onfocus="focused(this)" onfocusout="defocused(this)" value="<?= $userData['payment_method_iva'] ?>">
                                     <!-- <select class="multisteps-form__select form-control all_input_select" name="payment_method_iva" id="payment_method_iva">
                                         <option value="" disabled selected>Selecciona una Opción</option>

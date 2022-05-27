@@ -173,7 +173,8 @@ html;
     
     
     <div class="col-12 col-md-3 mt-3">
-        <div class="card card-body card-course p-0 border-radius-15" style="height:310px;">
+    <div class="card card-course p-0 border-radius-15">
+        <div class="card-body " style="height:310px;">
             <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
             <div class="caratula-content">
                 <a href="/Talleres/Video/{$value['clave']}">
@@ -230,6 +231,7 @@ html;
                 
             </div>
         </div>
+        </div>
     </div>
 
     <script>
@@ -268,7 +270,8 @@ html;
     
     
     <div class="col-12 col-md-3 mt-3">
-        <div class="card card-body card-course p-0 border-radius-15" style="height:310px;">
+    <div class="card card-course p-0 border-radius-15">
+        <div class="card-body " style="height:310px;">
             <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
             <div class="caratula-content">
                <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
@@ -298,11 +301,7 @@ html;
                 </div>-->
             </div>
             <!--<a href="/Talleres/Video/{$value['clave']}">-->
-                <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>
-                <div style = "display: flex; justify-content:start">
-                    <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
-                   
-                </div>
+                <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>               
                 
 
                 <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
@@ -326,6 +325,14 @@ html;
                 
             </div>
         </div>
+        <div class="card-footer">
+        <div style = "display: flex; justify-content:start">
+        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
+       
+    </div>
+  </div>
+        </div>
+        
     </div>
 
     <script>
