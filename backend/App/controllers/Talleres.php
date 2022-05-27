@@ -585,6 +585,7 @@ html;
 
     public function generateModalComprar($datos)
     {
+       
         $modal = <<<html
         <div class="modal fade" id="comprar-curso{$datos['id_producto']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" role="document">
@@ -599,7 +600,15 @@ html;
                 </span>
             </div>
             <div class="modal-body">
-              ...
+              <div class="row">
+                <div class="col-md-8">
+                <div style="display:flex; justify-content:center;">
+                <img src="/caratulas/{$datos['caratula']}" style="width:70%;" alt="" />
+                </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
