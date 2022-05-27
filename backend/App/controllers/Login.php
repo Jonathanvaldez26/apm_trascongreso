@@ -369,7 +369,7 @@ html;
         // 
 
         if (count($user)>=1) {
-            $user['nombre'] = utf8_encode($user['nombre']);
+            $user['name_user'] = utf8_encode($user['nombre']);
             echo json_encode($user);
         }
     }
