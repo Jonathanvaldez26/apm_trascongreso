@@ -84,6 +84,15 @@ sql;
         return $mysqli->queryAll($query);
     }
 
+    public static function getUserById($id){
+        $mysqli = Database::getInstance(true);
+        $query =<<<sql
+        SELECT * FROM utilerias_administradores  WHERE user_id = '$id'
+sql;
+    
+        return $mysqli->queryAll($query);
+    }
+
     public static function getCountryAll()
     {
         $mysqli = Database::getInstance();

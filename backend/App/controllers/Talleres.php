@@ -469,6 +469,8 @@ html;
         //CONGRESOS SIN COMPRAR
 
         $cursos = TalleresDao::getAllProductCongresosNotInUser($_SESSION['user_id']);
+        $costoUser  = RegisterDao::getUserById($_SESSION['user_id'])[0]['amout_due'];        
+
 
         foreach ($cursos as $key => $value) {
             $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
@@ -541,7 +543,7 @@ html;
             </div>
         </div>
         <div class="card-footer">
-        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
+        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$costoUser} USD</b></p>
         <div style = "display: flex; justify-content:start">
         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
        
@@ -564,7 +566,12 @@ html;
     </script>
 html;
 
+            $cost = ['amout_due'=> $costoUser];
+            $value = array_merge($value, $cost);
+            // array_push($value, ['amout_due'=>$costoUser]);
             $modalComprar .= $this->generateModalComprar($value);
+
+        
         }
 
         //CONGRESOS SIN COMPRAR
@@ -608,7 +615,7 @@ html;
 
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
-                    <p class="text-center" style="color: #2B932B;"><b>{$datos['precio_publico']}</b></p>
+                    <p class="text-center" style="color: #2B932B;"><b>{$datos['amout_due']} USD</b></p>
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
