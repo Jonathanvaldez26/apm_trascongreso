@@ -47,6 +47,16 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getProductosPendientesPago($user_id,$id_producto){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT * FROM pendiente_pago WHERE id_producto = $id_producto AND user_id = $user_id 
+sql;
+      return $mysqli->queryAll($query);
+    }
+
+    
+
     public static function getById($id){
       return "getById"+$id;
     }

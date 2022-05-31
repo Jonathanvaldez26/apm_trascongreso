@@ -486,93 +486,185 @@ html;
 
             $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
 
-            $card_congresos .= <<<html
-    
-    
-    <div class="col-12 col-md-4 mt-3">
-    <div class="card card-course p-0 border-radius-15">
-        <div class="card-body " style="height:235px;">
-            <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
-            <div class="caratula-content">
-               <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
-                    <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
-                <!--</a>-->
-                <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
-                <!--<button class="btn btn-outline-danger"></button-->
-                
-html;
-
-            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
-            if ($like['status'] == 1) {
-                $card_congresos .= <<<html
-            <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
-html;
-            } else {
-                $card_congresos .= <<<html
-            <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
-html;
-            }
-
-            $card_congresos .= <<<html
-               <!-- <div class="row">
-                    <div class="col-11 m-auto" id="">
-                        <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                    </div>
-                </div>-->
-            </div>
-            <!--<a href="/Talleres/Video/{$value['clave']}">-->
-                <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
-
-                <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
-                    {$value['descripcion']}<br>
-                    {$value['vistas']} vistas
-                    <br> <br>
-                    <b>Avance: $porcentaje %</b>
-                </p>-->
-
-html;
-            if ($value['status'] == 2 || $porcentaje >= 80) {
-                $card_congresos .= <<<html
-                    <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
-html;
-            }
-
-            $card_congresos .= <<<html
-            <!--</a>-->
-
-            <div>
-                
-            </div>
-        </div>
-        <div class="card-footer">
-        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
-        <div style = "display: flex; justify-content:start">
-        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
-       
-    </div>
-  </div>
-        </div>
-        
-    </div>
-
-    <script>
-        // $('#video_{$value['clave']}').on('click', function(){
-        //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
+            $pendientes_pago = TalleresDao::getProductosPendientesPago($_SESSION['user_id'], $value['id_producto'])[0];
             
-        //     if (like){
-        //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
-        //     } else {
-        //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
-        //     }
-        // });
-    </script>
+
+
+            if(isset($pendientes_pago['status'])){
+
+                if($pendientes_pago['status'] == 0){
+                    //echo "pendiente pago";
+
+                $card_congresos .= <<<html
+    
+    
+                <div class="col-12 col-md-4 mt-3">
+                    <div class="card card-course p-0 border-radius-15">
+                        <div class="card-body " style="height:235px;">
+                            <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
+                            <div class="caratula-content">
+                                <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                                <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
+                                <!--</a>-->
+                                <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
+                                <!--<button class="btn btn-outline-danger"></button-->
+                
+html;
+
+                                $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
+                                if ($like['status'] == 1) {
+                                    $card_congresos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
+html;
+                                } else {
+                                    $card_congresos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
+html;
+                                }
+
+                $card_congresos .= <<<html
+                                <!-- <div class="row">
+                                        <div class="col-11 m-auto" id="">
+                                            <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
+                                        </div>
+                                    </div>-->
+                            </div>
+                            <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                                <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
+
+                            <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
+                                {$value['descripcion']}<br>
+                                {$value['vistas']} vistas
+                                <br> <br>
+                                <b>Avance: $porcentaje %</b>
+                            </p>-->
+
+html;
+                        if ($value['status'] == 2 || $porcentaje >= 80) {
+                            $card_congresos .= <<<html
+                                <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
+html;
+            }
+
+                $card_congresos .= <<<html
+                            <!--</a>-->
+
+                        <div>                
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
+                    <div style = "display: flex; justify-content:start">
+                        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+       
+                    </div>
+                </div>
+            </div>        
+        </div>
+
+        <script>
+            // $('#video_{$value['clave']}').on('click', function(){
+            //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
+                
+            //     if (like){
+            //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
+            //     } else {
+            //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
+            //     }
+            // });
+        </script>
+html;
+
+                }else {
+                    //echo "pagado";
+                }
+            }else{
+                //echo "comprar";
+                $card_congresos .= <<<html
+    
+    
+                <div class="col-12 col-md-4 mt-3">
+                    <div class="card card-course p-0 border-radius-15">
+                        <div class="card-body " style="height:235px;">
+                            <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
+                            <div class="caratula-content">
+                                <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                                <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
+                                <!--</a>-->
+                                <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
+                                <!--<button class="btn btn-outline-danger"></button-->
+                
+html;
+
+                                $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
+                                if ($like['status'] == 1) {
+                                    $card_congresos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
+html;
+                                } else {
+                                    $card_congresos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
+html;
+                                }
+
+                $card_congresos .= <<<html
+                                <!-- <div class="row">
+                                        <div class="col-11 m-auto" id="">
+                                            <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
+                                        </div>
+                                    </div>-->
+                            </div>
+                            <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                                <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
+
+                            <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
+                                {$value['descripcion']}<br>
+                                {$value['vistas']} vistas
+                                <br> <br>
+                                <b>Avance: $porcentaje %</b>
+                            </p>-->
+
+html;
+                        if ($value['status'] == 2 || $porcentaje >= 80) {
+                            $card_congresos .= <<<html
+                                <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
+html;
+            }
+
+                $card_congresos .= <<<html
+                            <!--</a>-->
+
+                        <div>                
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
+                    <div style = "display: flex; justify-content:start">
+                        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+       
+                    </div>
+                </div>
+            </div>        
+        </div>
+
+        <script>
+            // $('#video_{$value['clave']}').on('click', function(){
+            //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
+                
+            //     if (like){
+            //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
+            //     } else {
+            //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
+            //     }
+            // });
+        </script>
 html;
 
             $cost = ['amout_due'=> $costoUser];
             $value = array_merge($value, $cost);
             // array_push($value, ['amout_due'=>$costoUser]);
             $modalComprar .= $this->generateModalComprar($value);
-
+            }
         
         }
 

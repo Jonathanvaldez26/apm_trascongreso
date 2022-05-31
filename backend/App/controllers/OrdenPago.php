@@ -170,7 +170,7 @@ html;
         // var_dump($documento);
         // exit;
 
-        // $id = TalleresDao::inserPendientePago($documento);       
+        $id = TalleresDao::inserPendientePago($documento);       
 
 
         $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
