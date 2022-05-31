@@ -125,6 +125,8 @@ html;
               });
           });
 
+        
+
       });
 </script>
 
@@ -228,7 +230,7 @@ html;
                     </div>
                 </div>
                 <div class="card-footer">
-                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
+                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
                 <div style = "display: flex; justify-content:start">
                 <p class="badge badge-success" style="margin-left: 5px;margin-bottom: 38px;">
                   Este curso ya lo compraste.
@@ -331,7 +333,7 @@ html;
             </div>
         </div>
         <div class="card-footer">
-        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
+        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
         <div style = "display: flex; justify-content:start">
         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
        
@@ -543,7 +545,7 @@ html;
             </div>
         </div>
         <div class="card-footer">
-        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$costoUser} USD</b></p>
+        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
         <div style = "display: flex; justify-content:start">
         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
        
@@ -592,9 +594,17 @@ html;
 
     public function generateModalComprar($datos)
     {
+        if(isset($datos['amout_due'])){
+            $precio_curso = '$ '.$datos['amout_due'] ." ".$datos['tipo_moneda'];
+            $solo_precio_curso = $datos['amout_due'];
+        }else{
+            $precio_curso = '$ '.$datos['precio_publico']." ".$datos['tipo_moneda'];
+            $solo_precio_curso = $datos['precio_publico'];
+        }
+        
        
         $modal = <<<html
-        <div class="modal fade" id="comprar-curso{$datos['id_producto']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="comprar-curso{$datos['id_producto']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="comprar-curso">
         <div class="modal-dialog modal-xl" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -607,6 +617,7 @@ html;
                 </span>
             </div>
             <div class="modal-body">
+              <form class="form_compra" method="POST" action="" target="_blank">              
               <div class="row">
                 <div class="col-md-8">
                     <div style="display:flex; justify-content:center;">
@@ -615,12 +626,17 @@ html;
 
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
-                    <p class="text-center" style="color: #2B932B;"><b>{$datos['amout_due']} USD</b></p>
+                    <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
+                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="text" class="tipo_pago" name="tipo_pago"/>
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
                             <label>Elige tu metodo de pago *</label>
-                            <select class="multisteps-form__select form-control all_input_second_select" id="metodo_pago" name="metodo_pago">
+                            <select class="multisteps-form__select form-control all_input_second_select metodo_pago" name="metodo_pago">
                                 <option value="" disabled selected>Selecciona una Opción</option>
                                 <option value="Paypal">Paypal</option>
                                 <option value="Efectivo">Efectivo</option>
@@ -630,7 +646,7 @@ html;
 
                     <div class="row d-flex justify-content-center mt-3">
                         <div class="col-md-4">
-                            <button class="btn btn-primary" style="width: 100%;" >Comprar</button>
+                            <button type="button" class="btn btn-primary btn_comprar" style="width: 100%;" name="btn_tipo_pago" >Comprar</button>
                         </div>
                     </div>
                     
@@ -640,10 +656,13 @@ html;
                 <div class="col-md-4">
                 </div>
               </div>
+              </form>
             </div>
           </div>
         </div>
       </div>
+
+      
 html;
 
 
@@ -1171,6 +1190,8 @@ html;
         }
     }
 
+    
+
     public function saveChat()
     {
         $chat = $_POST['txt_chat'];
@@ -1234,51 +1255,7 @@ html;
         }
     }
 
-    public function abrirConstancia($clave, $id_curso = null)
-    {
-
-        // $this->generaterQr($clave_ticket);
-
-        if ($id_curso == 1) {
-            $nombre_imagen = 'Constancia_no_neurologos_2.png';
-        } else if ($id_curso == 2) {
-            $nombre_imagen = 'Constancia_neurologos_2.png';
-        } else if ($id_curso == 3) {
-            $nombre_imagen = 'simposio_2.png';
-        }
-        $datos_user = RegisterDao::getUserByClave($clave)[0];
-
-        // $nombre = explode(" ", $datos_user['nombre']);
-
-        $nombre_completo = $datos_user['prefijo'] . " " . $datos_user['nombre'] . " " . $datos_user['apellidop'] . " " . $datos_user['apellidom'];
-
-
-        $pdf = new \FPDF($orientation = 'L', $unit = 'mm', $format = 'A4');
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
-        $pdf->setY(1);
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('constancias/plantillas/' . $nombre_imagen, 0, 0, 296, 210);
-        // $pdf->SetFont('Arial', 'B', 25);
-        // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
-
-        //$pdf->Image('1.png', 1, 0, 190, 190);
-        $pdf->SetFont('Arial', 'B', 5);    //Letra Arial, negrita (Bold), tam. 20
-        //$nombre = utf8_decode("Jonathan Valdez Martinez");
-        //$num_linea =utf8_decode("Línea: 39");
-        //$num_linea2 =utf8_decode("Línea: 39");
-
-        $pdf->SetXY(50, 87);
-        $pdf->SetFont('Arial', 'B', 30);
-        #4D9A9B
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(200, 10, utf8_decode($nombre_completo), 0, 'C');
-        $pdf->Output();
-        // $pdf->Output('F','constancias/'.$clave.$id_curso.'.pdf');
-
-        // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
-    }
-
+    
     public function guardarRespuestas()
     {
         $respuestas = $_POST['list_r'];
@@ -1402,4 +1379,6 @@ html;
     {
         return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
+
+    
 }

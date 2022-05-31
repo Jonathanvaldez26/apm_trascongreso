@@ -228,6 +228,7 @@
 
 <script>
     $(document).ready(function(){
+        
         let identificadorIntervaloDeTiempo;
 
         function repetirCadaSegundo() {
@@ -292,17 +293,66 @@
             });
         })
 
-        // $('.heart-like').on('click', function(){
-        //     let clave = $(this).attr('data-clave');
-        //     let heart = $(this);
+       
 
-        //     if (heart.hasClass('heart-like')) {
-        //         heart.removeClass('heart-like').addClass('heart-not-like');
-        //     } else {
-        //         heart.removeClass('heart-not-like').addClass('heart-like');
-        //     }
-        //     console.log('se cambió a no like: '+clave);
-        // })
+        $('.metodo_pago').on('change',function(e){
+            var tipo = $(this).val();
+           
+            if(tipo == 'Paypal'){
+                $(".form_compra").attr('action','/OrdenPago/PagarPaypal');
+                $(".btn_comprar").val('Paypal');
+                $(".tipo_pago").val('Paypal');
+            }else if(tipo == 'Efectivo'){
+                $(".form_compra").attr('action','/OrdenPago/ordenPago');
+                $(".btn_comprar").val('Efectivo');
+                $(".tipo_pago").val('Efectivo');
+
+             
+            }
+
+        });
+
+        $(".btn_comprar").on("click",function(e){
+            e.preventDefault();
+            var tipo = $(this).val();
+
+            if(tipo == 'Efectivo'){
+                Swal.fire({
+                    title: '¿Quieres comprar el curso?',
+                    text: "Una vez que confirmes se emitira tu orden de pago!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Comprar!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {                        
+                        $(this).closest(".form_compra").submit();                      
+
+                    }
+                })
+            }
+
+            else if(tipo == 'Paypal'){
+                Swal.fire({
+                    title: '¿Quieres comprar el curso?',
+                    text: "Una vez que confirmes se enviara a PayPal!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Comprar!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {                       
+                        $(this).closest(".form_compra").submit();
+                    }
+                })
+            }
+            
+
+        });
+
+        
 
         // repetirCadaSegundo();
 
