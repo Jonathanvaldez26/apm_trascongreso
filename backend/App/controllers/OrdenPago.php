@@ -222,6 +222,38 @@ html;
         // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
     }
 
+
+    public function Paypal($clave = null, $id_curso = null)
+    {
+
+        date_default_timezone_set('America/Mexico_City');
+        $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+        $documento = new \stdClass();
+
+        $nombre_curso = $_POST['nombre_curso'];
+        $id_producto = $_POST['id_producto'];
+        $user_id = $datos_user['user_id'];
+        $reference = $datos_user['reference'];
+        $fecha =  date("Y-m-d");
+        $monto = $_POST['costo'];
+        $tipo_pago = $_POST['tipo_pago'];
+        $status = 0;
+
+        $documento->_id_producto = $id_producto;
+        $documento->_user_id = $user_id;
+        $documento->_reference = $reference;
+        $documento->_fecha = $fecha;
+        $documento->_monto = $monto;
+        $documento->_tipo_pago = $tipo_pago;
+        $documento->_status = $status;
+
+        $d = $this->fechaCastellano($fecha);
+
+        $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
+
+        View::render("alerta_paypal");
+    }
+
     function fechaCastellano ($fecha) {
         $fecha = substr($fecha, 0, 10);
         $numeroDia = date('d', strtotime($fecha));
