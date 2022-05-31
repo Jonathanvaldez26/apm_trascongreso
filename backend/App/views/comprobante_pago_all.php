@@ -75,8 +75,47 @@
                 
                 <div class="card-body p-3">
 
-                    <div class="row mt-3">
-                        <?php echo $card_congresos ?>
+                    <div class="card-body px-0 pb-0">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
+                                <div class="table-responsive p-0">
+                                    <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
+                                        <thead class="thead-light">
+                                        <tr>
+
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Otros Datos</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php echo $tabla; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade position-relative height-350 border-radius-lg" id="Faltantes" role="tabpanel" aria-labelledby="Faltantes">
+                                <div class="table-responsive p-0">
+                                    <table class="align-items-center mb-0 table table-borderless" id="user_list_table_faltante">
+                                        <thead class="thead-light">
+                                        <tr>
+
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Usuario</th>
+                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Teléfono</th>
+                                            <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Acciones</th> -->
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php echo $tabla_faltantes; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                 </div>
