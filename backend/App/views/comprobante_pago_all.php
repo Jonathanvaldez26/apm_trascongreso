@@ -78,7 +78,7 @@
                     <div class="row mt-3">
                         <?php echo $card_congresos ?>
                     </div>
-                    
+
                 </div>
             <!-- Fin congreso -->
 
