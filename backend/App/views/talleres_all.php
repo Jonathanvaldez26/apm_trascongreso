@@ -324,7 +324,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Comprar!'
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Comprar'
                     }).then((result) => {
                     if (result.isConfirmed) {                        
                         $(this).closest(".form_compra").submit();                      
@@ -341,7 +342,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Comprar!'
+                    cancelButtonText: 'Cancelar',
+                    confirmButtonText: 'Comprar'
                     }).then((result) => {
                     if (result.isConfirmed) {                       
                         $(this).closest(".form_compra").submit();
