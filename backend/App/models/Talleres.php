@@ -55,6 +55,17 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getProductosPendientesPagoTicket($user_id,$id_producto){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT pp.*, p.nombre 
+      FROM pendiente_pago pp
+      INNER JOIN productos p ON (pp.id_producto = p.id_producto)
+      WHERE pp.id_producto = $id_producto AND pp.user_id = $user_id 
+sql;
+      return $mysqli->queryAll($query);
+    }
+
     
 
     public static function getById($id){

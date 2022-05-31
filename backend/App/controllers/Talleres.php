@@ -545,6 +545,8 @@ html;
                                 <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
 html;
             }
+                $link_parametro_user_id = base64_encode($_SESSION['user_id']);
+                $link_parametro_id_producto = base64_encode($value['id_producto']);
 
                 $card_congresos .= <<<html
                             <!--</a>-->
@@ -555,7 +557,9 @@ html;
                 <div class="card-footer">
                     <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
                     <div style = "display: flex; justify-content:start">
-                        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+                        <!--<button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>-->
+
+                        <a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:145px;">Reimprimir orden de pago</a>
        
                     </div>
                 </div>
