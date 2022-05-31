@@ -82,7 +82,7 @@
                                     <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
                                         <thead class="thead-light">
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"><i class="fa fa-charging-station"></i></th>
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"></th>
                                             <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre del Curso o Congreso</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estatus</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Metodo de Pago</th>
