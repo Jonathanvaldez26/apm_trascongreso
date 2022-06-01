@@ -7,10 +7,7 @@ require_once dirname(__DIR__) . '/../public/librerias/fpdf/fpdf.php';
 
 use \Core\View;
 use \Core\Controller;
-use \App\models\Talleres as TalleresDao;
-use \App\models\Transmision as TransmisionDao;
-use \App\models\Register as RegisterDao;
-use \App\models\Home as HomeDao;
+use \App\models\ComprobantePago as ComprobantePagoDao;
 
 class ComprobantePago extends Controller
 {
@@ -132,8 +129,124 @@ html;
 
 html;
 
+        View::set('tabla',$this->getAllComprobantesPagoById($_SESSION['user_id']));
         View::set('header', $this->_contenedor->header($extraHeader));
         View::render("comprobante_pago_all");
+    }
+
+    public function getAllComprobantesPagoById($id_user){
+
+        $html = "";
+        foreach (ComprobantePagoDao::getAll($id_user) as $key => $value) {
+
+            if ($value['status'] == 0 ) {
+                $icon_status = '<i class="fa fad fa-hourglass" style="color: #4eb8f7;"></i>';
+                $status = '<span class="badge badge-info">En espera de validación</span>';
+            } else if ($value['status'] == 1 ){
+                $icon_status = '<i class="far fa-check-circle" style="color: #269f61;"></i>';
+                $status = '<span class="badge badge-success">Aceptado</span>';
+
+            }
+            else{
+                $icon_status = '<i class="far fa-times-circle" style="color: red;"></i>';
+                $status = '<span class="badge badge-danger">Carga un Archivo PDF valido</span>';
+            }
+
+        
+
+            if (empty($value['url_archivo']) || $value['url_archivo'] == '') {
+                $button_comprobante = '<form method="POST" enctype="multipart/form-data" action="/ComprobantePago/uploadComprobante" data-id-pp='.$value["id_pendiente_pago"].'>
+                                        <input type="hidden" name="id_pendiente_pago" id="id_pendiente_pago" value="'.$value["id_pendiente_pago"].'"/>
+                                        <input type="file" accept="application/pdf" class="form-control" id="file-input" name="file-input" style="width: auto; margin: 0 auto;">
+                                        <button type="submit">ss<button>
+                                        </form>';
+            } else {
+                $button_comprobante = '<a href="/comprobantesPago/'.$value["url_archivo"].'" class="btn bg-pink btn-icon-only morado-musa-text text-center"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Ver Comprobante" target="_blank"><i class="fas fa-print"> </i></a>';
+            }
+
+//             $estatus = '';
+//             if ($value['status'] == 1) {
+//                 $estatus .= <<<html
+//                 <span class="badge badge-success">Activo</span>
+// html;
+//             } else {
+//                 $estatus .= <<<html
+//                 <span class="badge badge-success">Inactivo</span>
+// html;
+//             }
+            $html .= <<<html
+            <tr>
+                <td >
+                    <div class="text-center"> 
+                                                   
+                            <p>{$icon_status} {$value['nombre']}</p>                       
+                    </div>
+                </td>
+         
+                <td style="text-align:left; vertical-align:middle;" > 
+                    
+                    <div class="text-center">
+                        <p>{$status}</p>
+                    </div>
+                  
+                </td>
+
+                <td style="text-align:left; vertical-align:middle;" > 
+                    
+                    <div class="text-center">
+                        <p>{$value['tipo_pago']}</p>
+                    </div>
+                
+                </td>  
+
+                
+                <td  class="text-center">
+                   {$button_comprobante}
+                    
+                </td>
+        </tr>
+html;
+        }
+       
+        return $html;
+    }
+
+    public function uploadComprobante(){
+
+        $numero_rand = $this->generateRandomString();
+        $id_pendiente_pago = $_POST['id_pendiente_pago'];
+        $file = $_FILES["file-input"];
+
+        move_uploaded_file($file["tmp_name"], "comprobantesPago/".$numero_rand.".pdf");
+        $documento = new \stdClass();
+        $documento->_id_pendiente_pago = $id_pendiente_pago;
+        $documento->_url = $numero_rand.".pdf";
+
+        $id = ComprobantePagoDao::updateComprobante($documento);
+
+        if($id){
+
+        // $data = [
+        //     'status' => 'success',
+        //     'img' => $numero_rand.'.png'
+        // ];
+            echo "success";
+        }else{
+            echo "fail";
+        // $data = [
+        //     'status' => 'fail'
+
+        // ];
+        }
+
+        // echo json_encode($data);
+
+
+        // var_dump()
+    }
+
+    function generateRandomString($length = 10) {
+        return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
 
     
