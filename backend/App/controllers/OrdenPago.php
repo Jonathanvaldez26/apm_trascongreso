@@ -34,6 +34,101 @@ class OrdenPago extends Controller
     public function Pagar(){
         echo $_POST['costo'];
     }
+    
+    public function ticketAll($clave = null, $id_curso = null)
+    {
+        date_default_timezone_set('America/Mexico_City');
+
+        
+        $metodo_pago = $_POST['metodo_pago'];
+        $user_id = $_SESSION['user_id'];
+        $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+
+        $productos = TalleresDao::getCarritoByIdUser($user_id);
+
+
+
+        foreach($productos as $key => $value){
+
+            
+
+            $documento = new \stdClass();  
+
+            $nombre_curso = $value['nombre'];
+            $id_producto = $value['id_producto'];
+            $user_id = $datos_user['user_id'];
+            $reference = $datos_user['reference'];
+            $fecha =  date("Y-m-d");
+            $monto = $value['precio_publico'];
+            $tipo_pago = $metodo_pago;
+            $status = 0;
+    
+            $documento->_id_producto = $id_producto;
+            $documento->_user_id = $user_id;
+            $documento->_reference = $reference;
+            $documento->_fecha = $fecha;
+            $documento->_monto = $monto;
+            $documento->_tipo_pago = $tipo_pago;
+            $documento->_status = $status;
+
+            $id = TalleresDao::inserPendientePago($documento);
+            $delete = TalleresDao::deleteItem($value['id_carrito']);
+
+        }
+
+
+
+        $d = $this->fechaCastellano($fecha);
+        
+        $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
+
+
+        $pdf = new \FPDF($orientation = 'P', $unit = 'mm', $format = 'A4');
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
+        $pdf->setY(1);
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 200, 300);
+        // $pdf->SetFont('Arial', 'B', 25);
+        // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
+
+        $espace = 125;
+
+        foreach($productos as $key => $value){           
+
+            //Nombre Curso
+            $pdf->SetXY(12, $espace);
+            $pdf->SetFont('Arial', 'B', 8);  
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->Multicell(100, 4, utf8_decode($value['nombre']), 0, 'C');
+
+            //Costo
+            $pdf->SetXY(118, $espace);
+            $pdf->SetFont('Arial', 'B', 8);  
+            $pdf->SetTextColor(0, 0, 0);
+            $pdf->Multicell(100, 4, '$ '.$value['precio_publico'], 0, 'C');
+
+            $espace = $espace + 10;
+        }
+
+        //folio
+        $pdf->SetXY(118, 42.5);
+        $pdf->SetFont('Arial', 'B', 13);  
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Multicell(100, 10, $reference, 0, 'C');
+
+        //fecha
+        $pdf->SetXY(118, 51.5);
+        $pdf->SetFont('Arial', 'B', 13);  
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Multicell(100, 10, $fecha, 0, 'C');
+
+
+        $pdf->Output();
+        // $pdf->Output('F','constancias/'.$clave.$id_curso.'.pdf');
+
+        // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
+    }
 
     public function ordenPago($clave = null, $id_curso = null)
     {

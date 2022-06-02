@@ -288,12 +288,9 @@ html;
                         <div class="card-body " style="height:235px;">
                             <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                             <div class="caratula-content">
-                            <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                          
                                 <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
-                            <!--</a>-->
-                            <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
-                            <!--<button class="btn btn-outline-danger"></button-->
-                
+                           
 html;
 
                             $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
@@ -308,34 +305,21 @@ html;
                             }
 
                 $card_cursos .= <<<html
-                        <!-- <div class="row">
-                                <div class="col-11 m-auto" id="">
-                                    <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                                </div>
-                            </div>-->
+                       
                         </div>
-                        <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                        
                             <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
 
-                            <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
-                                {$value['descripcion']}<br>
-                                {$value['vistas']} vistas
-                                <br> <br>
-                                <b>Avance: $porcentaje %</b>
-                            </p>-->
+                           
 
 html;
-                        if ($value['status'] == 2 || $porcentaje >= 80) {
-                            $card_cursos .= <<<html
-                                <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
-html;
-                        }
+                       
 
                     $link_parametro_user_id = base64_encode($_SESSION['user_id']);
                     $link_parametro_id_producto = base64_encode($value['id_producto']);
 
                     $card_cursos .= <<<html
-                            <!--</a>-->
+                            
 
                             <div>
                     
@@ -401,31 +385,16 @@ html;
                             }
 
                 $card_cursos .= <<<html
-                        <!-- <div class="row">
-                                <div class="col-11 m-auto" id="">
-                                    <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                                </div>
-                            </div>-->
+                        
                         </div>
-                        <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                       
                             <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
 
-                            <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
-                                {$value['descripcion']}<br>
-                                {$value['vistas']} vistas
-                                <br> <br>
-                                <b>Avance: $porcentaje %</b>
-                            </p>-->
-
 html;
-                        if ($value['status'] == 2 || $porcentaje >= 80) {
-                            $card_cursos .= <<<html
-                                <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
-html;
-                        }
+                        
 
                     $card_cursos .= <<<html
-                            <!--</a>-->
+                            
 
                             <div>
                     
@@ -435,6 +404,7 @@ html;
                         <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
                         <div style = "display: flex; justify-content:start">
                         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+                        <button class="btn btn-primary btn_cart" value="{$value['id_producto']}" style="margin-right: 5px;margin-left: 5px;">Agregar <i class="fa far fa-cart-plus"></i></button>
                     
                     </div>
                 </div>
@@ -1385,6 +1355,239 @@ html;
         } else {
             View::render("404");
         }
+    }
+
+    public function Cart(){
+        $extraHeader = <<<html
+html;
+        $extraFooter = <<<html
+    <!--footer class="footer pt-0">
+              <div class="container-fluid">
+                  <div class="row align-items-center justify-content-lg-between">
+                      <div class="col-lg-6 mb-lg-0 mb-4">
+                          <div class="copyright text-center text-sm text-muted text-lg-start">
+                              © <script>
+                                  document.write(new Date().getFullYear())
+                              </script>,
+                              made with <i class="fa fa-heart"></i> by
+                              <a href="https://www.creative-tim.com" class="font-weight-bold" target="www.grupolahe.com">Creative GRUPO LAHE</a>.
+                          </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                              <li class="nav-item">
+                                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">privacy policies</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </footer--    >
+          <!-- jQuery -->
+            <script src="/js/jquery.min.js"></script>
+            <!--   Core JS Files   -->
+            <script src="/assets/js/core/popper.min.js"></script>
+            <script src="/assets/js/core/bootstrap.min.js"></script>
+            <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+            <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+            <!-- Kanban scripts -->
+            <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
+            <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
+            <script src="/assets/js/plugins/chartjs.min.js"></script>
+            <script src="/assets/js/plugins/threejs.js"></script>
+            <script src="/assets/js/plugins/orbit-controls.js"></script>
+            
+          <!-- Github buttons -->
+            <script async defer src="https://buttons.github.io/buttons.js"></script>
+          <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+            <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
+
+          <!-- VIEJO INICIO -->
+            <script src="/js/jquery.min.js"></script>
+          
+            <script src="/js/custom.min.js"></script>
+
+            <script src="/js/validate/jquery.validate.js"></script>
+            <script src="/js/alertify/alertify.min.js"></script>
+            <script src="/js/login.js"></script>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+          <!-- VIEJO FIN -->
+   <script>
+    $( document ).ready(function() {
+
+          $("#form_vacunacion").on("submit",function(event){
+              event.preventDefault();
+              
+                  var formData = new FormData(document.getElementById("form_vacunacion"));
+                  for (var value of formData.values()) 
+                  {
+                     console.log(value);
+                  }
+                  $.ajax({
+                      url:"/Talleres/uploadComprobante",
+                      type: "POST",
+                      data: formData,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                      beforeSend: function(){
+                      console.log("Procesando....");
+                  },
+                  success: function(respuesta){
+                      if(respuesta == 'success'){
+                         // $('#modal_payment_ticket').modal('toggle');
+                         
+                          swal("¡Se ha guardado tu prueba correctamente!", "", "success").
+                          then((value) => {
+                              window.location.replace("/Talleres/");
+                          });
+                      }
+                      console.log(respuesta);
+                  },
+                  error:function (respuesta)
+                  {
+                      console.log(respuesta);
+                  }
+              });
+          });
+
+        
+
+      });
+</script>
+
+html;
+
+        $productos = TalleresDao::getCarritoByIdUser($_SESSION['user_id']);
+        $precios = array();
+        $total = 0;
+
+        foreach($productos as $key => $value){
+            // echo $value['precio_publico'];
+            array_push($precios,$value['precio_publico']);
+        }
+
+        if(count($productos) >= 1){
+            $style = 'display:flex;';
+        }else{
+            $style = 'display:none';
+        }
+
+        // echo count($productos);
+
+        // exit;
+
+        $total = array_sum($precios);
+
+
+        View::set('header', $this->_contenedor->header($extraHeader));
+        View::set('footer', $this->_contenedor->footer($extraFooter));
+        View::set('tabla',$this->getAllProductsCartByUser($_SESSION['user_id']));
+        View::set('style',$style);
+        View::set('total',number_format($total,2));
+        View::render("carrito");
+    }
+
+    public function getAllProductsCartByUser($id_user){
+
+        $html = "";
+        foreach (TalleresDao::getCarritoByIdUser($id_user) as $key => $value) {
+            
+            $html .= <<<html
+            <tr>
+                <td >
+                    
+                    
+                    <div class=""> 
+                                                   
+                            <p><button class="btn btn-danger btn-sm btn-icon-only btn-delete" style="margin-top: 10px; margin-right:10px;" value="{$value['id_carrito']}">x</button><img src="/caratulas/{$value['caratula']}" style="width:100px;heigth:100px; border-radius:8px;"> {$value['nombre']}</p>                       
+                    </div>
+                </td>
+         
+                <td style="text-align:left; vertical-align:middle;" > 
+                    
+                    <div class="text-center">
+                        <p>{$value['precio_publico']}</p>
+                    </div>
+                  
+                </td>
+
+                <td style="text-align:left; vertical-align:middle;" > 
+                    
+                    <div class="text-center">
+                        <p>{$value['precio_publico']}</p>
+                    </div>
+                
+                </td>  
+
+               
+        </tr>
+html;
+        }
+
+        
+       
+        return $html;
+    }
+
+    public function getNumberPorducts(){
+
+        $user_id = $_SESSION['user_id'];
+
+        $getNumberProducts = TalleresDao::getProductsNumber($user_id)[0]['total_productos'];
+
+        echo $getNumberProducts;
+
+    }
+
+
+    public function cartShopping(){
+        $id_producto =  $_POST['id_producto'];
+
+        // $producto = TalleresDao::getProductoById($id_producto);
+
+        $getProductCart = TalleresDao::getProductCart($_SESSION['user_id'],$id_producto);
+
+        if($getProductCart){
+            $data = [
+                "msg" => "Este producto ya esta en su cesta",
+                "status" => "warning"
+            ];
+        }else{
+            $documento = new \stdClass();
+            $documento->_id_producto = $id_producto;
+            $documento->_user_id = $_SESSION['user_id'];
+
+            $insertProductCart = TalleresDao::insertProductCart($documento);
+
+            if($insertProductCart){
+                $data = [
+                    "msg" => "Se ingreso el producto a su cesta",
+                    "status" => "success"
+                ];
+            }else{
+                $data = [
+                    "msg" => "Error al gurdar el producto",
+                    "status" => "error"
+                ];
+            }
+        }
+
+        echo json_encode($data);
+    }
+
+    public function remove(){
+        $id = $_POST['id'];
+
+        $delete = TalleresDao::deleteItem($id);
+
+        if($delete){
+            echo "success";
+        }else{
+            echo "fail";
+        }
+
+        
     }
 
     
