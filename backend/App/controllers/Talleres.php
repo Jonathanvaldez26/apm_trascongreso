@@ -484,7 +484,7 @@ html;
                     <div class="card-footer">
                         <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
                         <div style = "display: flex; justify-content:start">
-                        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+                        <button class="btn btn-primary btn_comprar_individual" style="margin-right: 5px;margin-left: 5px; width:145px;"  value="{$value['id_producto']}">Comprar</button>
                         <button class="btn btn-primary btn_cart" value="{$value['id_producto']}" style="margin-right: 5px;margin-left: 5px;">Agregar <i class="fa far fa-cart-plus"></i></button>
                     
                     </div>
@@ -803,7 +803,7 @@ html;
                 <div class="card-footer">
                     <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
                     <div style = "display: flex; justify-content:start">
-                        <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+                        <button class="btn btn-primary btn_comprar_individual" style="margin-right: 5px;margin-left: 5px; width:145px;" value="{$value['id_producto']}">Comprar</button>
                         <button class="btn btn-primary btn_cart" value="{$value['id_producto']}" style="margin-right: 5px;margin-left: 5px;">Agregar <i class="fa far fa-cart-plus"></i></button>
        
                     </div>
@@ -883,16 +883,16 @@ html;
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
                     <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
-                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="text" class="tipo_pago" name="tipo_pago"/>
+                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
                             <label>Elige tu metodo de pago *</label>
-                            <select class="multisteps-form__select form-control all_input_second_select metodo_pago" name="metodo_pago">
+                            <select class="multisteps-form__select form-control all_input_second_select metodo_pago" name="metodo_pago" required>
                                 <option value="" disabled selected>Selecciona una Opción</option>
                                 <option value="Paypal">Paypal</option>
                                 <option value="Efectivo">Efectivo</option>
@@ -1575,7 +1575,6 @@ html;
 
         $total = array_sum($precios);
 
-
         View::set('header', $this->_contenedor->header($extraHeader));
         View::set('footer', $this->_contenedor->footer($extraFooter));
         View::set('tabla',$this->getAllProductsCartByUser($_SESSION['user_id']));
@@ -1627,9 +1626,38 @@ html;
                
         </tr>
 html;
-        }
-
+        }    
         
+        if($html == ""){
+
+            $html .= <<<html
+
+            <tr>
+                    <td class="text-center">
+                        
+                        
+                      
+                    
+                    </td>  
+
+                    <td class="text-center">
+                        
+                            
+                        No hay productos en su carrito
+                    
+                    </td>  
+
+                 <td class="text-center">
+                        
+    
+                
+                </td>  
+
+                
+            </tr>
+html;
+
+        }
        
         return $html;
     }
@@ -1644,6 +1672,28 @@ html;
 
     }
 
+
+    public function searchProductCart(){
+        $id_producto = $_POST['id_producto'];
+        $data = [];
+        $getProductCart = TalleresDao::getProductCart($_SESSION['user_id'],$id_producto);
+
+        if($getProductCart){
+            $data = [
+                "msg" => "Este producto ya esta en su cesta",
+                "status" => "warning"
+            ];
+        }else{
+            $data = [
+                "status"=>"success"
+            ];
+        }
+
+        echo json_encode($data);
+
+
+
+    }
 
     public function cartShopping(){
         $id_producto =  $_POST['id_producto'];

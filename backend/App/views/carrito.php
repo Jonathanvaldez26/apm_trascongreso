@@ -29,6 +29,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Home/">Inicio</a></li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Talleres/">Talleres</a></li>
                     <li class="breadcrumb-item text-sm">Carrito</li>
                 </ol>
             </nav>
@@ -323,6 +324,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $("#form_compra").submit();
+                        location.reload();
 
                     }
                 })
@@ -339,6 +341,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $("#form_compra").submit();
+                        location.reload();
                     }
                 })
             } else {

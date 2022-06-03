@@ -436,6 +436,46 @@
             });
         });
 
+        $(".btn_comprar_individual").on("click",function(){
+            var id_producto = $(this).val();
+            // $(this).prop("data-toggle","modal");            
+            
+            $.ajax({
+                url: "/Talleres/searchProductCart",
+                type: "POST",
+                dataType: 'json',
+                data: {id_producto},
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                    
+                    if(respuesta.status == "success"){
+                        // $(this).attr("data-toggle","modal");
+                        $("#comprar-curso"+id_producto).modal('show');
+                        
+                    }else{
+                        Swal.fire(
+                            respuesta.msg,
+                            '',
+                            respuesta.status
+                        );
+                    }                
+                                
+                    
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+            });
+
+
+            // $(this).attr("data-toggle","modal");
+            // // data-toggle="modal"
+            // alert(id_producto);
+        })
+
         function getNumberPorducts(){
             $.ajax({
                 url: "/Talleres/getNumberPorducts",
