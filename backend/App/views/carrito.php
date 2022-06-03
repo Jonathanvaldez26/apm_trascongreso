@@ -1,5 +1,5 @@
 <title>
-    Carrito 
+    Carrito
 </title>
 <?php echo $header; ?>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -62,17 +62,17 @@
         <div class="row mt-0 m-auto">
             <div class="col-lg-1">
             </div>
-            <div class="card col-lg-10 mt-lg-5 mt-1" >
-                
+            <div class="card col-lg-8 mt-lg-5 mt-1">
+
                 <!--Congreso  -->
                 <div class="card-header pb-0 p-3">
                     <div class="row">
-                    <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
-                    <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
+                        <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
+                        <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                     </div>
                     <h4 class="mb-1 mt-4 text-left"><i class="fa fa-cash-register"></i> Carrito de compras</h4>
                 </div>
-                
+
                 <div class="card-body p-3">
 
                     <div class="card-body px-0 pb-0">
@@ -81,13 +81,13 @@
                                 <div class="table-responsive p-0">
                                     <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
                                         <thead class="thead-light">
-                                        <tr>
-                                            <!-- <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"></th> -->
-                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Producto</th>
-                                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
-                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Subtotal</th>
-                                            
-                                        </tr>
+                                            <tr>
+                                                <!-- <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"></th> -->
+                                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Producto</th>
+                                                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Precio</th>
+                                                <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Subtotal</th>
+
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             <?php echo $tabla; ?>
@@ -96,22 +96,46 @@
                                 </div>
                             </div>
 
-                           
-                        </div>                      
+
+                        </div>
 
                     </div>
 
-                </div> 
+                </div>
+            </div>
+            <div class="card col-lg-2 mt-lg-5 mt-1" style="<?= $style ?>">
+                <div class="card-header pb-0 p-3">
+                    <div class="row">
+                        <!-- <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt=""> -->
+                        <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
+                    </div>
+
+                </div>
+                <form id="form_compra" method="POST" target="_blank" style="margin-top: 15px!important; margin: 0 auto;">
+                    <input type="hidden" id="tipo_pago" name="tipo_pago">
+                    <div>
+
+                        <label>Elige tu metodo de pago *</label>
+                        <select class="multisteps-form__select form-control all_input_second_select" id="metodo_pago" name="metodo_pago" style="width: auto;">
+                            <option value="" disabled selected>Selecciona una Opción</option>
+                            <option value="Paypal">Paypal</option>
+                            <option value="Efectivo">Efectivo</option>
+                        </select>
+
+                        <button id="btn_comprar" class="btn btn-success mt-3" style="width: 100%;">Comprar</button>
+                    </div>
+                </form>
+
             </div>
         </div>
 
 
-        <div class="row mt-0 m-auto" style="<?=$style?>">
+        <!-- <div class="row mt-0 m-auto" style="<?= $style ?>">
             <div class="col-lg-1">
             </div>
-            <div class="card col-lg-10 mt-lg-5 mt-1" >
-                
-                
+            <div class="card col-lg-10 mt-lg-5 mt-1">
+
+
                 <div class="card-body p-3">
 
                     <div class="card-body px-0 pb-0">
@@ -123,43 +147,43 @@
                                             <form id="form_compra" method="POST" target="_blank">
                                                 <input type="hidden" id="tipo_pago" name="tipo_pago">
                                                 <div>
-                                            
+
                                                     <label>Elige tu metodo de pago *</label>
                                                     <select class="multisteps-form__select form-control all_input_second_select" id="metodo_pago" name="metodo_pago" style="width: auto;">
                                                         <option value="" disabled selected>Selecciona una Opción</option>
                                                         <option value="Paypal">Paypal</option>
                                                         <option value="Efectivo">Efectivo</option>
                                                     </select>
-                        
+
                                                     <button id="btn_comprar" class="btn btn-success mt-3">Comprar</button>
                                                 </div>
-                                            </form>    
-                                            
+                                            </form>
+
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div style="display: flex; justify-content: end;">
-                                            <div>
-                                                <p>Total : <?=$total; ?></p>
+                                                <div>
+                                                    <p>Total : <?= $total; ?></p>
+                                                </div>
                                             </div>
                                         </div>
-                                        </div>
 
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                             </div>
 
-                           
-                        </div>                      
+
+                        </div>
 
                     </div>
 
-                </div> 
+                </div>
             </div>
-        </div>
+        </div> -->
 
-        
+
         <br>
     </div>
     <br>
@@ -171,12 +195,12 @@
     </div>
 
 </main>
-<?php echo $modalComprar?>
+<?php echo $modalComprar ?>
 
 
 <script>
-    $(document).ready(function(){
-        
+    $(document).ready(function() {
+
         let identificadorIntervaloDeTiempo;
 
         function repetirCadaSegundo() {
@@ -211,8 +235,8 @@
                 },
                 success: function(respuesta) {
                     console.log(respuesta);
-                    
-                    
+
+
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
@@ -221,36 +245,38 @@
             });
         });
 
-        $(".btn-delete").on("click",function(){
+        $(".btn-delete").on("click", function() {
             var id = $(this).val();
             $.ajax({
                 url: "/Talleres/remove",
                 type: "POST",
-                data: {id},                
+                data: {
+                    id
+                },
                 beforeSend: function() {
                     console.log("Procesando....");
                 },
                 success: function(respuesta) {
                     console.log(respuesta);
 
-                    if(respuesta == "success"){
+                    if (respuesta == "success") {
                         Swal.fire(
                             "Se quito el articulo",
                             '',
                             "success"
-                        ); 
+                        );
 
-                        setTimeout(location.reload(),'2000');
+                        setTimeout(location.reload(), '2000');
 
-                    }else{
+                    } else {
                         Swal.fire(
                             "Error al quitar el articulo, contacte a soporte",
                             '',
                             "error"
-                        ); 
+                        );
                     }
-                    
-                    
+
+
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
@@ -259,19 +285,19 @@
             });
         });
 
-        $('#metodo_pago').on('change',function(e){
+        $('#metodo_pago').on('change', function(e) {
             var tipo = $(this).val();
-           
-            if(tipo == 'Paypal'){
-                $("#form_compra").attr('action','/OrdenPago/PagarPaypalAll');
+
+            if (tipo == 'Paypal') {
+                $("#form_compra").attr('action', '/OrdenPago/PagarPaypalAll');
                 $("#btn_comprar").val('Paypal');
                 $("#tipo_pago").val('Paypal');
-            }else if(tipo == 'Efectivo'){
-                $("#form_compra").attr('action','/OrdenPago/ticketAll');
+            } else if (tipo == 'Efectivo') {
+                $("#form_compra").attr('action', '/OrdenPago/ticketAll');
                 $("#btn_comprar").val('Efectivo');
                 $("#tipo_pago").val('Efectivo');
 
-             
+
             }
 
         });
@@ -280,11 +306,11 @@
         //     location.reload();
         // });
 
-        $("#btn_comprar").on("click",function(e){
+        $("#btn_comprar").on("click", function(e) {
             e.preventDefault();
             var tipo = $("#metodo_pago").val();
 
-            if(tipo == 'Efectivo'){
+            if (tipo == 'Efectivo') {
                 Swal.fire({
                     title: '¿Quieres comprar el curso?',
                     text: "Una vez que confirmes se emitira tu orden de pago!",
@@ -294,15 +320,13 @@
                     cancelButtonColor: '#d33',
                     cancelButtonText: 'Cancelar',
                     confirmButtonText: 'Comprar'
-                    }).then((result) => {
-                    if (result.isConfirmed) {                        
-                        $("#form_compra").submit();                      
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#form_compra").submit();
 
                     }
                 })
-            }
-
-            else if(tipo == 'Paypal'){
+            } else if (tipo == 'Paypal') {
                 Swal.fire({
                     title: '¿Quieres comprar el curso?',
                     text: "Una vez que confirmes se enviara a PayPal!",
@@ -312,27 +336,25 @@
                     cancelButtonColor: '#d33',
                     cancelButtonText: 'Cancelar',
                     confirmButtonText: 'Comprar'
-                    }).then((result) => {
-                    if (result.isConfirmed) {                       
-                        $("#form_compra").submit(); 
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $("#form_compra").submit();
                     }
                 })
-            }
-
-            else{
+            } else {
                 Swal.fire(
                     "Selecciona un metodo de pago",
                     '',
                     "info"
-                ); 
+                );
             }
 
 
-            
+
 
         });
 
-        
+
 
         // repetirCadaSegundo();
 
@@ -344,5 +366,4 @@
         //     // console.log(v);
         // },true);
     })
-    
 </script>

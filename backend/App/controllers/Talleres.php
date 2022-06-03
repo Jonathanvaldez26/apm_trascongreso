@@ -1611,7 +1611,7 @@ html;
                 <td style="text-align:left; vertical-align:middle;" > 
                     
                     <div class="text-center">
-                        <p>{$precio}</p>
+                        <p>{$precio} - {$value['tipo_moneda']}</p>
                     </div>
                   
                 </td>
@@ -1619,7 +1619,7 @@ html;
                 <td style="text-align:left; vertical-align:middle;" > 
                     
                     <div class="text-center">
-                        <p>{$precio}</p>
+                        <p>{$precio} - {$value['tipo_moneda']}</p>
                     </div>
                 
                 </td>  
