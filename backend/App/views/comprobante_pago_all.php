@@ -79,13 +79,15 @@
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show position-relative active height-350 border-radius-lg" id="Invitados" role="tabpanel" aria-labelledby="Invitados">
                                 <div class="table-responsive p-0">
-                                    <table class="align-items-center mb-0 table table-borderless" id="user_list_table">
+                                    <table class="align-items-center mb-0 table table-borderless" id="user_list_table" style="width:100%">
                                         <thead class="thead-light">
                                         <tr>
                                             <!-- <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"></th> -->
-                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Nombre del Curso o Congreso</th>
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7" style="width:30%">Nombre del Curso o Congreso</th>
                                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estatus</th>
-                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Metodo de Pago</th>
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Monto a Pagar</th>
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Metodo de Pago</th>   
+                                            <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7">Ticket</th>                                     
                                             <th class="text-uppercase text-secondary text-center text-xxs font-weight-bolder opacity-7"><i class="fa fa-eye"></i></th>
                                         </tr>
                                         </thead>

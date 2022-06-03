@@ -93,7 +93,21 @@ sql;
 sql;
       return $mysqli->queryAll($query);
 
-    }   
+    } 
+    
+    public static function getCarritoByIdUserTicket($user_id,$clave){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT c.id_carrito,pro.id_producto,pro.nombre,pro.precio_publico,pro.precio_socio,pro.tipo_moneda,pro.caratula,pro.es_curso,pro.es_servicio,pro.es_congreso,ua.amout_due,ua.wadd_member,ua.apm_member,ua.APAL,ua.AILANCYP,ua.AMPI,ua.LC
+      FROM productos pro
+      INNER JOIN carrito c ON(c.id_producto = pro.id_producto)
+      INNER JOIN utilerias_administradores ua ON(c.user_id = ua.user_id)
+      INNER JOIN pendiente_pago pp ON (pp.id_producto = c.id_producto)
+      WHERE c.user_id = $user_id AND pp.clave = '$clave'
+sql;
+      return $mysqli->queryAll($query);
+
+    } 
 
     public static function deleteItem($id){
       $mysqli = Database::getInstance();
@@ -521,13 +535,14 @@ sql;
   public static function inserPendientePago($data){ 
     $mysqli = Database::getInstance(1);
     $query=<<<sql
-    INSERT INTO pendiente_pago (id_producto, user_id, reference, 	fecha, monto, tipo_pago, status) VALUES (:id_producto, :user_id, :reference, :fecha, :monto, :tipo_pago, :status);
+    INSERT INTO pendiente_pago (id_producto, user_id, reference, clave,fecha, monto, tipo_pago, status) VALUES (:id_producto, :user_id, :reference,:clave,:fecha, :monto, :tipo_pago, :status);
 sql;
 
   $parametros = array(
     ':id_producto'=>$data->_id_producto,
     ':user_id'=>$data->_user_id,
     ':reference'=>$data->_reference,
+    ':clave'=>$data->_clave,
     ':fecha'=>$data->_fecha,
     ':monto'=>$data->_monto,
     ':tipo_pago'=>$data->_tipo_pago,

@@ -42,6 +42,7 @@ class OrdenPago extends Controller
         
         $metodo_pago = $_POST['metodo_pago'];
         $user_id = $_SESSION['user_id'];
+        $clave = $this->generateRandomString();
         $datos_user = RegisterDao::getUser($this->getUsuario())[0];
 
         $productos = TalleresDao::getCarritoByIdUser($user_id);
@@ -79,6 +80,7 @@ class OrdenPago extends Controller
             $documento->_fecha = $fecha;
             $documento->_monto = $monto;
             $documento->_tipo_pago = $tipo_pago;
+            $documento->_clave = $clave;
             $documento->_status = $status;
 
             $id = TalleresDao::inserPendientePago($documento);
@@ -155,6 +157,7 @@ class OrdenPago extends Controller
 
         // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
     }
+    
 
     public function ordenPago($clave = null, $id_curso = null)
     {
@@ -163,6 +166,7 @@ class OrdenPago extends Controller
         // $this->generaterQr($clave_ticket);
 
         $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+        $clave = $this->generateRandomString();
 
         $documento = new \stdClass();  
 
@@ -178,6 +182,7 @@ class OrdenPago extends Controller
         $documento->_id_producto = $id_producto;
         $documento->_user_id = $user_id;
         $documento->_reference = $reference;
+        $documento->_clave = $clave;
         $documento->_fecha = $fecha;
         $documento->_monto = $monto;
         $documento->_tipo_pago = $tipo_pago;
@@ -415,6 +420,11 @@ class OrdenPago extends Controller
         $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
 
         return $nombredia." ".$numeroDia." de ".$nombreMes." de ".$anio;
+    }
+
+    function generateRandomString($length = 10)
+    {
+        return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
     }
 
 }
