@@ -276,9 +276,9 @@
 
         });
 
-        $("#form_compra").on("submit",function(){
-            location.reload();
-        });
+        // $("#form_compra").on("submit",function(){
+        //     location.reload();
+        // });
 
         $("#btn_comprar").on("click",function(e){
             e.preventDefault();
