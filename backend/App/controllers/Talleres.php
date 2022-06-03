@@ -329,7 +329,13 @@ html;
                         <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
                         <div style = "display: flex; justify-content:start">
                         <!--<button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>-->
-                        <a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>
+                        <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
+                        <div style = "display: flex; justify-content:start">
+                            <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
+                            En espera de validación de pago.
+                            </p>
+                   
+                        </div>
                     
                     </div>
                 </div>
@@ -348,7 +354,82 @@ html;
         // });
     </script>
 html;
-
+                }else if($pendientes_pago['status'] == 2){
+                    //pago rechazado
+                    $card_cursos .= <<<html
+    
+    
+                    <div class="col-12 col-md-4 mt-3">
+                        <div class="card card-course p-0 border-radius-15">
+                            <div class="card-body " style="height:235px;">
+                                <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
+                                <div class="caratula-content">
+                              
+                                    <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
+                               
+html;
+    
+                                $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
+                                if ($like['status'] == 1) {
+                                    $card_cursos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
+html;
+                                } else {
+                                    $card_cursos .= <<<html
+                                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
+html;
+                                }
+    
+                    $card_cursos .= <<<html
+                           
+                            </div>
+                            
+                                <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
+    
+                               
+    
+html;
+                           
+    
+                        $link_parametro_user_id = base64_encode($_SESSION['user_id']);
+                        $link_parametro_id_producto = base64_encode($value['id_producto']);
+    
+                        $card_cursos .= <<<html
+                                
+    
+                                <div>
+                        
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$value['precio_publico']} {$value['tipo_moneda']}</b></p>
+                            <div style = "display: flex; justify-content:start">
+                            <!--<button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>-->
+                            <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
+                            <div style = "display: flex; justify-content:start">
+                                <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
+                                    No se pudo validar tu pago, vuelve a subir tu comprobante ó contacta a soporte.
+                                </p>
+                       
+                            </div>
+                        
+                        </div>
+                    </div>
+                </div>        
+            </div>
+    
+        <script>
+            // $('#video_{$value['clave']}').on('click', function(){
+            //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
+                
+            //     if (like){
+            //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
+            //     } else {
+            //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
+            //     }
+            // });
+        </script>
+html;
                 
                 }else {
                     //echo "pagado";
@@ -514,11 +595,11 @@ html;
                 <div class="card-footer">
                 <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
                 <div style = "display: flex; justify-content:start">
-                <p class="badge badge-success" style="margin-left: 5px;margin-bottom: 38px;">
-                  Este curso ya lo compraste.
-                </p>
+                    <p class="badge badge-success" style="margin-left: 5px;margin-bottom: 38px;">
+                    Este curso ya lo compraste.
+                    </p>
                
-            </div>
+                </div>
           </div>
                 </div>
                 
@@ -630,7 +711,14 @@ html;
                     <div style = "display: flex; justify-content:start">
                         <!--<button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>-->
 
-                        <a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>
+                        <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
+
+                        <div style = "display: flex; justify-content:start">
+                            <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
+                            En espera de validación de pago.
+                            </p>
+                
+                        </div>
        
                     </div>
                 </div>
@@ -716,6 +804,7 @@ html;
                     <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
                     <div style = "display: flex; justify-content:start">
                         <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>
+                        <button class="btn btn-primary btn_cart" value="{$value['id_producto']}" style="margin-right: 5px;margin-left: 5px;">Agregar <i class="fa far fa-cart-plus"></i></button>
        
                     </div>
                 </div>
@@ -1464,7 +1553,14 @@ html;
 
         foreach($productos as $key => $value){
             // echo $value['precio_publico'];
-            array_push($precios,$value['precio_publico']);
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
+            array_push($precios,$precio);
         }
 
         if(count($productos) >= 1){
@@ -1492,6 +1588,14 @@ html;
 
         $html = "";
         foreach (TalleresDao::getCarritoByIdUser($id_user) as $key => $value) {
+
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
             
             $html .= <<<html
             <tr>
@@ -1507,7 +1611,7 @@ html;
                 <td style="text-align:left; vertical-align:middle;" > 
                     
                     <div class="text-center">
-                        <p>{$value['precio_publico']}</p>
+                        <p>{$precio}</p>
                     </div>
                   
                 </td>
@@ -1515,7 +1619,7 @@ html;
                 <td style="text-align:left; vertical-align:middle;" > 
                     
                     <div class="text-center">
-                        <p>{$value['precio_publico']}</p>
+                        <p>{$precio}</p>
                     </div>
                 
                 </td>  

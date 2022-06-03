@@ -46,12 +46,21 @@ class OrdenPago extends Controller
 
         $productos = TalleresDao::getCarritoByIdUser($user_id);
 
+        // var_dump($productos);
+        // exit;
+
 
 
         foreach($productos as $key => $value){
 
-            
-
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
+           
             $documento = new \stdClass();  
 
             $nombre_curso = $value['nombre'];
@@ -59,7 +68,8 @@ class OrdenPago extends Controller
             $user_id = $datos_user['user_id'];
             $reference = $datos_user['reference'];
             $fecha =  date("Y-m-d");
-            $monto = $value['precio_publico'];
+            // $monto = $value['precio_publico'];
+            $monto = $precio;
             $tipo_pago = $metodo_pago;
             $status = 0;
     
@@ -93,8 +103,19 @@ class OrdenPago extends Controller
         // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
 
         $espace = 125;
+        $total = array();
+        foreach($productos as $key => $value){            
+            
+            
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
 
-        foreach($productos as $key => $value){           
+            array_push($total,$precio);
 
             //Nombre Curso
             $pdf->SetXY(12, $espace);
@@ -106,9 +127,9 @@ class OrdenPago extends Controller
             $pdf->SetXY(118, $espace);
             $pdf->SetFont('Arial', 'B', 8);  
             $pdf->SetTextColor(0, 0, 0);
-            $pdf->Multicell(100, 4, '$ '.$value['precio_publico'], 0, 'C');
+            $pdf->Multicell(100, 4, '$ '.$precio, 0, 'C');
 
-            $espace = $espace + 10;
+            $espace = $espace + 8;
         }
 
         //folio
@@ -123,6 +144,11 @@ class OrdenPago extends Controller
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, $fecha, 0, 'C');
 
+        //total
+        $pdf->SetXY(118, 170);
+        $pdf->SetFont('Arial', 'B', 8);  
+        $pdf->SetTextColor(0, 0, 0);
+        $pdf->Multicell(100, 10, 'TOTAL : '.number_format(array_sum($total),2), 0, 'C');
 
         $pdf->Output();
         // $pdf->Output('F','constancias/'.$clave.$id_curso.'.pdf');

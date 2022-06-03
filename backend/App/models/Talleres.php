@@ -58,7 +58,7 @@ sql;
     public static function getProductCart($user_id,$id_producto){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT * FROM carrito WHERE id_producto = $id_producto AND user_id = $user_id 
+      SELECT * FROM carrito WHERE id_producto = $id_producto AND user_id = $user_id and status = 1
 sql;
       return $mysqli->queryAll($query);
     }
@@ -66,7 +66,7 @@ sql;
     public static function insertProductCart($data){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      INSERT INTO carrito(id_producto, user_id) VALUES ('$data->_id_producto','$data->_user_id')
+      INSERT INTO carrito(id_producto, user_id, status) VALUES ('$data->_id_producto','$data->_user_id',1)
 sql;
       $id = $mysqli->insert($query);
    
@@ -76,7 +76,7 @@ sql;
     public static function getProductsNumber($user_id){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT count(1) as total_productos FROM carrito WHERE user_id = $user_id
+      SELECT count(1) as total_productos FROM carrito WHERE user_id = $user_id and status = 1
 sql;
       return $mysqli->queryAll($query);
 
@@ -85,10 +85,11 @@ sql;
     public static function getCarritoByIdUser($user_id){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT c.id_carrito,pro.id_producto,pro.nombre,pro.precio_publico,pro.precio_socio,pro.tipo_moneda,pro.caratula
+      SELECT c.id_carrito,pro.id_producto,pro.nombre,pro.precio_publico,pro.precio_socio,pro.tipo_moneda,pro.caratula,pro.es_curso,pro.es_servicio,pro.es_congreso,ua.amout_due,ua.wadd_member,ua.apm_member,ua.APAL,ua.AILANCYP,ua.AMPI,ua.LC
       FROM productos pro
       INNER JOIN carrito c ON(c.id_producto = pro.id_producto)
-      WHERE c.user_id = $user_id
+      INNER JOIN utilerias_administradores ua ON(c.user_id = ua.user_id)
+      WHERE c.user_id = $user_id and c.status = 1
 sql;
       return $mysqli->queryAll($query);
 
@@ -96,9 +97,12 @@ sql;
 
     public static function deleteItem($id){
       $mysqli = Database::getInstance();
-      $query=<<<sql
-      DELETE FROM carrito WHERE id_carrito = $id
-sql;
+//       $query=<<<sql
+//       DELETE FROM carrito WHERE id_carrito = $id
+// sql;
+    $query=<<<sql
+      UPDATE carrito SET status = 0  WHERE id_carrito = $id
+sql;  
       return $mysqli->delete($query);
 
     }  
