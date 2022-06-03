@@ -246,7 +246,7 @@ public function getAllComprobantesPagoById($id_user){
                                     <button class="btn btn-primary btn-only-icon mt-2" type="submit">Subir</button>
                                     </form>';
         } else {
-            $button_comprobante = '<a href="/comprobantesPago/'.$value["url_archivo"].'" class="btn bg-pink btn-icon-only morado-musa-text text-center"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Ver Comprobante" target="_blank"><i class="fas fa-print"> </i></a>';
+            $button_comprobante = '<a href="/comprobantesPago/'.$value["url_archivo"].'" class="btn bg-pink btn-icon-only morado-musa-text text-center"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Ver mi comprobante" target="_blank"><i class="fas fa-print"> </i></a>';
         }
         
 
@@ -274,12 +274,14 @@ html;
                         $precio = $value2['precio_publico'];
                     }else if($value2['es_curso'] == 1){
                         $precio = $value2['precio_publico'];
-                    }
+                    }                    
 
                     array_push($total_array,$precio);
 
+                    $precio = number_format($precio,2);
+
                     $html .= <<<html
-                    <p>{$icon_status} {$value2['nombre']}</p>
+                    <p>{$icon_status} {$value2['nombre']} $ {$precio}</p>
 html;
 
                 }   
@@ -300,7 +302,7 @@ html;
 
             <td style="text-align:left; vertical-align:middle;" >                 
                 <div class="text-center">                
-                <p>{$total}</p>
+                <p>$ {$total} {$value['tipo_moneda']}</p>
             </div>
           
         </td>
@@ -475,14 +477,14 @@ html;
             // ];
                 // echo "success";
                 echo "<script>
-                    alert('Archivo subido correctamente');
+                    // alert('Archivo subido correctamente');
                     window.location.href = /ComprobantePago/;
                 </script>";
                 
             }else{
                 // echo "fail";
                 echo "<script>
-                        alert('Hubo un error al subir el archivo');
+                        // alert('Hubo un error al subir el archivo');
                         window.location.href = /ComprobantePago/;
                     </script>";
                  
@@ -499,7 +501,7 @@ html;
 
         }else{
             echo "<script>
-                alert('No selecciono ningun archivo');
+                // alert('No selecciono ningun archivo');
                 window.location.href = /ComprobantePago/;
             </script>";
             

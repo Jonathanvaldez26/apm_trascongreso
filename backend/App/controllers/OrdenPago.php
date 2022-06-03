@@ -216,13 +216,13 @@ class OrdenPago extends Controller
 
         //Nombre Curso
         $pdf->SetXY(12, 125);
-        $pdf->SetFont('Arial', 'B', 13);  
+        $pdf->SetFont('Arial', 'B', 8);  
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, utf8_decode($nombre_curso), 0, 'C');
 
         //Costo
         $pdf->SetXY(118, 125);
-        $pdf->SetFont('Arial', 'B', 13);  
+        $pdf->SetFont('Arial', 'B', 8);  
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, '$ '.$monto, 0, 'C');
 
