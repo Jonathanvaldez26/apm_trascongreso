@@ -1606,7 +1606,7 @@ html;
         View::set('footer', $this->_contenedor->footer($extraFooter));
         View::set('tabla',$this->getAllProductsCartByUser($_SESSION['user_id']));
         View::set('style',$style);
-        View::set('total',number_format($total,2));
+        View::set('total',intval($total));
         View::render("carrito");
     }
 

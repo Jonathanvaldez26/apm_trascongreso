@@ -125,15 +125,15 @@
                         <input type='hidden' name='clave' value="<?=$clave?>"> 
 
                         <!-- <br><br><br> -->
-                        <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
-                        <input type='hidden' name='item_name' value='<?=$producto_s?>'> 
-                        <input type='hidden' name='item_number' value="<?=$clave?>"> 
-                        <input type='hidden' name='amount' value='<?=$total?>'> 
-                        <input type='hidden' name='currency_code' value='MXN'> 
-                        <input type='hidden' name='notify_url' value=''> 
-                        <input type='hidden' name='return' value='http://localhost:8112/ComprobantePago/'> 
-                        <input type="hidden" name="cmd" value="_xclick">  
-                        <input type="hidden" name="order" value="<?=$clave?>">
+                        <input type='text' name='business' value='jvaldez_2610@hotmail.com'> 
+                        <input type='text' name='item_name' value='<?=$producto_s?>'> 
+                        <input type='text' name='item_number' value="<?=$clave?>"> 
+                        <input type='text' name='amount' value='<?=$total?>'> 
+                        <input type='text' name='currency_code' value='MXN'> 
+                        <input type='text' name='notify_url' value=''> 
+                        <input type='text' name='return' value='http://localhost:8112/ComprobantePago/'> 
+                        <input type="text" name="cmd" value="_xclick">  
+                        <input type="text" name="order" value="<?=$clave?>">
 
                         <button id="btn_comprar" class="btn btn-success mt-3" style="width: 100%;">Comprar</button>
                     </div>
