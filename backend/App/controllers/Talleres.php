@@ -857,6 +857,8 @@ html;
             $precio_curso = '$ '.$datos['precio_publico']." ".$datos['tipo_moneda'];
             $solo_precio_curso = $datos['precio_publico'];
         }
+
+        $clave = $this->generateRandomString();
         
        
         $modal = <<<html
@@ -868,7 +870,7 @@ html;
                 Completa tu compra
                 </h5>
 
-                <span type="button" class="btn bg-gradient-danger" data-dismiss="modal" aria-label="Close">
+                <span type="button" class="btn bg-gradient-danger" data-bs-dismiss="modal" aria-label="Close">
                     X
                 </span>
             </div>
@@ -883,11 +885,24 @@ html;
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
                     <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
-                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>
+                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="text" class="tipo_pago" name="tipo_pago"/>
+
+                    <br><br><br><br>
+
+                    <!-- campos para paypal -->
+                    <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
+                    <input type='hidden' name='item_name' value='{$datos['nombre']}'> 
+                    <input type='hidden' name='item_number' value="{$clave}"> 
+                    <input type='hidden' name='amount' value='{$solo_precio_curso}'> 
+                    <input type='hidden' name='currency_code' value='MXN'> 
+                    <input type='hidden' name='notify_url' value=''> 
+                    <input type='hidden' name='return' value='http://localhost:8112/ComprobantePago/'> 
+                    <input type="hidden" name="cmd" value="_xclick">  
+                    <input type="hidden" name="order" value="{$clave}">
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
@@ -1575,6 +1590,18 @@ html;
 
         $total = array_sum($precios);
 
+        //get productos
+        $nombres_productos = '';
+        $productos = TalleresDao::getCarritoByIdUser($_SESSION['user_id']);
+        foreach($productos as $key => $value){
+            // array_push($nombres_productos,$value['nombre']);
+            $nombres_productos .= $value['nombre'].", ";
+        }
+        $nombres_productos = substr($nombres_productos, 0, -2);
+        $clave = $this->generateRandomString();
+
+        View::set('clave',$clave);
+        View::set('producto_s',$nombres_productos);
         View::set('header', $this->_contenedor->header($extraHeader));
         View::set('footer', $this->_contenedor->footer($extraFooter));
         View::set('tabla',$this->getAllProductsCartByUser($_SESSION['user_id']));

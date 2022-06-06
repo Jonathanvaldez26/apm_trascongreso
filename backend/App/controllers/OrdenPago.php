@@ -42,7 +42,7 @@ class OrdenPago extends Controller
         
         $metodo_pago = $_POST['metodo_pago'];
         $user_id = $_SESSION['user_id'];
-        $clave = $this->generateRandomString();
+        $clave = $_POST['clave'];
         $datos_user = RegisterDao::getUser($this->getUsuario())[0];
 
         $productos = TalleresDao::getCarritoByIdUser($user_id);
@@ -83,8 +83,13 @@ class OrdenPago extends Controller
             $documento->_clave = $clave;
             $documento->_status = $status;
 
-            $id = TalleresDao::inserPendientePago($documento);
-            $delete = TalleresDao::deleteItem($value['id_carrito']);
+            $existe = TalleresDao::getProductosPendientesPago($user_id,$id_producto);
+
+            if(!$existe){
+                $id = TalleresDao::inserPendientePago($documento); 
+                $delete = TalleresDao::deleteItem($value['id_carrito']);
+            }
+                // $delete = TalleresDao::deleteItem($value['id_carrito']);
 
         }
 
@@ -193,9 +198,11 @@ class OrdenPago extends Controller
         // var_dump($documento);
         // exit;
 
-        $id = TalleresDao::inserPendientePago($documento);       
+        $existe = TalleresDao::getProductosPendientesPago($user_id,$id_producto);
 
-
+        if(!$existe){
+            $id = TalleresDao::inserPendientePago($documento);   
+        }
         $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
 
 
@@ -244,6 +251,8 @@ class OrdenPago extends Controller
 
         // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
     }
+
+
 
     public function impticket($user_id = null, $id_producto = null)
     {
@@ -321,88 +330,143 @@ class OrdenPago extends Controller
     }
 
 
-    public function PagarPaypal($clave = null, $id_curso = null)
-    {
-        date_default_timezone_set('America/Mexico_City');
+    // public function PagarPaypal($clave = null, $id_curso = null)
+    // {
+    //     date_default_timezone_set('America/Mexico_City');
 
-        // $this->generaterQr($clave_ticket);
+    //     // $this->generaterQr($clave_ticket);
 
-        $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+    //     $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+    //     $clave = $this->generateRandomString();
 
-        $documento = new \stdClass();
+    //     $documento = new \stdClass();  
 
-        $nombre_curso = $_POST['nombre_curso'];
-        $id_producto = $_POST['id_producto'];
-        $user_id = $datos_user['user_id'];
-        $reference = $datos_user['reference'];
-        $fecha =  date("Y-m-d");
-        $monto = $_POST['costo'];
-        $tipo_pago = $_POST['tipo_pago'];
-        $status = 0;
+    //     $nombre_curso = $_POST['nombre_curso'];
+    //     $id_producto = $_POST['id_producto'];
+    //     $user_id = $datos_user['user_id'];
+    //     $reference = $datos_user['reference'];
+    //     $fecha =  date("Y-m-d");
+    //     $monto = $_POST['costo'];
+    //     $tipo_pago = $_POST['tipo_pago'];
+    //     $status = 0;
 
-        $documento->_id_producto = $id_producto;
-        $documento->_user_id = $user_id;
-        $documento->_reference = $reference;
-        $documento->_fecha = $fecha;
-        $documento->_monto = $monto;
-        $documento->_tipo_pago = $tipo_pago;
-        $documento->_status = $status;
-
-        $d = $this->fechaCastellano($fecha);
-
-        // var_dump($documento);
-        // exit;
-
-        // $id = TalleresDao::inserPendientePago($documento);
+    //     $documento->_id_producto = $id_producto;
+    //     $documento->_user_id = $user_id;
+    //     $documento->_reference = $reference;
+    //     $documento->_clave = $clave;
+    //     $documento->_fecha = $fecha;
+    //     $documento->_monto = $monto;
+    //     $documento->_tipo_pago = $tipo_pago;
+    //     $documento->_status = $status;
 
 
-        $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
+    //     // var_dump($documento);
+    //     // exit;
+
+    //     $existe = TalleresDao::getProductosPendientesPago($user_id,$id_producto);
+
+    //     if(!$existe){
+    //         $id = TalleresDao::inserPendientePago($documento);   
+    //     }
+    //     // $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
+
+    // }
+
+    function PagarPaypal(){
+        // $raw_post_data = file_get_contents('php://input');
+        // $raw_post_array = explode('&', $raw_post_data);
+        // $myPost = array();
+        // foreach ($raw_post_array as $keyval) {
+        //     $keyval = explode ('=', $keyval);
+        //     if (count($keyval) == 2)
+        //         $myPost[$keyval[0]] = urldecode($keyval[1]);
+        // }
+
+        // // read the post from PayPal system and add 'cmd'
+        // $req = 'cmd=_notify-validate';
+        // if(function_exists('get_magic_quotes_gpc')) {
+        //     $get_magic_quotes_exists = true;
+        // }
 
 
-        $pdf = new \FPDF($orientation = 'P', $unit = 'mm', $format = 'A4');
-        $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
-        $pdf->setY(1);
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 200, 300);
-        // $pdf->SetFont('Arial', 'B', 25);
-        // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
+        // foreach ($myPost as $key => $value) {
+        //     if($get_magic_quotes_exists == true && get_magic_quotes_gpc() == 1) {
+        //         $value = urlencode(stripslashes($value));
+        //     } else {
+        //         $value = urlencode($value);
+        //     }
+        //     $req .= "&$key=$value";
+        // }
 
-        //$pdf->Image('1.png', 1, 0, 190, 190);
-        $pdf->SetFont('Arial', 'B', 5);    //Letra Arial, negrita (Bold), tam. 20
-        //$nombre = utf8_decode("Jonathan Valdez Martinez");
-        //$num_linea =utf8_decode("Línea: 39");
-        //$num_linea2 =utf8_decode("Línea: 39");
+        // // Post IPN data back to PayPal to validate the IPN data is genuine
+        // // Without this step anyone can fake IPN data
 
-        //Nombre Curso
-        $pdf->SetXY(12, 125);
-        $pdf->SetFont('Arial', 'B', 13);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(100, 10, utf8_decode($nombre_curso), 0, 'C');
+        // $ch = curl_init("https://www.paypal.com/es/cgi-bin/webscr");
+        // if ($ch == FALSE) {
+        //     return FALSE;
+        // }
+        // curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+        // curl_setopt($ch, CURLOPT_POST, 1);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        // curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+        // curl_setopt($ch, CURLOPT_HEADER, 1);
+        // curl_setopt($ch, CURLINFO_HEADER_OUT, 1);
 
-        //Costo
-        $pdf->SetXY(118, 125);
-        $pdf->SetFont('Arial', 'B', 13);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(100, 10, '$ '.$monto, 0, 'C');
+        // // Set TCP timeout to 30 seconds
+        // curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 
-        //folio
-        $pdf->SetXY(118, 42.5);
-        $pdf->SetFont('Arial', 'B', 13);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(100, 10, $reference, 0, 'C');
-
-        //fecha
-        $pdf->SetXY(118, 51.5);
-        $pdf->SetFont('Arial', 'B', 13);
-        $pdf->SetTextColor(0, 0, 0);
-        $pdf->Multicell(100, 10, $fecha, 0, 'C');
+        // $res = curl_exec($ch);
 
 
-        $pdf->Output();
-        // $pdf->Output('F','constancias/'.$clave.$id_curso.'.pdf');
+        // if (curl_errno($ch) != 0) // cURL error
+        //     {
+        //     error_log(date('[Y-m-d H:i e] '). "Can't connect to PayPal to validate IPN message: " . curl_error($ch) . PHP_EOL, 3, 'app.log');
+        //     curl_close($ch);
+        //     exit;
+        // } else {
+        //         // Log the entire HTTP response if debug is switched on.
+        //         error_log(date('[Y-m-d H:i e] '). "HTTP request of validation request:". curl_getinfo($ch, CURLINFO_HEADER_OUT) ." for IPN payload: $req" . PHP_EOL, 3, 'app.log');
+        //         error_log(date('[Y-m-d H:i e] '). "HTTP response of validation request: $res" . PHP_EOL, 3, 'app.log');
+        //         curl_close($ch);
+        // }
+        // // Inspect IPN validation result and act accordingly
+        // // Split response headers and payload, a better way for strcmp
+        // $payment_response = $res;
 
-        // $pdf->Output('F', 'C:/pases_abordar/'. $clave.'.pdf');
+        // $tokens = explode("\r\n\r\n", trim($res));
+        // $res = trim(end($tokens));
+        // if (strcmp ($res, "VERIFIED") == 0) {
+        //     // assign posted variables to local variables
+            
+        //     $item_name = $_POST['item_name'];
+        //     $item_number = $_POST['item_number'];
+        //     $payment_status = $_POST['payment_status'];
+        //     $payment_amount = $_POST['mc_gross'];
+        //     $payment_currency = $_POST['mc_currency'];
+        //     $txn_id = $_POST['txn_id'];
+        //     $receiver_email = $_POST['receiver_email'];
+        //     $payer_email = $_POST['payer_email'];
+            
+        //     // check whether the payment_status is Completed
+        //     $isPaymentCompleted = false;
+        //     if($payment_status == "Completed") {
+        //         $isPaymentCompleted = true;
+        //     }
+        //     $payment_id = $shoppingCart->insertPayment($item_number, $payment_status, $payment_response);
+            
+        //     // process payment and mark item as paid.
+        //     $shoppingCart->paymentStatusChange ( $item_number,"PAID" );
+        //     error_log(date('[Y-m-d H:i e] '). "Verified IPN: $req ". PHP_EOL, 3, 'app.log');
+            
+        // } else if (strcmp ($res, "INVALID") == 0) {
+        //     // log for manual investigation
+        //     // Add business logic here which deals with invalid IPN messages
+        //     error_log(date('[Y-m-d H:i e] '). "Invalid IPN: $req" . PHP_EOL, 3, 'app.log');
+        // }
     }
 
     function fechaCastellano ($fecha) {

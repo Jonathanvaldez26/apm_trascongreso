@@ -354,14 +354,14 @@
             var tipo = $(this).val();
            
             if(tipo == 'Paypal'){
-                $(".form_compra").attr('action','/OrdenPago/PagarPaypal');
+                // $(".form_compra").attr('action','/OrdenPago/PagarPaypal');
+                $(".form_compra").attr('action','https://www.paypal.com/es/cgi-bin/webscr'); 
                 $(".btn_comprar").val('Paypal');
                 $(".tipo_pago").val('Paypal');
             }else if(tipo == 'Efectivo'){
                 $(".form_compra").attr('action','/OrdenPago/ordenPago');
                 $(".btn_comprar").val('Efectivo');
                 $(".tipo_pago").val('Efectivo');
-
              
             }
 
@@ -404,6 +404,14 @@
                         $(this).closest(".form_compra").submit();
                     }
                 })
+            }else{
+
+                Swal.fire(
+                    "Debes seleccionar un metodo de pago.",
+                    '',
+                    'info'
+                );   
+
             }
             
 
