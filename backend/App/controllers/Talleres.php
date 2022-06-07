@@ -884,11 +884,11 @@ html;
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
                     <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
-                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="text" class="tipo_pago" name="tipo_pago"/>
+                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>
 
                     <br><br><br><br>
 
