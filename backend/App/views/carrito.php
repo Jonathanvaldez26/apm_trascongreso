@@ -337,7 +337,8 @@
                 success: function(respuesta) {
                     
                     console.log(respuesta); 
-                    location.reload();               
+                    location.reload(); 
+                    //               
 
 
                 },
