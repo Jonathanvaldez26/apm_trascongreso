@@ -124,7 +124,7 @@
                         </select>
                         <input type='hidden' name='clave' value="<?=$clave?>"> 
 
-                        <!-- <br><br><br> -->
+                        <br><br><br>
                         <input type='text' name='business' value='jvaldez_2610@hotmail.com'> 
                         <input type='text' name='item_name' value='<?=$producto_s?>'> 
                         <input type='text' name='item_number' value="<?=$clave?>"> 
@@ -137,6 +137,11 @@
 
                         <button id="btn_comprar" class="btn btn-success mt-3" style="width: 100%;">Comprar</button>
                     </div>
+                </form>
+
+                <form id="form_compra_paypal" method="POST" >
+                    <input type="text" id="tipo_pago_paypal" name="tipo_pago_paypal">
+                    <input type='text' id='clave_paypal' name='clave_paypal' value="<?=$clave?>"> 
                 </form>
 
             </div>
@@ -306,14 +311,41 @@
                 $("#form_compra").attr('action', 'https://www.paypal.com/es/cgi-bin/webscr');
                 $("#btn_comprar").val('Paypal');
                 $("#tipo_pago").val('Paypal');
+                $("#tipo_pago_paypal").val('Paypal');
             } else if (tipo == 'Efectivo') {
                 $("#form_compra").attr('action', '/OrdenPago/ticketAll');
                 $("#btn_comprar").val('Efectivo');
                 $("#tipo_pago").val('Efectivo');
+                $("#tipo_pago_paypal").val('Efectivo');
 
 
             }
 
+        });
+
+        $("#form_compra_paypal").on("submit",function(event){
+            event.preventDefault();
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: "/OrdenPago/PagarPaypalAll",
+                type: "POST",
+                data: formData,
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    
+                    console.log(respuesta); 
+                    location.reload();               
+
+
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+
+            });
         });
 
         // $("#form_compra").on("submit",function(){
@@ -336,7 +368,7 @@
                     confirmButtonText: 'Comprar'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $("#form_compra").submit();
+                        $("#form_compra").submit();                        
                         location.reload();
 
                     }
@@ -354,7 +386,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $("#form_compra").submit();
-                        location.reload();
+                        $("#form_compra_paypal").submit();
+                        // location.reload();
                     }
                 })
             } else {

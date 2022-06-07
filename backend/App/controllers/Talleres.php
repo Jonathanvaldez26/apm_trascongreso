@@ -859,8 +859,7 @@ html;
         }
 
         $clave = $this->generateRandomString();
-        
-       
+
         $modal = <<<html
         <div class="modal fade" id="comprar-curso{$datos['id_producto']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="comprar-curso">
         <div class="modal-dialog modal-xl" role="document">
@@ -894,6 +893,7 @@ html;
                     <br><br><br><br>
 
                     <!-- campos para paypal -->
+                    <input type="hidden" name="charset" value="utf-8">
                     <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
                     <input type='hidden' name='item_name' value='{$datos['nombre']}'> 
                     <input type='hidden' name='item_number' value="{$clave}"> 
@@ -1583,10 +1583,6 @@ html;
         }else{
             $style = 'display:none';
         }
-
-        // echo count($productos);
-
-        // exit;
 
         $total = array_sum($precios);
 

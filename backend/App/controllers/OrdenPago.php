@@ -372,7 +372,70 @@ class OrdenPago extends Controller
 
     // }
 
-    function PagarPaypal(){
+    function PagarPaypalAll(){
+
+        $metodo_pago = $_POST['tipo_pago_paypal'];
+        $user_id = $_SESSION['user_id'];
+        $clave = $_POST['clave_paypal'];
+
+        $bandera = '';
+        $datos_user = RegisterDao::getUser($this->getUsuario())[0];
+
+        $productos = TalleresDao::getCarritoByIdUser($user_id);
+
+
+        foreach($productos as $key => $value){
+
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
+           
+            $documento = new \stdClass();  
+
+            $nombre_curso = $value['nombre'];
+            $id_producto = $value['id_producto'];
+            $user_id = $datos_user['user_id'];
+            $reference = $datos_user['reference'];
+            $fecha =  date("Y-m-d");
+            // $monto = $value['precio_publico'];
+            $monto = $precio;
+            $tipo_pago = $metodo_pago;
+            $status = 0;
+    
+            $documento->_id_producto = $id_producto;
+            $documento->_user_id = $user_id;
+            $documento->_reference = $reference;
+            $documento->_fecha = $fecha;
+            $documento->_monto = $monto;
+            $documento->_tipo_pago = $tipo_pago;
+            $documento->_clave = $clave;
+            $documento->_status = $status;
+
+            $existe = TalleresDao::getProductosPendientesPago($user_id,$id_producto);
+
+            if(!$existe){
+                $id = TalleresDao::inserPendientePago($documento); 
+                $delete = TalleresDao::deleteItem($value['id_carrito']);
+
+                
+            }
+                // $delete = TalleresDao::deleteItem($value['id_carrito']);
+                $bandera = "success";
+        }
+
+        $d = $this->fechaCastellano($fecha);
+        
+        $nombre_completo = $datos_user['name_user'] . " " . $datos_user['middle_name'] . " " . $datos_user['surname'] . " " . $datos_user['second_surname'];
+
+       if($bandera == "success"){
+           echo "success";
+       }else{
+           echo "fail";
+       }
         // $raw_post_data = file_get_contents('php://input');
         // $raw_post_array = explode('&', $raw_post_data);
         // $myPost = array();
