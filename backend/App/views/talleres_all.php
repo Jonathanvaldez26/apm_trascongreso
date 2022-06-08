@@ -370,6 +370,7 @@
         $(".btn_comprar").on("click",function(e){
             e.preventDefault();
             var tipo = $(this).val();
+            var dataId = $(this).attr('data-id');
 
             if(tipo == 'Efectivo'){
                 Swal.fire({
@@ -400,8 +401,37 @@
                     cancelButtonText: 'Cancelar',
                     confirmButtonText: 'Comprar'
                     }).then((result) => {
-                    if (result.isConfirmed) {                       
+                    if (result.isConfirmed) {                                               
                         $(this).closest(".form_compra").submit();
+                        $("#form_compra_paypal"+dataId).on("submit",function(event){
+                            event.preventDefault();
+                            var formData = $(this).serialize();
+
+                            $.ajax({
+                                url: "/OrdenPago/PagarPaypal",
+                                type: "POST",
+                                data: formData,
+                                beforeSend: function() {
+                                    console.log("Procesando....");
+                                },
+                                success: function(respuesta) {
+                                    console.log("Rregreso respuesta");
+                                    console.log(respuesta); 
+                                    location.reload(); 
+                                    //               
+
+
+                                },
+                                error: function(respuesta) {
+                                    console.log(respuesta);
+                                }
+
+                            });
+                        });
+
+                        $("#form_compra_paypal"+dataId).submit();
+                        
+                       
                     }
                 })
             }else{
@@ -483,6 +513,32 @@
             // // data-toggle="modal"
             // alert(id_producto);
         })
+
+        // $("#form_compra_paypal").on("submit",function(event){
+        //     event.preventDefault();
+        //     var formData = $(this).serialize();
+
+        //     $.ajax({
+        //         url: "/OrdenPago/PagarPaypal",
+        //         type: "POST",
+        //         data: formData,
+        //         beforeSend: function() {
+        //             console.log("Procesando....");
+        //         },
+        //         success: function(respuesta) {
+        //             console.log("Rregreso respuesta");
+        //             console.log(respuesta); 
+        //             // location.reload(); 
+        //             //               
+
+
+        //         },
+        //         error: function(respuesta) {
+        //             console.log(respuesta);
+        //         }
+
+        //     });
+        // });
 
         function getNumberPorducts(){
             $.ajax({

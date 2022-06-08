@@ -738,6 +738,101 @@ html;
         </script>
 html;
 
+            }if($pendientes_pago['status'] == 2){
+            //echo "no se pudo validar el pago";
+
+            $card_congresos .= <<<html
+
+
+            <div class="col-12 col-md-4 mt-3">
+                <div class="card card-course p-0 border-radius-15">
+                    <div class="card-body " style="height:235px;">
+                        <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
+                        <div class="caratula-content">
+                            <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
+                            <!--</a>-->
+                            <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
+                            <!--<button class="btn btn-outline-danger"></button-->
+
+html;
+
+                $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
+                if ($like['status'] == 1) {
+                    $card_congresos .= <<<html
+                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
+html;
+                } else {
+                    $card_congresos .= <<<html
+                <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
+html;
+                }
+
+                $card_congresos .= <<<html
+                                <!-- <div class="row">
+                                        <div class="col-11 m-auto" id="">
+                                            <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
+                                        </div>
+                                    </div>-->
+                            </div>
+                            <!--<a href="/Talleres/Video/{$value['clave']}">-->
+                                <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p> 
+
+                            <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
+                                {$value['descripcion']}<br>
+                                {$value['vistas']} vistas
+                                <br> <br>
+                                <b>Avance: $porcentaje %</b>
+                            </p>-->
+
+html;
+                    if ($value['status'] == 2 || $porcentaje >= 80) {
+                        $card_congresos .= <<<html
+                            <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
+html;
+                    }
+                    $link_parametro_user_id = base64_encode($_SESSION['user_id']);
+                    $link_parametro_id_producto = base64_encode($value['id_producto']);
+
+                    $card_congresos .= <<<html
+                                <!--</a>-->
+
+                            <div>                
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>$ {$costoUser} {$value['tipo_moneda']}</b></p>
+                        <div style = "display: flex; justify-content:start">
+                            <!--<button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px; width:145px;" data-toggle="modal" data-target="#comprar-curso{$value['id_producto']}">Comprar</button>-->
+
+                            <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
+
+                            <div style = "display: flex; justify-content:start">
+                                <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
+                                No se pudo validar tu pago, vuelve a subir tu comprobante ó contacta a soporte.
+                                </p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>        
+                    </div>
+
+                    <script>
+                    // $('#video_{$value['clave']}').on('click', function(){
+                    //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
+
+                    //     if (like){
+                    //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
+                    //     } else {
+                    //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
+                    //     }
+                    // });
+                    </script>
+html;
+
+
                 }else {
                     //echo "pagado";
                 }
@@ -884,25 +979,25 @@ html;
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
                     <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
-                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>
+                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="text" class="tipo_pago" name="tipo_pago"/>
 
                     <br><br><br><br>
 
                     <!-- campos para paypal -->
-                    <input type="hidden" name="charset" value="utf-8">
-                    <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
-                    <input type='hidden' name='item_name' value='{$datos['nombre']}'> 
-                    <input type='hidden' name='item_number' value="{$clave}"> 
-                    <input type='hidden' name='amount' value='{$solo_precio_curso}'> 
-                    <input type='hidden' name='currency_code' value='MXN'> 
-                    <input type='hidden' name='notify_url' value=''> 
-                    <input type='hidden' name='return' value='http://localhost:8112/ComprobantePago/'> 
-                    <input type="hidden" name="cmd" value="_xclick">  
-                    <input type="hidden" name="order" value="{$clave}">
+                    <input type="text" name="charset" value="utf-8">
+                    <input type='text' name='business' value='jvaldez_2610@hotmail.com'> 
+                    <input type='text' name='item_name' value='{$datos['nombre']}'> 
+                    <input type='text' name='item_number' value="{$clave}"> 
+                    <input type='text' name='amount' value='{$solo_precio_curso}'> 
+                    <input type='text' name='currency_code' value='MXN'> 
+                    <input type='text' name='notify_url' value=''> 
+                    <input type='text' name='return' value='http://localhost:8112/ComprobantePago/'> 
+                    <input type="text" name="cmd" value="_xclick">  
+                    <input type="text" name="order" value="{$clave}">
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
@@ -917,7 +1012,7 @@ html;
 
                     <div class="row d-flex justify-content-center mt-3">
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-primary btn_comprar" style="width: 100%;" name="btn_tipo_pago" >Comprar</button>
+                            <button type="button" class="btn btn-primary btn_comprar" style="width: 100%;" name="btn_tipo_pago" data-id={$datos['id_producto']} >Comprar</button>
                         </div>
                     </div>
                     
@@ -927,6 +1022,17 @@ html;
                 <div class="col-md-4">
                 </div>
               </div>
+              </form>
+                
+              <form id="form_compra_paypal{$datos['id_producto']}">
+                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="text" class="tipo_pago" name="tipo_pago"/>                    
+                    <input type='text' name='clave' value="{$clave}">                    
+
+
               </form>
             </div>
           </div>
