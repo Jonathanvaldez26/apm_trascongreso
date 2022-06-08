@@ -221,6 +221,7 @@ public function getAllComprobantesPagoById($id_user){
     foreach (ComprobantePagoDao::getAllComprobantes($id_user) as $key => $value) {
 
         $total_array = array();
+        
         $precio = 0;
 
         if ($value['status'] == 0 ) {
@@ -236,8 +237,47 @@ public function getAllComprobantesPagoById($id_user){
             $status = '<span class="badge badge-danger">Carga un Archivo PDF valido</span>';
         }
 
-        
-        $reimprimir_ticket = '<a href="/comprobantePago/ticketImp/'.$value["clave"].'" class="btn bg-pink btn-icon-only morado-musa-text text-center"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Reimprimir Ticket" target="_blank"><i class="fas fa-file"></i></a>';
+        if($value['tipo_pago'] == "Efectivo"){
+
+            $reimprimir_ticket = '<a href="/comprobantePago/ticketImp/'.$value["clave"].'" class="btn bg-pink btn-icon-only morado-musa-text text-center"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Reimprimir Ticket" target="_blank"><i class="fas fa-file"></i></a>';
+
+        }else if($value['tipo_pago'] == "Paypal"){
+            $total_array_paypal = array();
+            $nombre_producto = '';
+
+            foreach(ComprobantePagoDao::getAllComprobantesbyClave($id_user,$value['clave']) as $key => $value){
+
+                if($value['es_congreso'] == 1){
+                    $precio = $value['amout_due'];
+                }else if($value['es_servicio'] == 1){
+                    $precio = $value['precio_publico'];
+                }else if($value['es_curso'] == 1){
+                    $precio = $value['precio_publico'];
+                }                    
+
+                array_push($total_array_paypal,$precio);
+
+                $nombre_producto .= $value['nombre'] .",";
+
+            } 
+
+            $total_paypal = number_format(array_sum($total_array_paypal));
+            $reimprimir_ticket = '<form method="POST"  action="https://www.paypal.com/es/cgi-bin/webscr" data-form-paypal='.$value["id_pendiente_pago"].'>
+            <input type="hidden" name="business" value="jvaldez_2610@hotmail.com"> 
+            <input type="hidden" name="item_name" value="'.$nombre_producto.'"> 
+            <input type="hidden" name="item_number" value="'.$value["clave"].'"> 
+            <input type="hidden" name="amount" value="'.$total_paypal.'"> 
+            <input type="hidden" name="currency_code" value="MXN"> 
+            <input type="hidden" name="notify_url" value=""> 
+            <input type="hidden" name="return" value="http://localhost:8112/ComprobantePago/"> 
+            <input type="hidden" name="cmd" value="_xclick">  
+            <input type="hidden" name="order" value="'.$value["clave"].'">
+           
+            <button class="btn btn-primary btn-only-icon mt-2" type="submit">Ir a Paypal</button>
+            </form>';
+
+            $nombre_producto = '';
+        }
 
         if (empty($value['url_archivo']) || $value['url_archivo'] == '') {
             $button_comprobante = '<form method="POST" enctype="multipart/form-data" action="/ComprobantePago/uploadComprobante" data-id-pp='.$value["id_pendiente_pago"].'>
@@ -342,7 +382,8 @@ html;
         $user_id = $_SESSION['user_id'];
         // $clave = $this->generateRandomString();
         $datos_user = RegisterDao::getUser($this->getUsuario())[0];
-        $productos = TalleresDao::getCarritoByIdUserTicket($user_id,$clave);
+        $productos = TalleresDao::getTicketUser($user_id,$clave);
+
 
         // echo $user_id;
         // echo "<br>";
