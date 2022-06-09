@@ -979,25 +979,25 @@ html;
                     <p class="text-center mt-3"><b>{$datos['nombre']}</b></p>
 
                     <p class="text-center" style="color: #2B932B;"><b>{$precio_curso}</b></p>
-                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="text" class="tipo_pago" name="tipo_pago"/>
+                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>
 
                     <br><br><br><br>
 
                     <!-- campos para paypal -->
-                    <input type="text" name="charset" value="utf-8">
-                    <input type='text' name='business' value='jvaldez_2610@hotmail.com'> 
-                    <input type='text' name='item_name' value='{$datos['nombre']}'> 
-                    <input type='text' name='item_number' value="{$clave}"> 
-                    <input type='text' name='amount' value='{$solo_precio_curso}'> 
-                    <input type='text' name='currency_code' value='MXN'> 
-                    <input type='text' name='notify_url' value=''> 
-                    <input type='text' name='return' value='http://localhost:8112/ComprobantePago/'> 
-                    <input type="text" name="cmd" value="_xclick">  
-                    <input type="text" name="order" value="{$clave}">
+                    <input type="hidden" name="charset" value="utf-8">
+                    <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
+                    <input type='hidden' name='item_name' value='{$datos['nombre']}'> 
+                    <input type='hidden' name='item_number' value="{$clave}"> 
+                    <input type='hidden' name='amount' value='{$solo_precio_curso}'> 
+                    <input type='hidden' name='currency_code' value='{$datos['tipo_moneda']}'> 
+                    <input type='hidden' name='notify_url' value=''> 
+                    <input type='hidden' name='return' value='https://registro.dualdisorderswaddmexico2022.com/ComprobantePago/'> 
+                    <input type="hidden" name="cmd" value="_xclick">  
+                    <input type="hidden" name="order" value="{$clave}">
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-4">
@@ -1025,12 +1025,12 @@ html;
               </form>
                 
               <form id="form_compra_paypal{$datos['id_producto']}">
-                    <input type="text" value="{$solo_precio_curso}" name="costo"/>
-                    <input type="text" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
-                    <input type="text" value="{$datos['id_producto']}" name="id_producto"/>
-                    <input type="text" value="{$datos['nombre']}" name="nombre_curso"/>
-                    <input type="text" class="tipo_pago" name="tipo_pago"/>                    
-                    <input type='text' name='clave' value="{$clave}">                    
+                    <input type="hidden" value="{$solo_precio_curso}" name="costo"/>
+                    <input type="hidden" value="{$datos['tipo_moneda']}" name="tipo_moneda"/>
+                    <input type="hidden" value="{$datos['id_producto']}" name="id_producto"/>
+                    <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
+                    <input type="hidden" class="tipo_pago" name="tipo_pago"/>                    
+                    <input type='hidden' name='clave' value="{$clave}">                    
 
 
               </form>

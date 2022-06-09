@@ -129,9 +129,9 @@
                         <input type='hidden' name='item_name' value='<?=$producto_s?>'> 
                         <input type='hidden' name='item_number' value="<?=$clave?>"> 
                         <input type='hidden' name='amount' value='<?=$total?>'> 
-                        <input type='hidden' name='currency_code' value='MXN'> 
+                        <input type='hidden' name='currency_code' value='USD'> 
                         <input type='hidden' name='notify_url' value=''> 
-                        <input type='hidden' name='return' value='http://localhost:8112/ComprobantePago/'> 
+                        <input type='hidden' name='return' value='https://registro.dualdisorderswaddmexico2022.com/ComprobantePago/'> 
                         <input type="hidden" name="cmd" value="_xclick">  
                         <input type="hidden" name="order" value="<?=$clave?>">
 

@@ -262,18 +262,18 @@ public function getAllComprobantesPagoById($id_user){
             } 
 
             $total_paypal = number_format(array_sum($total_array_paypal));
-            $reimprimir_ticket = '<form method="POST"  action="https://www.paypal.com/es/cgi-bin/webscr" data-form-paypal='.$value["id_pendiente_pago"].'>
+            $reimprimir_ticket = '<form method="POST"  action="https://www.paypal.com/es/cgi-bin/webscr" data-form-paypal='.$value["id_pendiente_pago"].' target="_blank">
             <input type="hidden" name="business" value="jvaldez_2610@hotmail.com"> 
             <input type="hidden" name="item_name" value="'.$nombre_producto.'"> 
             <input type="hidden" name="item_number" value="'.$value["clave"].'"> 
             <input type="hidden" name="amount" value="'.$total_paypal.'"> 
-            <input type="hidden" name="currency_code" value="MXN"> 
+            <input type="hidden" name="currency_code" value="USD"> 
             <input type="hidden" name="notify_url" value=""> 
-            <input type="hidden" name="return" value="http://localhost:8112/ComprobantePago/"> 
+            <input type="hidden" name="return" value="https://registro.dualdisorderswaddmexico2022.com/ComprobantePago/"> 
             <input type="hidden" name="cmd" value="_xclick">  
             <input type="hidden" name="order" value="'.$value["clave"].'">
            
-            <button class="btn btn-primary btn-only-icon mt-2" type="submit">Ir a Paypal</button>
+            <button class="btn btn-primary btn-only-icon mt-2" type="submit">Realizar pago Paypal</button>
             </form>';
 
             $nombre_producto = '';
