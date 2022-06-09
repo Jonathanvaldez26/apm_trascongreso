@@ -291,7 +291,7 @@ sql;
     public static function getContenidoProdductCursoByAsignacion($id_registrado,$clave_taller){
       $mysqli = Database::getInstance();
       $query=<<<sql
-      SELECT p.nombre, uad.nombre as nombre_usuario, ap.* FROM asigna_producto ap
+      SELECT p.nombre, uad.name_user as nombre_usuario, ap.* FROM asigna_producto ap
       INNER JOIN utilerias_administradores uad
       ON ap.user_id = uad.user_id
       INNER JOIN productos p
@@ -553,6 +553,17 @@ sql;
         SET segundos = '$segundos', fecha_ultima_vista = NOW()
         WHERE id_curso = '$id_curso' 
         AND id_registrado = '$registrado'
+sql;
+    return $mysqli->update($query);
+  } 
+
+  public static function updateProgresoFechaProducto($id_curso, $registrado, $segundos){
+    $mysqli = Database::getInstance();
+    $query=<<<sql
+        UPDATE progresos_productocursos 
+        SET segundos = '$segundos', fecha_ultima_vista = NOW()
+        WHERE id_producto = '$id_curso' 
+        AND user_id = '$registrado'
 sql;
     return $mysqli->update($query);
   } 
