@@ -332,7 +332,7 @@ html;
                         <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago.
+                            En espera de validación de pago. Si usted ya realizo su pago ó desea reimprimir el formato de pago de clic aqui.
                             </p>
                    
                         </div>
@@ -715,7 +715,7 @@ html;
 
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago.
+                            En espera de validación de pago. Si usted ya realizo su pago ó desea reimprimir el formato de pago de clic aqui.
                             </p>
                 
                         </div>
@@ -989,7 +989,7 @@ html;
 
                     <!-- campos para paypal -->
                     <input type="hidden" name="charset" value="utf-8">
-                    <input type='hidden' name='business' value='jvaldez_2610@hotmail.com'> 
+                    <input type='hidden' name='business' value='aspsiqm@prodigy.net.mx'> 
                     <input type='hidden' name='item_name' value='{$datos['nombre']}'> 
                     <input type='hidden' name='item_number' value="{$clave}"> 
                     <input type='hidden' name='amount' value='{$solo_precio_curso}'> 
