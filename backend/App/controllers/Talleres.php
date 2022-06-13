@@ -158,6 +158,15 @@ html;
         $card_cursos = '';
 
         foreach ($cursos as $key => $value) {
+
+            // if($value['es_congreso'] == 1){
+            //     $precio = $value['amout_due'];
+            // }else if($value['es_servicio'] == 1){
+            //     $precio = $value['precio_publico'];
+            // }else if($value['es_curso'] == 1){
+            //     $precio = $value['precio_publico'];
+            // }
+
             $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
@@ -521,6 +530,15 @@ html;
         $card_congresos = '';
 
         foreach ($cursos as $key => $value) {
+
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
+
             $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
@@ -593,7 +611,7 @@ html;
                     </div>
                 </div>
                 <div class="card-footer">
-                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
+                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$precio} {$value['tipo_moneda']}</b></p>
                 <div style = "display: flex; justify-content:start">
                     <p class="badge badge-success" style="margin-left: 5px;margin-bottom: 38px;">
                     Este curso ya lo compraste.
