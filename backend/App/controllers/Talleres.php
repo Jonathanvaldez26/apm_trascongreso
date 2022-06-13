@@ -332,7 +332,7 @@ html;
                         <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline;">clic aqui.</a>
+                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aqui.</a>
                             </p>
                    
                         </div>
@@ -408,7 +408,7 @@ html;
                             <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
                             <div style = "display: flex; justify-content:start">
                                 <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
-                                    No se pudo validar tu pago, vuelve a subir tu comprobante <br> ó contacta a soporte.
+                                    No se pudo validar tu pago, vuelve a subir tu <br> comprobante dando <a href="/ComprobantePago/" style="color: #bd0000; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aqui.</a> ó contacta a soporte.
                                 </p>
                        
                             </div>
@@ -715,7 +715,7 @@ html;
 
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline;">clic aqui.</a>
+                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aqui.</a>
                             </p>
                 
                         </div>
@@ -809,7 +809,7 @@ html;
 
                             <div style = "display: flex; justify-content:start">
                                 <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
-                                No se pudo validar tu pago, vuelve a subir tu comprobante <br> ó contacta a soporte.
+                                No se pudo validar tu pago, vuelve a subir tu <br> comprobante dando <a href="/ComprobantePago/" style="color: #bd0000; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aqui.</a> <br> ó contacta a soporte.
                                 </p>
 
                             </div>
