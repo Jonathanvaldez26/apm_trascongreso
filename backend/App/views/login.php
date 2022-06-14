@@ -148,7 +148,7 @@ echo $header;
                                             <div class="col-3">Segundos</div> -->
                                         </div>
                                     </div>
-                                    <p class="mb-0 mt-5">Introduzca el correo electrónico con el cual usted fue registrado para poder iniciar sesión</p>
+                                    <p class="mb-0 mt-5">Ingresa tu correo electrónico para iniciar sesión o registrarte.</p>
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
