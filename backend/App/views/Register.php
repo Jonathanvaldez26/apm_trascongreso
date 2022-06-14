@@ -174,7 +174,7 @@ echo $header;
                                                                 <div class="row mt-3">
                                                                     <div class="col">
                                                                         <label>Organización *</label>
-                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="35" id="organization" name="organization" placeholder="eg. Associated APM">
+                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="100" id="organization" name="organization" placeholder="eg. Associated APM">
                                                                     </div>
                                                                     <div class="col">
                                                                         <label>Puesto *</label>
