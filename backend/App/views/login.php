@@ -148,12 +148,12 @@ echo $header;
                                             <div class="col-3">Segundos</div> -->
                                         </div>
                                     </div>
-                                    <p class="mb-0 mt-5">Ingresa tu correo electrónico para iniciar sesión o registrarte.</p>
+                                    <p class="mb-0 mt-5">Ingrese tu correo electrónico para iniciar sesión o registrarte.</p>
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login" action="/Login/crearSession" method="POST" class="form-horizontal">
-                                        <label style="font-weight:bold;">¿Ya realizaste tu registro?</label>
+                                        <label style="font-weight:bold;">Correo electrónico</label>
                                         <div class="mb-5">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">
                                         </div>
