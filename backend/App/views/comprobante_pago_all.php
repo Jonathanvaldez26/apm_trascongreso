@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Home/">Inicio</a></li>
-                    <i class="breadcrumb-item text-sm">Comprobantes de Pago</i>
+                    <li class="breadcrumb-item text-sm">Comprobantes de Pago</li>
                 </ol>
             </nav>
 

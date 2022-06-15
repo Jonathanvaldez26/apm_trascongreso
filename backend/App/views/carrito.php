@@ -377,7 +377,7 @@
             } else if (tipo == 'Paypal') {
                 Swal.fire({
                     title: '¿Quieres comprar el curso?',
-                    text: "Una vez que confirmes se enviara a PayPal!",
+                    text: "Una vez que confirmes se enviara a PayPal.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
