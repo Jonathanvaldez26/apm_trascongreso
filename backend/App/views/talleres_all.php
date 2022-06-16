@@ -384,10 +384,14 @@
                     confirmButtonText: 'Comprar'
                     }).then((result) => {
                     if (result.isConfirmed) {                        
-                        $(this).closest(".form_compra").submit();                      
-
+                        $(this).closest(".form_compra").submit();                        
+                        setTimeout(function() { 
+                            location.reload();
+                        }, 1000);    
                     }
+                    
                 })
+                
             }
 
             else if(tipo == 'Paypal'){

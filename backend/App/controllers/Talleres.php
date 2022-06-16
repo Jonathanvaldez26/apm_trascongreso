@@ -1003,7 +1003,7 @@ html;
                     <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
                     <input type="hidden" class="tipo_pago" name="tipo_pago"/>
 
-                    <br><br><br><br>
+                    <br>
 
                     <!-- campos para paypal -->
                     <input type="hidden" name="charset" value="utf-8">
