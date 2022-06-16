@@ -154,7 +154,7 @@ echo $header;
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login" action="/Login/crearSession" method="POST" class="form-horizontal">
                                         <label style="font-weight:bold;">Correo electrónico</label>
-                                        <div class="mb-5">
+                                        <div class="mb-1">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">
                                         </div>
                                         <!-- <label style="font-weight:bold; font-size: 15px">Contraseña</label> -->
