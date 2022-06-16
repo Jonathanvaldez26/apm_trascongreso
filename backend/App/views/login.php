@@ -166,6 +166,8 @@ echo $header;
                                             <label class="form-check-label" for="rememberMe">Recordar contraseña</label>
                                         </div> -->
 
+                                        <img src="/assets/img/logos/apm.png" height="40" alt=""> &nbsp;&nbsp;
+
                                         <div class="text-center">
                                             <button type="button" id="btnEntrar" class="btn bg-gradient-info w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>
                                         </div>
