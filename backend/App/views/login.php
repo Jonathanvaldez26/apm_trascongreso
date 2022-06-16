@@ -167,7 +167,7 @@ echo $header;
                                         </div> -->
 
                                         <div class="mb-1">
-                                            <img src="/assets/img/logos/seroquelpng" height="50" alt="">
+                                            <img src="/assets/img/logos/seroquel.png" height="50" alt="">
                                         </div>
                                         &nbsp;&nbsp;
 
