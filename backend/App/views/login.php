@@ -166,8 +166,8 @@ echo $header;
                                             <label class="form-check-label" for="rememberMe">Recordar contraseña</label>
                                         </div> -->
 
-                                        <div class="mb-1">
-                                            <img src="/assets/img/logos/seroquel.png" height="50" alt="">
+                                        <div class="mb-1 text-center">
+                                            <img src="/assets/img/logos/seroquel.png" height="100" alt="">
                                         </div>
                                         &nbsp;&nbsp;
 
