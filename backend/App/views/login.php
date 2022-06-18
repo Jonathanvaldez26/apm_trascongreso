@@ -148,13 +148,13 @@ echo $header;
                                             <div class="col-3">Segundos</div> -->
                                         </div>
                                     </div>
-                                    <p class="mb-0 mt-5">Introduzca el correo electrónico con el cual usted fue registrado para poder iniciar sesión</p>
+                                    <p class="mb-0 mt-5">Ingrese tu correo electrónico para iniciar sesión o registrarte.</p>
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
                                     <form role="form" class="text-start" id="login" action="/Login/crearSession" method="POST" class="form-horizontal">
-                                        <label style="font-weight:bold;">¿Ya realizaste tu registro?</label>
-                                        <div class="mb-5">
+                                        <label style="font-weight:bold;">Correo electrónico</label>
+                                        <div class="mb-1">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">
                                         </div>
                                         <!-- <label style="font-weight:bold; font-size: 15px">Contraseña</label> -->
@@ -165,6 +165,11 @@ echo $header;
                                             <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                                             <label class="form-check-label" for="rememberMe">Recordar contraseña</label>
                                         </div> -->
+
+                                        <div class="mb-1 text-center">
+                                            <img src="/assets/img/logos/seroquel.png" height="100" alt="">
+                                        </div>
+                                        &nbsp;&nbsp;
 
                                         <div class="text-center">
                                             <button type="button" id="btnEntrar" class="btn bg-gradient-info w-100 mt-1 mb-0"><b style="color: #FFFFFF">ENTRAR</b></button>

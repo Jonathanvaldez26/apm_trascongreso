@@ -174,7 +174,7 @@ echo $header;
                                                                 <div class="row mt-3">
                                                                     <div class="col">
                                                                         <label>Organización *</label>
-                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="35" id="organization" name="organization" placeholder="eg. Associated APM">
+                                                                        <input class="multisteps-form__input form-control all_input_second" type="text" maxlength="100" id="organization" name="organization" placeholder="eg. Associated APM">
                                                                     </div>
                                                                     <div class="col">
                                                                         <label>Puesto *</label>
@@ -411,7 +411,7 @@ echo $header;
                                                                     <div class="row mt-1">
                                                                         <div class="col-12 col-sm-4">
                                                                             <label>Razón Social *</label>
-                                                                            <input class="multisteps-form__input form-control" type="text" id="business_name_iva" name="business_name_iva" placeholder="eg. Christopher Prior Jones" maxlength="20" onfocus="focused(this)" onfocusout="defocused(this)">
+                                                                            <input class="multisteps-form__input form-control" type="text" id="business_name_iva" name="business_name_iva" placeholder="eg. Christopher Prior Jones" maxlength="100" onfocus="focused(this)" onfocusout="defocused(this)">
                                                                         </div>
                                                                         <div class="col-12 col-sm-4 mt-1 mt-sm-0">
                                                                             <label>RFC *</label>

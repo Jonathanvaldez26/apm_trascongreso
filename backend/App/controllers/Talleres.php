@@ -158,6 +158,15 @@ html;
         $card_cursos = '';
 
         foreach ($cursos as $key => $value) {
+
+            // if($value['es_congreso'] == 1){
+            //     $precio = $value['amout_due'];
+            // }else if($value['es_servicio'] == 1){
+            //     $precio = $value['precio_publico'];
+            // }else if($value['es_curso'] == 1){
+            //     $precio = $value['precio_publico'];
+            // }
+
             $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
@@ -332,7 +341,7 @@ html;
                         <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline;">clic aqui.</a>
+                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aquí.</a>
                             </p>
                    
                         </div>
@@ -408,7 +417,7 @@ html;
                             <!--<a class="btn btn-primary" href="/OrdenPago/impticket/{$link_parametro_user_id}/{$link_parametro_id_producto})" target="_blank" style="margin-right: 5px;margin-left: 5px; width:auto;">Reimprimir orden de pago</a>-->
                             <div style = "display: flex; justify-content:start">
                                 <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
-                                    No se pudo validar tu pago, vuelve a subir tu comprobante <br> ó contacta a soporte.
+                                    No se pudo validar tu pago, vuelve a subir tu <br> comprobante dando <a href="/ComprobantePago/" style="color: #bd0000; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aquí.</a>
                                 </p>
                        
                             </div>
@@ -535,6 +544,15 @@ html;
         $card_congresos = '';
 
         foreach ($cursos as $key => $value) {
+
+            if($value['es_congreso'] == 1){
+                $precio = $value['amout_due'];
+            }else if($value['es_servicio'] == 1){
+                $precio = $value['precio_publico'];
+            }else if($value['es_curso'] == 1){
+                $precio = $value['precio_publico'];
+            }
+
             $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
 
             $max_time = $value['duracion'];
@@ -607,7 +625,7 @@ html;
                     </div>
                 </div>
                 <div class="card-footer">
-                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['precio_publico']}</b></p>
+                <p style="font-size: 23px; color: #2B932B;" class="text-left mx-3 mt-2" style="color: black;"><b>{$precio} {$value['tipo_moneda']}</b></p>
                 <div style = "display: flex; justify-content:start">
                     <p class="badge badge-success" style="margin-left: 5px;margin-bottom: 38px;">
                     Este curso ya lo compraste.
@@ -729,7 +747,7 @@ html;
 
                         <div style = "display: flex; justify-content:start">
                             <p class="badge badge-info" style="margin-left: 5px;margin-bottom: 38px;">
-                            En espera de validación de pago. Si usted ya realizo su pago ó desea reimprimir el formato de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline;">clic aqui.</a> 
+                            En espera de validación de pago. <br>Si usted ya realizo su pago ó desea reimprimir el formato <br> de pago de <a href="/ComprobantePago/" style="color: #08a1c4; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aquí.</a>
                             </p>
                 
                         </div>
@@ -823,7 +841,7 @@ html;
 
                             <div style = "display: flex; justify-content:start">
                                 <p class="badge badge-danger" style="margin-left: 5px;margin-bottom: 38px;">
-                                No se pudo validar tu pago, vuelve a subir tu comprobante <br> ó contacta a soporte.
+                                No se pudo validar tu pago, vuelve a subir tu <br> comprobante dando <a href="/ComprobantePago/" style="color: #bd0000; text-decoration: underline; font-weight: bold; font-size: 15px;">clic aquí.</a>
                                 </p>
 
                             </div>
@@ -999,7 +1017,7 @@ html;
                     <input type="hidden" value="{$datos['nombre']}" name="nombre_curso"/>
                     <input type="hidden" class="tipo_pago" name="tipo_pago"/>
 
-                    <br><br><br><br>
+                    <br>
 
                     <!-- campos para paypal -->
                     <input type="hidden" name="charset" value="utf-8">
