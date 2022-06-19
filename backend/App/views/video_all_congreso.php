@@ -27,7 +27,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Home/">Inicio</a></li>
-                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Talleres/">Talleres</a></li>
+                    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/Congreso/">Congreso</a></li>
                     <li class="breadcrumb-item text-sm">Video</li>
                     <li class="breadcrumb-item text-sm"><?php echo $nombre_taller; ?></li>
                 </ol>
