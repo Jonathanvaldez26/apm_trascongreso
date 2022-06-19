@@ -103,7 +103,7 @@
                         </div> -->
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/Talleres/">
+                            <a href="/Congreso/Video/6YETRFH">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_1.png); background-size: contain;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
@@ -118,7 +118,7 @@
                         </div>
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/ComprobantePago/">
+                            <a href="/Congreso/Video/5GYEPOFH">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_2.png); background-size: contain;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
@@ -155,7 +155,7 @@
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-12">
-                                    <a href="/Account/">
+                                    <a href="/Congreso/Video/9J45GFT">
                                         <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_3.png); background-size: contain;  object-position: center center;">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
@@ -173,7 +173,7 @@
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
                             <div class="row">
                                 <div class="col-12 col-md-12">
-                                    <a href="/Login/cerrarSession">
+                                    <a href="/Congreso/Video/SD9TRFH">
                                         <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_4.png); background-size: contain;  object-position: center center;">
                                             <div class="card-body mt-md-3 text-center content-card-home">
                                                 <div class="col-12 text-center">
@@ -190,7 +190,7 @@
 
                         
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/BienvenidoCongreso/">
+                            <a href="/Congreso/Video/JHFJ6D6">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_5.png);background-size: contain;  object-position: center center;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
@@ -203,7 +203,7 @@
                         </div>
 
                         <div class="col-6 m-auto m-md-0 col-lg-3 col-md-4 my-md-3 mt-4">
-                            <a href="/BienvenidoCongreso/">
+                            <a href="/Congreso/Video/THF56DG">
                                 <div class="card card-link btn-menu-home m-auto"  style="background-image: url(/img/SMNP_Iconos/Mesa_de_trabajo_6.png);background-size: contain;  object-position: center center;">
                                     <div class="card-body mt-md-3 text-center content-card-home">
                                         <div class="col-12 text-center">
