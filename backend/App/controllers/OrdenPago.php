@@ -212,7 +212,7 @@ class OrdenPago extends Controller
         $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
         $pdf->setY(1);
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 200, 300);
+        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 210, 300);
         // $pdf->SetFont('Arial', 'B', 25);
         // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
 
@@ -223,13 +223,13 @@ class OrdenPago extends Controller
         //$num_linea2 =utf8_decode("Línea: 39");
 
         //Nombre Curso
-        $pdf->SetXY(30, 140);
+        $pdf->SetXY(30, 141);
         $pdf->SetFont('Arial', 'B', 8);  
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, utf8_decode($nombre_curso), 0, 'C');
 
         //Costo
-        $pdf->SetXY(122, 140);
+        $pdf->SetXY(129, 141);
         $pdf->SetFont('Arial', 'B', 8);  
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, '$ '.$monto.' '.$tipo_moneda, 0, 'C');
@@ -289,7 +289,7 @@ class OrdenPago extends Controller
         $pdf->SetFont('Arial', 'B', 8);    //Letra Arial, negrita (Bold), tam. 20
         $pdf->setY(1);
         $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 200, 300);
+        $pdf->Image('constancias/plantillas/orden.jpeg', 0, 0, 210, 300);
         // $pdf->SetFont('Arial', 'B', 25);
         // $pdf->Multicell(133, 80, $clave_ticket, 0, 'C');
 
@@ -306,7 +306,7 @@ class OrdenPago extends Controller
         $pdf->Multicell(100, 10, utf8_decode($nombre_curso), 0, 'C');
 
         //Costo
-        $pdf->SetXY(122, 140);
+        $pdf->SetXY(129, 140);
         $pdf->SetFont('Arial', 'B', 8);  
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Multicell(100, 10, '$ '.$monto, 0, 'C');
