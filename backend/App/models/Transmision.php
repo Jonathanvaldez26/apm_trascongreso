@@ -53,11 +53,11 @@ sql;
     public static function insertPregunta($data){
         $mysqli = Database::getInstance(1);
         $query=<<<sql
-        INSERT INTO preguntas_transmision (id_registrado, pregunta, 	fecha, tipo, id_tipo, sala) 
-        VALUES (:id_registrado,:pregunta,NOW(),:tipo,:id_tipo,:sala)
+        INSERT INTO new_preguntas (user_id, pregunta, 	fecha, tipo, id_tipo, sala) 
+        VALUES (:user_id,:pregunta,NOW(),:tipo,:id_tipo,:sala)
 sql;
         $parametros = array(
-            ':id_registrado'=>$data->_id_registrado,
+            ':user_id'=>$data->_user_id,
             ':pregunta'=>$data->_pregunta, 
             ':tipo'=>$data->_tipopre,
             ':id_tipo'=>$data->_id_tipopre,
@@ -108,6 +108,26 @@ sql;
     }
 
 
+    public static function insertNewPregunta($data){
+        $mysqli = Database::getInstance(1);
+        $query=<<<sql
+        INSERT INTO new_preguntas (user_id, pregunta, fecha, tipo, id_tipo, sala) 
+        VALUES (:user_id,:pregunta,NOW(),:tipo,:id_tipo,:sala)
+sql;
+        $parametros = array(
+            ':user_id'=>$data->_id_registrado,
+            ':pregunta'=>$data->_pregunta,
+            ':tipo'=>$data->_tipo,
+            ':id_tipo'=>$data->_id_tipo,
+            ':sala'=>$data->_sala
+        );      
+  
+        $id = $mysqli->insert($query, $parametros);
+    
+        return $id;
+    }
+
+
 //     public static function getChatByID($data){
 //         $mysqli = Database::getInstance(true);
 //         $query =<<<sql
@@ -124,8 +144,25 @@ sql;
 //         );
 //         return $mysqli->queryAll($query, $parametros);
 //     }
-
+ 
     public static function getNewChatByID($data){
+        $mysqli = Database::getInstance(true);
+        $query =<<<sql
+        SELECT nc.*, uad.name_user, uad.surname, uad.second_surname
+        FROM new_chat nc
+        INNER JOIN utilerias_administradores uad ON (uad.user_id = nc.user_id)
+        WHERE nc.tipo = :tipo and nc.sala = :sala and nc.id_tipo = :id_tipo;
+sql;
+
+        $parametros = array(
+            ':tipo'=>$data->_tipo,
+            ':sala'=>$data->_sala,
+            ':id_tipo'=>$data->_id_tipo
+        );
+        return $mysqli->queryAll($query, $parametros);
+    }
+
+    public static function getNewPreguntaByID($data){
         $mysqli = Database::getInstance(true);
         $query =<<<sql
         SELECT nc.*, uad.name_user, uad.surname, uad.second_surname
