@@ -108,7 +108,7 @@
 
                             <div class="d-flex mt-4">
                                 <div class="flex-shrink-0">
-                                    <img alt="Image placeholder" class="avatar rounded-circle me-3" src="../../../img/users_musa/<?php echo $avatar; ?>">
+                                    <img alt="Image placeholder" class="avatar rounded-circle me-3" src="../../../img/users_musa/form.jpg">
                                 </div>
                                 <div class="flex-grow-1 my-auto">
                                     <form class="align-items-center" id="form_chat" method="post">
@@ -140,7 +140,7 @@
                                         <!--img alt="Image" src="assets/img/bruce-mars.jpg" class="avatar"-->
                                         <div class="ms-3">
                                             <div class="d-flex align-items-center">
-                                                <img alt="Image" src="../../../img/users_musa/<?php echo $avatar; ?>" class="avatar">
+                                                <img alt="Image" src="../../../img/users_musa/form.jpg" class="avatar">
                                                 <div class="ms-3">
                                                     <h6 class="mb-0 d-block"><?php echo $info_user['prefijo'] . ' ' . $info_user['nombre']; ?></h6>
                                                     <span class="text-sm text-dark opacity-8">Tus Preguntas al Ponente</span>
