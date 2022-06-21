@@ -83,8 +83,8 @@
                         </div>
 
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-                            <a href="/Congreso/" class="btn" style="color:#000; background-color: orange; margin-right: 5px;">Regresar</a>
-                            <a href="/Congreso/VideoTraduccion/<?=$clave?>" class="btn" style="color:#000; background-color: orange;">Traducción</a>
+                            <a href="/Congreso/" class="btn" style="color:#000; background-color: #f1a823; margin-right: 5px;">Regresar</a>
+                            <a href="/Congreso/VideoTraduccion/<?=$clave?>" class="btn" style="color:#000; background-color: #f1a823;">Traducción</a>
                         </div>
                     </div>
                 </div>
