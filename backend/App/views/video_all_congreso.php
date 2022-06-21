@@ -73,6 +73,7 @@
                                 <h5 class="mb-1 font-weight-bolder" id="nombre_transmision">
                                     <?php echo $nombre_taller; ?>
                                 </h5>
+                                <!--  -->
 
                                 <input type="text" id="nombre_t1" value="<?php echo $transmision_1['nombre']; ?>" readonly hidden>
                                 <input type="text" id="nombre_t2" value="<?php echo $transmision_2['nombre']; ?>" readonly hidden>
