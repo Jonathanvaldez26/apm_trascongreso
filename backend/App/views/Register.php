@@ -17,7 +17,7 @@ echo $header;
                     </ul>
                     <ul class="navbar-nav d-lg-block d-none">
                         <li class="nav-item">
-                            <a href="/Login/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIAR SESIÓN</a>
+                            <a href="/Inicio/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIAR SESIÓN</a>
                         </li>
                     </ul>
                 </div>
