@@ -17,7 +17,7 @@ class Inicio{
     // }
 
     public function index() {
-        
+
         $extraHeader =<<<html
         <!DOCTYPE html>
         <html lang="en">
@@ -66,7 +66,7 @@ class Inicio{
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/vnd.microsoft.icon" href="../../../assets/img/logos/apmn.png">
         <title>
-           Login - Congreso Neuro Pediatría
+           Login - VI Congreso Mundial de Patología Dual
         </title>
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -81,6 +81,7 @@ class Inicio{
         <link rel="stylesheet" href="/css/alertify/alertify.core.css" />
         <link rel="stylesheet" href="/css/alertify/alertify.default.css" id="toggleCSS" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/assets/css/flags.css" id="toggleCSS" />
             
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -196,6 +197,8 @@ html;
 
         <script>
             $(document).ready(function(){
+                localStorage.clear();
+               
                 $.validator.addMethod("checkUserName",function(value, element) {
                   var response = false;
                     $.ajax({
@@ -210,6 +213,10 @@ html;
                                 response = true;
                             }else{
                                 $('#btnEntrar').attr("disabled", true);
+                                //$('#btn_modal_add').attr("disabled",false);
+                                //$('#Modal_Add').modal('show');
+                                window.location.replace("/Register/");
+                                localStorage.setItem("email",$("#usuario").val());
                             }
                         }
                     });
@@ -242,13 +249,17 @@ html;
                         type: "POST",
                         url: "/Inicio/verificarUsuario",
                         data: $("#login").serialize(),
+                        dataType: 'json',
                         success: function(response){
+                            console.log(response);
+                            console.log(response.nombre);
                             if(response!=""){
-                                var usuario = jQuery.parseJSON(response);
+                                var usuario = response;
                                 if(usuario.nombre!=""){
                                     $("#login").append('<input type="hidden" name="autentication" id="autentication" value="OK"/>');
                                     $("#login").append('<input type="hidden" name="nombre" id="nombre" value="'+usuario.nombre+'"/>');
                                     $("#login").submit();
+
                             }else{
                                 alertify.alert("Error de autenticación <br> El usuario o contraseña es incorrecta");
                             }
@@ -259,19 +270,93 @@ html;
                     });
                 });
 
+                $("#login").on("submit",function(event){
+                    // event.preventDefault();
+                });
+
             });
         </script>
 
         
 html;
 
+        $especialidades = LoginDao::getAllEspecialidades();
+        $optionEspecialidad = '';
+
+        foreach($especialidades as $key => $value){
+            $optionEspecialidad .= <<<html
+                    <option value="{$value['nombre']}">{$value['nombre']}</option>
+html;
+        }
+
+        $paises = LoginDao::getPais();
+        $optionPais = '';
+        foreach($paises as $key => $value){
+            $optionPais .= <<<html
+                        <option value="{$value['id_pais']}">{$value['pais']}</option>
+html;
+        }
+
+        foreach(LoginDao::getStateByCountry($value['id_pais']) as $key => $value){
+            $optionState = '';
+            $selectedEstado = ($value['id_estado'] == $value['id_estado']) ? 'selected' : '';
+            $optionState .= <<<html
+                        <option value="{$value['id_estado']}" $selectedEstado>{$value['estado']}</option>
+html;
+        }
+
+
         View::set('header',$extraHeader);
         View::set('footer',$extraFooter);
+        View::set('optionEspecialidad', $optionEspecialidad);
+        View::set('optionPais', $optionPais);
+        View::set('optionState', $optionState);
         View::render("login");
     }
 
-    public function isUserValidate(){
-        echo (count(LoginDao::getUserByEmail($_POST['usuario']))>=1)? 'true' : 'false';
+    public function getEstadoPais(){
+        $pais = $_POST['pais'];
+
+        if (isset($pais)) {
+            $Paises = LoginDao::getStateByCountry($pais);
+
+            echo json_encode($Paises);
+        }
+    }
+
+    public function saveData()
+    {
+        $data = new \stdClass();
+        $data->_nombre = MasterDom::getData('nombre');
+        $data->_apellidop = MasterDom::getData('apellidop');
+        $data->_apellidom = MasterDom::getData('apellidom');
+        $data->_email = MasterDom::getData('email');
+        $data->_prefijo = MasterDom::getData('prefijo');
+        $data->_especialidad = MasterDom::getData('especialidad');
+        $data->_telefono = MasterDom::getData('telefono');
+        $data->_pais = MasterDom::getData('pais');
+        $data->_estado = MasterDom::getData('estado');
+        $data->_identificador = MasterDom::getData('estado');
+        // $data->_utilerias_administrador_id = $_SESSION['utilerias_administradores_id'];
+
+        $id = LoginDao::insert($data);
+        if ($id >= 1) {
+            echo "success";
+            // $this->alerta($id,'add');
+            //header('Location: /PickUp');
+        } else {
+            echo "error";
+            // header('Location: /PickUp');
+            //var_dump($id);
+        }
+    }
+
+    public function cerrarSession(){
+        session_start();
+        // unset($_SESSION);
+        // session_unset();
+        session_destroy();
+        header("Location: /Inicio/");
     }
 
     public function verificarUsuario(){
@@ -281,11 +366,16 @@ html;
         $usuario->_password = MasterDom::getData("password");
         // var_dump($usuario);
         $user = LoginDao::getUserRAById($usuario);
-        // 
+        //
+
         if (count($user)>=1) {
-            $user['nombre'] = utf8_encode($user['nombre']);
+            $user['name_user'] = utf8_encode($user['nombre']);
             echo json_encode($user);
         }
+    }
+
+    public function isUserValidate(){
+        echo (count(LoginDao::getUserByEmail($_POST['usuario']))>=1)? 'true' : 'false';
     }
 
     public function crearSession(){
@@ -294,21 +384,40 @@ html;
         // $usuario->_password = MD5(MasterDom::getData("password"));
         $usuario->_password = MasterDom::getData("password");
         $user = LoginDao::getUserRAById($usuario);
-        // echo ($user);
+
         session_start();
-        $_SESSION['usuario'] = $user['email'];
+        $_SESSION['usuario'] = $user['usuario'];
         $_SESSION['nombre'] = $user['nombre'];
-        $_SESSION['id_registrado'] = $user['id_registrado'];
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['clave_socio'] = $user['clave_socio'];
+
+        // var_dump($usuario);
+        // echo "<br>";
+        // var_dump($_SESSION);
+        // exit;
 
         header("location: /Home/");
+        // echo "Hola";
     }
 
-    public function cerrarSession(){
+    public function crearSessionFinalize(){
+        $usuario = new \stdClass();
+        $usuario->_usuario = $_POST['usuario'];
+
+        $user = LoginDao::getUserRAById($usuario);
+
         session_start();
-        // unset($_SESSION);
-        // session_unset();
-        session_destroy();
-        header("Location: /Inicio/");
+        $_SESSION['usuario'] = $user['usuario'];
+        $_SESSION['nombre'] = $user['nombre'];
+        $_SESSION['user_id'] = $user['user_id'];
+
+        // var_dump($usuario);
+        // echo "<br>";
+        // var_dump($_SESSION);
+        // exit;
+
+        header("location: /Home/");
+        // echo "Hola";
     }
 
 }
