@@ -404,6 +404,8 @@
 
         let list_r = [];
 
+        $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+
         $('#enviar_encuesta').on('click', function() {
             // alert('envio de formulario');
             let enc = $('.encuesta_completa');
@@ -459,7 +461,7 @@
                 //     then((result) => {
                 //         console.log('c');
                 //     });
-                // }
+                }
             });
         });
 
@@ -501,7 +503,7 @@
 
         let tiempo_total = 0;
 
-        $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+        
 
         function countTime() {
             intervalo = setInterval(function() {
