@@ -434,17 +434,17 @@
                     console.log(respuesta);
 
                     if (respuesta.status == 'success') {
-                        Swal.fire('Se ha guardado correctamente su examen', '', 'success').
+                        Swal.fire('Ha contestado la trivia', '', 'success').
                         then((result) => {
                             console.log('a');
-                            $('#constancia_download').attr('href', respuesta.href)
-                            $('#constancia_download')[0].click();
+                            // $('#constancia_download').attr('href', respuesta.href)
+                            // $('#constancia_download')[0].click();
                             // $('#constancia_download_1').attr('href',respuesta.href_download)
                             // $('#constancia_download_1')[0].click();
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire('Lo sentimos, usted ya ha contestado este examen', '', 'info').
+                        Swal.fire('Lo sentimos, usted ya ha contestado la trivia', '', 'info').
                         then((result) => {
                             console.log('b');
                             window.location.reload();
@@ -454,11 +454,12 @@
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
-                    Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
-                    then((result) => {
-                        console.log('c');
-                    });
-                }
+                    Swal.fire('Ha contestado la trivia', '', 'success');
+                //     Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
+                //     then((result) => {
+                //         console.log('c');
+                //     });
+                // }
             });
         });
 
