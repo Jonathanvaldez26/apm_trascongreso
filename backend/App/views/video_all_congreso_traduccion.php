@@ -500,6 +500,8 @@
 
         let tiempo_total = 0;
 
+          $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+
         function countTime() {
             intervalo = setInterval(function() {
                 tiempo_total++;
@@ -515,7 +517,7 @@
                 }
 
                 // if (porcentaje_num >= 79) {
-                    $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+                    // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
                 // }
 
                 $('#barra_progreso').val(inicio);
