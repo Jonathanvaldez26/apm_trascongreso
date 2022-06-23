@@ -216,7 +216,7 @@
                             </div>
                         </div>
 
-                        <input type="text" id="id_curso" name="id_curso" value="<?php echo $id_curso;?>">
+                        <input type="hidden" id="id_curso" name="id_curso" value="<?php echo $id_curso;?>">
 
                         
                        
