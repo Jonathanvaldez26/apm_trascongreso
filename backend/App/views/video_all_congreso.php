@@ -404,7 +404,7 @@
 
         let list_r = [];
 
-        $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+        // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
 
         $('#enviar_encuesta').on('click', function() {
             // alert('envio de formulario');
