@@ -402,7 +402,7 @@
 
     $(document).ready(function() {
 
-        $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+        // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
 
         let list_r = [];
 
