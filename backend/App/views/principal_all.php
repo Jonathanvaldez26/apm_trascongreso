@@ -402,7 +402,7 @@
                 h = (d.getHours()<10?'0':'') + d.getHours(),
                 m = (d.getMinutes()<10?'0':'') + d.getMinutes();
             var hora_actual = getDateFromHours(h + ':' + m);
-            var hora_inicial_trivia = getDateFromHours('16:00');
+            var hora_inicial_trivia = getDateFromHours('07:00');
             var hora_final_trivia = getDateFromHours('18:00');
 
             if(hora_actual >= hora_inicial_trivia && hora_actual <= hora_final_trivia){
