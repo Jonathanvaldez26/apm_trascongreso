@@ -17,7 +17,7 @@ echo $header;
                     </ul>
                     <ul class="navbar-nav d-lg-block d-none">
                         <li class="nav-item">
-                            <a href="/Login/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIAR SESIÓN</a>
+                            <a href="/Inicio/" class="btn btn-sm  bg-gradient-info  btn-round mb-0 me-1" onclick="smoothToPricing('pricing-soft-ui')">INICIAR SESIÓN</a>
                         </li>
                     </ul>
                 </div>
@@ -269,7 +269,7 @@ echo $header;
                                                                     <h5 class="font-weight-normal">Muy Importante</h5>
                                                                     <p>La Asociación Psiquiátrica Mexicana es una sociedad sin fines de lucro, y puede expedir
                         comprobantes deducibles de impuestos para personas físicas y morales mexicanas.
-                        Una vez que tu pago haya sido identificado, recibirás tu comprobante dentro de las primeras
+                        Una vez que tu pago haya sido procesado, recibirás tu comprobante dentro de las primeras
                         48 horas. En caso de no recibirlo, favor de enviar un correo con el comprobante adjunto a
                         apm@psiquiatrasapm.org.mx. Recuerda que los comprobantes fiscales solo pueden ser
                         emitidos en el mes en el cual realizaste tu pago.
@@ -303,9 +303,9 @@ echo $header;
                                                         <div id="card_four" class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
                                                             <div class="row text-center">
                                                                 <div class="col-10 mx-auto">
-                                                                    <h5 class="font-weight-normal">Payment Method</h5>
-                                                                    <p>You will have a maximum of 5 days to make your payment and upload your voucher to the system. Y Complete the form with your VAT information If you require a
-                                                                        tax deductible receipt.</p>
+                                                                    <h5 class="font-weight-normal">Metodo de Pago</h5>
+                                                                    <p>Tendrás un máximo de 5 días para realizar tu pago y subir tu comprobante al sistema. Y Complete el formulario con sus datos de IVA Si requiere un
+                                                                        recibo deducible de impuestos.</p>
                                                                 </div>
                                                             </div>
                                                             <div class="multisteps-form__content">
@@ -376,7 +376,7 @@ echo $header;
                                                                 <div class="row text-center">
                                                                     <div class="col-10 mx-auto">
                                                                         <br>
-                                                                        <p class="mb-0 text-sm">To finish your registration select a method of payment to the event</p>
+                                                                        <p class="mb-0 text-sm">Para finalizar tu inscripción selecciona un método de pago al evento</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="button-row d-flex mt-4">

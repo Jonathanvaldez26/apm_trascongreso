@@ -565,6 +565,7 @@ html;
 
             // var_dump($preguntas)
 
+
             View::set('clave', $clave);
             View::set('encuesta', $encuesta);
             View::set('id_curso', $id_curso);
@@ -1107,7 +1108,7 @@ html;
             View::set('avatar', $avatar);
             View::set('header', $this->_contenedor->header($extraHeader));
             View::set('footer', $this->_contenedor->footer($extraFooter));
-            View::render("video_all_congreso");
+            View::render("video_all_congreso_traduccion");
         } else {
             View::render("404");
         }

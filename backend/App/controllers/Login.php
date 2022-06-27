@@ -311,7 +311,7 @@ html;
         View::set('optionEspecialidad', $optionEspecialidad);
         View::set('optionPais', $optionPais);
         View::set('optionState', $optionState);
-        View::render("login");
+        View::render("login_inicio");
     }
 
     public function getEstadoPais(){
@@ -356,7 +356,7 @@ html;
         // unset($_SESSION);
         // session_unset();
         session_destroy();
-        header("Location: /Login/");
+        header("Location: /Inicio/");
     }
 
     public function verificarUsuario(){

@@ -84,7 +84,7 @@
 
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
                             <a href="/Congreso/" class="btn" style="color:#000; background-color: orange; margin-right: 5px;">Regresar</a>
-                            <a href="/Congreso/VideoTraduccion/<?=$clave?>" class="btn" style="color:#000; background-color: orange;">Traducción</a>
+                            <a href="/Congreso/Video/<?=$clave?>" class="btn" style="color:#000; background-color: orange;">Translation</a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark my-3">
-                        <!-- Comments --> 
+                        <!-- Comments -->
                         <div class="mb-1">
                             <div id="cont_chat" class="text-scroll">
                                 <?php echo $cont_chat; ?>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="card-footer d-block">
                             <progress id="barra_progreso" max="<?php echo $secs_totales; ?>" value="<?php echo $progreso_curso['segundos']; ?>"></progress>
-                            <input type="hidden" name="" id="id_curso"  readonly value="<?php echo $id_curso; ?>">
+                            <input type="text" name="" id="id_curso" hidden readonly value="<?php echo $id_curso; ?>">
                         </div>
                         <div class="row m-auto">
                             <div class="col-12" id="btn-examen">
@@ -402,9 +402,9 @@
 
     $(document).ready(function() {
 
-        let list_r = [];
-
         // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+
+        let list_r = [];
 
         $('#enviar_encuesta').on('click', function() {
             // alert('envio de formulario');
@@ -436,17 +436,17 @@
                     console.log(respuesta);
 
                     if (respuesta.status == 'success') {
-                        Swal.fire('Ha contestado la trivia', '', 'success').
+                        Swal.fire('Se ha guardado correctamente su examen', '', 'success').
                         then((result) => {
                             console.log('a');
-                            // $('#constancia_download').attr('href', respuesta.href)
-                            // $('#constancia_download')[0].click();
+                            $('#constancia_download').attr('href', respuesta.href)
+                            $('#constancia_download')[0].click();
                             // $('#constancia_download_1').attr('href',respuesta.href_download)
                             // $('#constancia_download_1')[0].click();
                             window.location.reload();
                         });
                     } else {
-                        Swal.fire('Lo sentimos, usted ya ha contestado la trivia', '', 'info').
+                        Swal.fire('Lo sentimos, usted ya ha contestado este examen', '', 'info').
                         then((result) => {
                             console.log('b');
                             window.location.reload();
@@ -456,11 +456,10 @@
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
-                    Swal.fire('Ha contestado la trivia', '', 'success');
-                //     Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
-                //     then((result) => {
-                //         console.log('c');
-                //     });
+                    Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
+                    then((result) => {
+                        console.log('c');
+                    });
                 }
             });
         });
@@ -503,7 +502,7 @@
 
         let tiempo_total = 0;
 
-        
+          
 
         function countTime() {
             intervalo = setInterval(function() {
@@ -543,9 +542,6 @@
         }
 
         function actualizarProgreso(curso, segundos) {
-
-            // console.log("curso " +curso);
-            // console.log("segundos "+segundos);
             $.ajax({
                 url: "/Talleres/updateProgress",
                 type: "POST",

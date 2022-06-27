@@ -2085,9 +2085,9 @@ html;
         $progreso = $_POST['segundos'];
         $curso = $_POST['curso'];
 
-        var_dump(TalleresDao::updateProgresoFecha($curso, $_SESSION['user_id'], $progreso));
+        TalleresDao::updateProgresoFechaProducto($curso, $_SESSION['user_id'], $progreso);
 
-            // echo 'minuto ' . $progreso . ' ' . $curso;
+            echo 'minuto ' . $progreso . ' ' . $curso;
         
 
 

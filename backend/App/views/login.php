@@ -102,7 +102,7 @@ echo $header;
                         <ul class="navbar-nav d-lg-block d-none">
                             <li class="nav-item">
                                 <!-- <button type="button" class="btn btn-sm bg-gradient-info btn-round mb-0 me-1" data-toggle="modal" data-target="#doc_programa"><b style="color: #ffffff">Programa</b></button> -->
-                                <a href="https://register.dualdisorderswaddmexico2022.com/Login/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
+                                <a href="https://register.dualdisorderswaddmexico2022.com/Inicio/" class="flag-cont" onclick="smoothToPricing('pricing-soft-ui')">
                                     <img id="flag" src="/assets/img/united-k.png">
                                 </a>
                             </li>
@@ -148,7 +148,7 @@ echo $header;
                                             <div class="col-3">Segundos</div> -->
                                         </div>
                                     </div>
-                                    <p class="mb-0 mt-5">Ingrese tu correo electrónico para iniciar sesión o registrarte.</p>
+                                    <p class="mb-0 mt-5">Ingrese su correo electrónico para iniciar sesión o registrarse.</p>
                                 </div>
                                 <!-- Button trigger modal -->
                                 <div class="card-body">
@@ -157,14 +157,6 @@ echo $header;
                                         <div class="mb-1">
                                             <input type="email" name="usuario" id="usuario" class="form-control" placeholder="usuario@grupolahe.com" aria-label="Email">
                                         </div>
-                                        <!-- <label style="font-weight:bold; font-size: 15px">Contraseña</label> -->
-                                        <!-- <div class="mb-3">
-                                            <input type="password" name="password" id="password" class="form-control" placeholder="•••••••••" aria-label="Password">
-                                        </div> -->
-                                        <!-- <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
-                                            <label class="form-check-label" for="rememberMe">Recordar contraseña</label>
-                                        </div> -->
 
                                         <div class="mb-1 text-center">
                                             <img src="/assets/img/logos/seroquel.png" height="100" alt="">
