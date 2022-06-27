@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark my-3">
-                        <!-- Comments -->
+                        <!-- Comments --> 
                         <div class="mb-1">
                             <div id="cont_chat" class="text-scroll">
                                 <?php echo $cont_chat; ?>
