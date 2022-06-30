@@ -31,249 +31,400 @@ class Home extends Controller{
       </title>
 html;
 
-        // $card_permisos = HomeDao::getCountByUser($_SESSION['utilerias_asistentes_id']);
-        //$pickup_permisos = HomeDao::getCountPickUp($_SESSION['utilerias_asistentes_id']);
-        $tabla = '';
+$extraFooter = <<<html
+            <!--footer class="footer pt-0">
+                    <div class="container-fluid">
+                        <div class="row align-items-center justify-content-lg-between">
+                            <div class="col-lg-6 mb-lg-0 mb-4">
+                                <div class="copyright text-center text-sm text-muted text-lg-start">
+                                    © <script>
+                                        document.write(new Date().getFullYear())
+                                    </script>,
+                                    made with <i class="fa fa-heart"></i> by
+                                    <a href="https://www.creative-tim.com" class="font-weight-bold" target="www.grupolahe.com">Creative GRUPO LAHE</a>.
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                                    <li class="nav-item">
+                                        <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">privacy policies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </footer--    >
+                <!-- jQuery -->
+                    <script src="/js/jquery.min.js"></script>
+                    <!--   Core JS Files   -->
+                    <script src="/assets/js/core/popper.min.js"></script>
+                    <script src="/assets/js/core/bootstrap.min.js"></script>
+                    <script src="/assets/js/plugins/perfect-scrollbar.min.js"></script>
+                    <script src="/assets/js/plugins/smooth-scrollbar.min.js"></script>
+                    <!-- Kanban scripts -->
+                    <script src="/assets/js/plugins/dragula/dragula.min.js"></script>
+                    <script src="/assets/js/plugins/jkanban/jkanban.js"></script>
+                    <script src="/assets/js/plugins/chartjs.min.js"></script>
+                    <script src="/assets/js/plugins/threejs.js"></script>
+                    <script src="/assets/js/plugins/orbit-controls.js"></script>
+                    
+                <!-- Github buttons -->
+                    <script async defer src="https://buttons.github.io/buttons.js"></script>
+                <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+                    <script src="/assets/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
 
-        //foreach ($pickup_permisos as $key => $value) {
-        //    if ($value['count'] >= 0) {
-        //        $tabla.= <<<html
-        //        aaaaaaas
-//html;
-  //          } else {
-    //            $tabla.= <<<html
-    //            ssssss
-//html;
+                <!-- VIEJO INICIO -->
+                    <script src="/js/jquery.min.js"></script>
+                
+                    <script src="/js/custom.min.js"></script>
 
-          //  }
-        //}
+                    <script src="/js/validate/jquery.validate.js"></script>
+                    <script src="/js/alertify/alertify.min.js"></script>
+                    <script src="/js/login.js"></script>
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <!-- VIEJO FIN -->
+        <script>
+            $( document ).ready(function() {
 
-        $data_user = HomeDao::getDataUser($this->__usuario);
-        $modalComprar = '';
+                $("#form_vacunacion").on("submit",function(event){
+                    event.preventDefault();
+                    
+                        var formData = new FormData(document.getElementById("form_vacunacion"));
+                        for (var value of formData.values()) 
+                        {
+                            console.log(value);
+                        }
+                        $.ajax({
+                            url:"/Talleres/uploadComprobante",
+                            type: "POST",
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            beforeSend: function(){
+                            console.log("Procesando....");
+                        },
+                        success: function(respuesta){
+                            if(respuesta == 'success'){
+                                // $('#modal_payment_ticket').modal('toggle');
+                                
+                                swal("¡Se ha guardado tu prueba correctamente!", "", "success").
+                                then((value) => {
+                                    window.location.replace("/Talleres/");
+                                });
+                            }
+                            console.log(respuesta);
+                        },
+                        error:function (respuesta)
+                        {
+                            console.log(respuesta);
+                        }
+                    });
+                });
+
+            });
+        </script>
+
+html;
+
+        $data_user = HomeDao::getDataUser($this->__usuario);      
 
         $permisos_congreso = $data_user['congreso'] != '1' ? "style=\"display:none;\"" : "";
 
-        // $usuarios = HomeDao::getAllUsers();
-        // $free_courses = HomeDao::getFreeCourses();
+        $id_curso = 102;
 
+        $encuesta = '';
 
-        // foreach ($free_courses as $key => $value) {
-        //     // HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
-        //     $hay = HomeDao::getAsignaCursoByUser($_SESSION['id_registrado'],$value['id_curso']);
-        //     // var_dump($hay);
-        //     if ($hay == NULL || $hay == 'NULL ') {
-        //       HomeDao::insertCursos($_SESSION['id_registrado'],$value['id_curso']);
-        //     }
-        // }
+        $preguntas  = TalleresDao::getPreguntasTriviaUsuario($id_curso);
+        $ha_respondido = TalleresDao::getRespuestasCurso($_SESSION['user_id'], $id_curso);
 
-        //CURSOS COMPRADOS
-        // $cursos = TalleresDao::getAll();
-        $cursos = TalleresDao::getAsignaProducto($_SESSION['user_id']);
+        if ($preguntas) {
 
-        $card_cursos = '';
+            $num_pregunta = 1;
 
-        foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
+            if ($ha_respondido) {
 
-            $max_time = $value['duracion'];
-            $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
-            $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
-            $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
+                foreach ($preguntas as $key => $value) {
+                    $opcion1 = $value['opcion1'];
+                    $opcion2 = $value['opcion2'];
+                    $opcion3 = $value['opcion3'];
+                    $opcion4 = $value['opcion4'];
 
-            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
-
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
-
-            $card_cursos .= <<<html
-            
-
-            
-            
-            <div class="col-12 col-md-3 mt-3">
-                <div class="card card-body card-course p-0 border-radius-15" style="height:600px;">
-                    <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
-                    <div class="caratula-content">
-                        <a href="/Talleres/Video/{$value['clave']}">
-                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
-                        </a>
-                        <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
-                        <!--button class="btn btn-outline-danger"></button-->
-                        
-html;
-
-            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
-            if ($like['status'] == 1) {
-                $card_cursos .= <<<html
-                    <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
-html;
-            } else {
-                $card_cursos .= <<<html
-                    <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
-html;
-            }
-
-            $card_cursos .= <<<html
-                        <!--<div class="row">
-                            <div class="col-11 m-auto" id="">
-                                <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </div>
-                        </div>-->
-                    </div>
-                    <a href="/Talleres/Video/{$value['clave']}">
-                        <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>
-                        <p class="badge badge-success" style="margin-left: 5px;">
-                          Este curso ya lo compraste.
-                        </p>
-                        
-
-                        <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
-                            {$value['descripcion']}<br>
-                            {$value['vistas']} vistas
-                            <br> <br>
-                            <b>Avance: $porcentaje %</b>
-                        </p>-->
-
-html;
-            if ($value['status'] == 2 || $porcentaje >= 80) {
-                $card_cursos .= <<<html
-                            <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
-html;
-            }
-
-            $card_cursos .= <<<html
-                    </a>
-
-                    <div>
-                        
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                // $('#video_{$value['clave']}').on('click', function(){
-                //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
-                    
-                //     if (like){
-                //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
-                //     } else {
-                //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
-                //     }
-                // });
-            </script>
-html;
-        }
-        //FIN CURSOS COMPRADOS
-
-
-        //CURSOS SIN COMPRAR
-
-        $cursos = TalleresDao::getAllProductCursosNotInUser($_SESSION['user_id']);
-
-        foreach ($cursos as $key => $value) {
-            $progreso = TalleresDao::getProductProgreso($_SESSION['user_id'], $value['id_producto']);
-
-            $max_time = $value['duracion'];
-            $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
-            $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
-            $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
-
-            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
-
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
-
-            $card_cursos .= <<<html
-            
-            
-            <div class="col-12 col-md-3 mt-3">
-                <div class="card card-body card-course p-0 border-radius-15" style="height:600px;">
-                    <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
-                    <div class="caratula-content">
-                        <a href="/Talleres/Video/{$value['clave']}">
-                            <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
-                        </a>
-                        <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
-                        <!--<button class="btn btn-outline-danger"></button-->
-                        
-html;
-
-            $like = TalleresDao::getlikeProductCurso($value['id_producto'], $_SESSION['user_id']);
-            if ($like['status'] == 1) {
-                $card_cursos .= <<<html
-                    <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-like p-2"></span>
-html;
-            } else {
-                $card_cursos .= <<<html
-                    <span id="video_{$value['clave']}" data-clave="{$value['clave']}" class="fas fa-heart heart-not-like p-2"></span>
-html;
-            }
-
-            $card_cursos .= <<<html
-                       <!-- <div class="row">
-                            <div class="col-11 m-auto" id="">
-                                <progress class="barra_progreso_small mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </div>
-                        </div>-->
-                    </div>
-                    <!--<a href="/Talleres/Video/{$value['clave']}">-->
-                        <h6 class="text-left mx-3 mt-2" style="color: black;">{$value['nombre']}</h3>
-                        <div style = "display: flex; justify-content:start">
-                            <button class="btn btn-primary" style="margin-right: 5px;margin-left: 5px;" data-toggle="modal" data-target="#comprar-curso{$value['id_curso']}">Comprar</button>
-                           
+                    $encuesta .= <<<html
+                    <div class="col-12 encuesta_completa">
+                        <div class="mb-3 text-dark">
+                            <h6 class="">$num_pregunta. {$value['pregunta']}</h6>
                         </div>
-                        
-
-                        <!--<p class="text-left mx-3 text-sm">{$value['fecha_curso']}
-                            {$value['descripcion']}<br>
-                            {$value['vistas']} vistas
-                            <br> <br>
-                            <b>Avance: $porcentaje %</b>
-                        </p>-->
-
+                        <input id="id_pregunta_$num_pregunta" value="{$value['id_pregunta_encuesta']}" hidden readonly>
+                        <div class="form-group encuesta_curso_$num_pregunta">
 html;
-            if ($value['status'] == 2 || $porcentaje >= 80) {
-                $card_cursos .= <<<html
-                            <!--<div class="ms-3 me-3 msg-encuesta px-2 py-1">Se ha habilitado un examen para este taller</div><br><br>-->
+                    if ($value['respuesta_correcta'] == 1) {
+                        $encuesta .= <<<html
+                        <div id="op1">
+                            <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" disabled>
+                            <label class="text-success form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                        </div>
+
+                        <div id="op2">
+                            <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                        </div>
+
+                        <div id="op3">
+                            <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                        </div>
+
+                        <div id="op4">
+                            <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                        </div>
+
+                        <div id="op5">
+                            <input type="radio" data-label="{$value['opcion5']}" id="opcion5_$num_pregunta" name="pregunta_$num_pregunta" value="5" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion5_$num_pregunta">{$value['opcion5']}</label>
+                        </div>
 html;
-            }
+                    }
 
-            $card_cursos .= <<<html
-                    <!--</a>-->
+                    if ($value['respuesta_correcta'] == 2) {
+                        $encuesta .= <<<html
+                        <div id="op1">
+                            <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                        </div>
 
-                    <div>
-                        
+                        <div id="op2">
+                            <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2" disabled>
+                            <label class="text-success form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                        </div>
+
+                        <div id="op3">
+                            <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                        </div>
+
+                        <div id="op4">
+                            <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                        </div>
+
+                        <div id="op5">
+                            <input type="radio" data-label="{$value['opcion5']}" id="opcion5_$num_pregunta" name="pregunta_$num_pregunta" value="5" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion5_$num_pregunta">{$value['opcion5']}</label>
+                        </div>
+html;
+                    }
+
+                    if ($value['respuesta_correcta'] == 3) {
+                        $encuesta .= <<<html
+                        <div id="op1">
+                            <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                        </div>
+
+                        <div id="op2">
+                            <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                        </div>
+
+                        <div id="op3">
+                            <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3" disabled>
+                            <label class="text-success form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                        </div>
+
+                        <div id="op4">
+                            <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                        </div>
+
+                        <div id="op5">
+                            <input type="radio" data-label="{$value['opcion5']}" id="opcion5_$num_pregunta" name="pregunta_$num_pregunta" value="5" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion5_$num_pregunta">{$value['opcion5']}</label>
+                        </div>
+html;
+                    }
+
+                    if ($value['respuesta_correcta'] == 4) {
+                        $encuesta .= <<<html
+                        <div id="op1">
+                            <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                        </div>
+
+                        <div id="op2">
+                            <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                        </div>
+
+                        <div id="op3">
+                            <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                        </div>
+
+                        <div id="op4">
+                            <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4" disabled>
+                            <label class="text-success form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                        </div>
+
+                        <div id="op5">
+                            <input type="radio" data-label="{$value['opcion5']}" id="opcion5_$num_pregunta" name="pregunta_$num_pregunta" value="5" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion5_$num_pregunta">{$value['opcion5']}</label>
+                        </div>
+html;
+                    }
+
+                    if ($value['respuesta_correcta'] == 5) {
+                        $encuesta .= <<<html
+                        <div id="op1">
+                            <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                        </div>
+
+                        <div id="op2">
+                            <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                        </div>
+
+                        <div id="op3">
+                            <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                        </div>
+
+                        <div id="op4">
+                            <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4" disabled>
+                            <label class="text-dark form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                        </div>
+
+                        <div id="op5">
+                            <input type="radio" data-label="{$value['opcion5']}" id="opcion5_$num_pregunta" name="pregunta_$num_pregunta" value="5" disabled>
+                            <label class="text-success form-label opcion-encuesta" for="opcion5_$num_pregunta">{$value['opcion5']}</label>
+                        </div>
+html;
+                    }
+
+                    $encuesta .= <<<html
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <script>
-                // $('#video_{$value['clave']}').on('click', function(){
-                //     let like = $('#video_{$value['clave']}').hasClass('heart-like');
-                    
-                //     if (like){
-                //         $('#video_{$value['clave']}').removeClass('heart-like').addClass('heart-not-like')
-                //     } else {
-                //         $('#video_{$value['clave']}').removeClass('heart-not-like').addClass('heart-like')
-                //     }
-                // });
-            </script>
+                    <script>
+                        $(document).ready(function(){
+                            
+                            // Pinta la respuesta si es correcta o no
+                            console.log({$ha_respondido[$num_pregunta - 1]['respuesta_registrado']});
+                            if({$ha_respondido[$num_pregunta - 1]['respuesta_registrado']} == 1){
+                                $('.encuesta_curso_$num_pregunta #op1 input').attr('checked','');
+                                if(!$('.encuesta_curso_$num_pregunta #op1 label').hasClass('text-success')){
+                                    $('.encuesta_curso_$num_pregunta #op1 label').removeClass('text-dark').addClass('text-danger');
+                                }
+                            } else if({$ha_respondido[$num_pregunta - 1]['respuesta_registrado']} == 2){
+                                $('.encuesta_curso_$num_pregunta #op2 input').attr('checked','');
+                                if(!$('.encuesta_curso_$num_pregunta #op2 label').hasClass('text-success')){
+                                    $('.encuesta_curso_$num_pregunta #op2 label').removeClass('text-dark').addClass('text-danger');
+                                }
+                            } else if({$ha_respondido[$num_pregunta - 1]['respuesta_registrado']} == 3){
+                                $('.encuesta_curso_$num_pregunta #op3 input').attr('checked','');
+                                if(!$('.encuesta_curso_$num_pregunta #op3 label').hasClass('text-success')){
+                                    $('.encuesta_curso_$num_pregunta #op3 label').removeClass('text-dark').addClass('text-danger');
+                                }
+                            } else if({$ha_respondido[$num_pregunta - 1]['respuesta_registrado']} == 4){
+                                $('.encuesta_curso_$num_pregunta #op4 input').attr('checked','');
+                                if(!$('.encuesta_curso_$num_pregunta #op4 label').hasClass('text-success')){
+                                    $('.encuesta_curso_$num_pregunta #op4 label').removeClass('text-dark').addClass('text-danger');
+                                }
+                            }
+
+                            $('.encuesta_curso_$num_pregunta').on('click',function(){
+                                let respuesta = $('.encuesta_curso_$num_pregunta input[name=pregunta_$num_pregunta]:checked');
+                                if($('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' input').prop('checked')){
+                                    $('.encuesta_curso_$num_pregunta label').removeClass('opacity-5');
+                                    $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').addClass('opacity-5');
+                                }
+    
+                                // Pinta la respuesta si es correcta o no
+                                // if(respuesta.val() == {$value['respuesta_correcta']}){
+                                //     $('.encuesta_curso_$num_pregunta label').addClass('text-dark');
+                                //     $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').removeClass('text-dark').addClass('text-success');
+                                // } else {
+                                //     $('.encuesta_curso_$num_pregunta label').addClass('text-dark');
+                                //     $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').removeClass('text-dark').addClass('text-danger');
+                                // }
+                            });
+                            
+                        });
+                    </script>
 html;
+                    $num_pregunta = $num_pregunta + 1;
+                }
+            } else {
+                foreach ($preguntas as $key => $value) {
+                    $encuesta .= <<<html
+                    <div class="col-12 encuesta_completa">
+                        <div class="mb-3 text-dark">
+                            <h6 class="">$num_pregunta. {$value['pregunta']}</h6>
+                        </div>
+                        <input id="id_pregunta_$num_pregunta" value="{$value['id_pregunta_encuesta']}" hidden readonly>
+                        <div class="form-group encuesta_curso_$num_pregunta">
+                            <div id="op1">
+                                <input type="radio" data-label="{$value['opcion1']}" id="opcion1_$num_pregunta" name="pregunta_$num_pregunta" value="1" required>
+                                <label class="form-label opcion-encuesta" for="opcion1_$num_pregunta">{$value['opcion1']}</label>
+                            </div>
 
-            $modalComprar .= $this->generateModalComprar($value);
+                            <div id="op2">
+                                <input type="radio" data-label="{$value['opcion2']}" id="opcion2_$num_pregunta" name="pregunta_$num_pregunta" value="2">
+                                <label class="form-label opcion-encuesta" for="opcion2_$num_pregunta">{$value['opcion2']}</label>
+                            </div>
+
+                            <div id="op3">
+                                <input type="radio" data-label="{$value['opcion3']}" id="opcion3_$num_pregunta" name="pregunta_$num_pregunta" value="3">
+                                <label class="form-label opcion-encuesta" for="opcion3_$num_pregunta">{$value['opcion3']}</label>
+                            </div>
+
+                            <div id="op4">
+                                <input type="radio" data-label="{$value['opcion4']}" id="opcion4_$num_pregunta" name="pregunta_$num_pregunta" value="4">
+                                <label class="form-label opcion-encuesta" for="opcion4_$num_pregunta">{$value['opcion4']}</label>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <script>
+                        $('.encuesta_curso_$num_pregunta').on('click',function(){
+                            let respuesta = $('.encuesta_curso_$num_pregunta input[name=pregunta_$num_pregunta]:checked');
+                            if($('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' input').prop('checked')){
+                                $('.encuesta_curso_$num_pregunta label').removeClass('opacity-5');
+                                $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').addClass('opacity-5');
+                            }
+
+                            // Pinta la respuesta si es correcta o no
+                            // if(respuesta.val() == {$value['respuesta_correcta']}){
+                            //     $('.encuesta_curso_$num_pregunta label').addClass('text-dark');
+                            //     $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').removeClass('text-dark').addClass('text-success');
+                            // } else {
+                            //     $('.encuesta_curso_$num_pregunta label').addClass('text-dark');
+                            //     $('.encuesta_curso_$num_pregunta #op'+respuesta.val()+' label').removeClass('text-dark').addClass('text-danger');
+                            // }
+                        });
+                            
+                        
+                    </script>
+html;
+                    $num_pregunta = $num_pregunta + 1;
+                }
+            }
+        } 
+else {
+            $encuesta = <<<html
+            <h3 class="text-danger">Aún no hay preguntas para este Curso.</h3>
+html;
         }
-
-        //CURSOS SIN COMPRAR
-
-        // $modalComprar = '';
-        // foreach (TalleresDao::getAll() as $key => $value) {
-        //     $modalComprar .= $this->generateModalComprar($value);
-        // }
 
         View::set('header',$this->_contenedor->header($extraHeader));
+        View::set('footer', $this->_contenedor->footer($extraFooter));
         View::set('permisos_congreso',$permisos_congreso);
         View::set('datos',$data_user);
-        View::set('card_cursos', $card_cursos);
-        View::set('modalComprar',$modalComprar);
-        //View::set('tabla',$tabla);
+        View::set('encuesta',$encuesta);
+        View::set('id_curso',$id_curso);
         View::render("principal_all");
     }
 

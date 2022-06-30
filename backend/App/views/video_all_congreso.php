@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <hr class="horizontal dark my-3">
-                        <!-- Comments -->
+                        <!-- Comments --> 
                         <div class="mb-1">
                             <div id="cont_chat" class="text-scroll">
                                 <?php echo $cont_chat; ?>
@@ -200,7 +200,7 @@
                         </div>
                         <div class="card-footer d-block">
                             <progress id="barra_progreso" max="<?php echo $secs_totales; ?>" value="<?php echo $progreso_curso['segundos']; ?>"></progress>
-                            <input type="text" name="" id="id_curso" hidden readonly value="<?php echo $id_curso; ?>">
+                            <input type="hidden" name="" id="id_curso"  readonly value="<?php echo $id_curso; ?>">
                         </div>
                         <div class="row m-auto">
                             <div class="col-12" id="btn-examen">
@@ -266,376 +266,309 @@
 
 <script>
     intervalo1();
-
-function intervalo1() {
-    intervalo = setInterval(chats, 60000, $("#id_tipo").val(), 1);
-}
-
-function saveChat() {
-    event.preventDefault(event);
-    var formData = new FormData(document.getElementById("form_chat"));
-
-    var id_tipo = formData.get('id_tipo');
-    var sala = formData.get('sala');
-
-
-    for (var value of formData.values()) {
-        console.log(value);
+    function intervalo1() {
+        intervalo = setInterval(chats, 60000, $("#id_tipo").val(), 1);
     }
 
-    $.ajax({
-        url: "/Talleres/saveChat",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        beforeSend: function() {
-            event.preventDefault();
-            document.getElementById("txt_chat").value = "";
-            console.log("Procesando....");
-            // alert('Se está borrando');
-        },
-        success: function(respuesta) {
-            console.log(respuesta);
-            chats(id_tipo, sala);
+    function saveChat() {
+        event.preventDefault(event);
+        var formData = new FormData(document.getElementById("form_chat"));
 
-        },
-        error: function(respuesta) {
-            console.log(respuesta);
-
-        }
-    });
-}
-
-function savePregunta() {
-    event.preventDefault(event);
-    var formData = new FormData(document.getElementById("form_pregunta"));
-
-    var id_tipo = formData.get('id_tipo');
-    var sala = formData.get('sala');
+        var id_tipo = formData.get('id_tipo');
+        var sala = formData.get('sala');
 
 
-    for (var value of formData.values()) {
-        console.log(value);
-    }
-
-    $.ajax({
-        url: "/Talleres/savePregunta",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        beforeSend: function() {
-            event.preventDefault();
-            document.getElementById("txt_pregunta").value = "";
-            console.log("Procesando....");
-            // alert('Se está borrando');
-        },
-        success: function(respuesta) {
-            //console.log(respuesta);
-            //preguntas(id_tipo, sala);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Su pregunta fue enviada exitosamente!',
-                showConfirmButton: false,
-                timer: 1500
-            })
-
-        },
-        error: function(respuesta) {
-            console.log(respuesta);
-
-        }
-    });
-}
-
-function chats(id_tipo, sala) {
-
-    console.log(id_tipo);
-    console.log("sala " + sala);
-
-    $.ajax({
-        url: "/Talleres/getChatById",
-        type: "POST",
-        data: {
-            id_tipo,
-            sala
-        },
-        dataType: 'json',
-        beforeSend: function() {
-            console.log("Procesando....");
-            $("#cont_chat").empty();
-
-        },
-        success: function(respuesta) {
-
-            console.log(respuesta);
-            // var numero_noti = 0;
-
-            $.each(respuesta, function(index, el) {
-
-                // console.log(el.title);
-                var nombre_completo = el.name_user + ' ' + el.surname + ' ' + el.second_surname;
-
-                $("#cont_chat").append(
-                    `<div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/${el.avatar_img}">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="h5 mt-0">${nombre_completo}</h6>
-                            <p class="text-sm">${el.chat}</p>
-                            
-                        </div>
-                    </div>`
-                );
-            });
-
-
-
-        },
-        error: function(respuesta) {
-            console.log(respuesta);
+        for (var value of formData.values()) {
+            console.log(value);
         }
 
-    });
-}
-
-
-
-
-function preguntas(id_tipo, sala) {
-
-    console.log(id_tipo);
-    console.log("sala " + sala);
-
-    $.ajax({
-        url: "/Talleres/getPreguntaById",
-        type: "POST",
-        data: {
-            id_tipo,
-            sala
-        },
-        dataType: 'json',
-        beforeSend: function() {
-            console.log("Procesando....");
-            $("#cont_pregunta").empty();
-
-        },
-        success: function(respuesta) {
-
-            console.log(respuesta);
-            // var numero_noti = 0;
-
-            $.each(respuesta, function(index, el) {
-
-                // console.log(el.title);
-                var nombre_completo = el.name_user + ' ' + el.surname + ' ' + el.second_surname;
-
-                $("#cont_pregunta").append(
-                    `<div class="d-flex mt-3">
-                        <div class="flex-shrink-0">
-                            <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/${el.avatar_img}">
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h6 class="h5 mt-0">${nombre_completo}</h6>
-                            <p class="text-sm">${el.chat}</p>
-                            
-                        </div>
-                    </div>`
-                );
-            });
-
-
-
-        },
-        error: function(respuesta) {
-            console.log(respuesta);
-        }
-
-    });
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-$(document).ready(function() {
-
-    let list_r = [];
-
-    $('#enviar_encuesta').on('click', function() {
-        // alert('envio de formulario');
-        let enc = $('.encuesta_completa');
-        let id_curso = $('#id_curso').val();
-
-        for (let index = 0; index < enc.length; index++) {
-            const respuesta = enc[index];
-            let id = $('#id_pregunta_' + (index + 1)).val();
-            let res = $('input[name=pregunta_' + (index + 1) + ']:checked', enc[index]).val();
-            let res_id = [id, res];
-            list_r.push(res_id);
-            // console.log(res_id);
-        }
-
-        // alert(list_r);
         $.ajax({
-            url: "/Talleres/guardarRespuestas",
+            url: "/Congreso/saveChat",
             type: "POST",
-            dataType: 'json',
-            data: {
-                list_r,
-                id_curso
-            },
+            data: formData,
+            contentType: false,
+            processData: false,
             beforeSend: function() {
+                event.preventDefault();
+                document.getElementById("txt_chat").value = "";
                 console.log("Procesando....");
+                // alert('Se está borrando');
             },
             success: function(respuesta) {
                 console.log(respuesta);
+                chats(id_tipo, sala);
 
-                if (respuesta.status == 'success') {
-                    Swal.fire('Se ha guardado correctamente su examen', '', 'success').
-                    then((result) => {
-                        console.log('a');
-                        $('#constancia_download').attr('href', respuesta.href)
-                        $('#constancia_download')[0].click();
-                        // $('#constancia_download_1').attr('href',respuesta.href_download)
-                        // $('#constancia_download_1')[0].click();
-                        window.location.reload();
-                    });
-                } else {
-                    Swal.fire('Lo sentimos, usted ya ha contestado este examen', '', 'info').
-                    then((result) => {
-                        console.log('b');
-                        window.location.reload();
-                    });
+            },
+            error: function(respuesta) {
+                console.log(respuesta);
+
+            }
+        });
+    }
+
+    function savePregunta() {
+        //event.preventDefault(event);
+        var formData = new FormData(document.getElementById("form_pregunta"));
+
+        var id_tipopre = formData.get('id_tipopre');
+        var salapre = formData.get('salapre');
+
+        $.ajax({
+            url: "/Talleres/savePregunta",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            beforeSend: function() {
+                event.preventDefault();
+                document.getElementById("txt_pregunta").value = "";
+                console.log("Procesando....");
+                // alert('Se está borrando');
+            },
+            success: function(respuesta) {
+                console.log(respuesta);
+                if (respuesta == "success") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Su preguntaha sido enviada correctamente',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
                 }
 
+
+
             },
             error: function(respuesta) {
                 console.log(respuesta);
-                Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
-                then((result) => {
-                    console.log('c');
+
+            }
+        });
+    }
+
+    function chats(id_tipo, sala) {
+
+        console.log(id_tipo);
+        console.log("sala " + sala);
+
+        $.ajax({
+            url: "/Congreso/getChatById",
+            type: "POST",
+            data: {
+                id_tipo,
+                sala
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                console.log("Procesando....");
+                $("#cont_chat").empty();
+
+            },
+            success: function(respuesta) {
+
+                console.log(respuesta);
+                // var numero_noti = 0;
+
+                $.each(respuesta, function(index, el) {
+
+                    // console.log(el.title);
+                    var nombre_completo = el.name_user + ' ' + el.surname + ' ' + el.second_surname;
+                    // <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/${el.avatar_img}">
+
+                    $("#cont_chat").append(
+                        `<div class="d-flex mt-3">
+                            <div class="flex-shrink-0">
+                                <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/form.jpg">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h6 class="h5 mt-0">${nombre_completo}</h6>
+                                <p class="text-sm">${el.chat}</p>
+                                
+                            </div>
+                        </div>`
+                    );
                 });
+
+
+
+            },
+            error: function(respuesta) {
+                console.log(respuesta);
             }
+
         });
+    }
+
+    $(document).ready(function() {
+
+        let list_r = [];
+
+        // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+
+        $('#enviar_encuesta').on('click', function() {
+            // alert('envio de formulario');
+            let enc = $('.encuesta_completa');
+            let id_curso = $('#id_curso').val();
+
+            for (let index = 0; index < enc.length; index++) {
+                const respuesta = enc[index];
+                let id = $('#id_pregunta_' + (index + 1)).val();
+                let res = $('input[name=pregunta_' + (index + 1) + ']:checked', enc[index]).val();
+                let res_id = [id, res];
+                list_r.push(res_id);
+                // console.log(res_id);
+            }
+
+            // alert(list_r);
+            $.ajax({
+                url: "/Talleres/guardarRespuestas",
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    list_r,
+                    id_curso
+                },
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+
+                    if (respuesta.status == 'success') {
+                        Swal.fire('Ha contestado la trivia', '', 'success').
+                        then((result) => {
+                            console.log('a');
+                            // $('#constancia_download').attr('href', respuesta.href)
+                            // $('#constancia_download')[0].click();
+                            // $('#constancia_download_1').attr('href',respuesta.href_download)
+                            // $('#constancia_download_1')[0].click();
+                            window.location.reload();
+                        });
+                    } else {
+                        Swal.fire('Lo sentimos, usted ya ha contestado la trivia', '', 'info').
+                        then((result) => {
+                            console.log('b');
+                            window.location.reload();
+                        });
+                    }
+
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                    Swal.fire('Ha contestado la trivia', '', 'success');
+                //     Swal.fire('Ha ocurrido un error, contacte con soporte', '', 'error').
+                //     then((result) => {
+                //         console.log('c');
+                //     });
+                }
+            });
+        });
+
+        setTimeout(agregarVista, 10000);
+
+        var vista = 0;
+
+        function agregarVista() {
+            vista++;
+            console.log("Vista nueva al video: " + vista);
+
+            clave_video = $('#clave_video').val();
+
+            $.ajax({
+                url: "/Talleres/Vistas",
+                type: "POST",
+                data: {
+                    clave_video
+                },
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+
+                    console.log(respuesta);
+
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+            });
+        }
+
+        let inicio = $('#barra_progreso').val();
+        let duracion = $('#barra_progreso').attr('max');
+
+        let porcentaje_num = (inicio * 100) / parseInt(duracion);
+        let increment = 1;
+
+        let tiempo_total = 0;
+
+        
+
+        function countTime() {
+            intervalo = setInterval(function() {
+                tiempo_total++;
+
+                if (inicio < duracion) {
+                    inicio += increment;
+                }
+
+                if (tiempo_total % 60 == 0) {
+                    console.log('Ejecutamos Ajax');
+                    actualizarProgreso($('#id_curso').val(), inicio);
+
+                }
+
+                // if (porcentaje_num >= 79) {
+                    // $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Responde la Trivia</button>');
+                // }
+
+                $('#barra_progreso').val(inicio);
+                porcentaje_num = (inicio * 100) / parseInt(duracion);
+                $('#porcentaje').html(porcentaje_num.toFixed(0) + ' %');
+
+
+            }, 1000);
+
+            // $(window).blur(function() {
+            //     ventana = 0;
+            //     increment = 0;
+            //     console.log('fuera de la ventana');
+            // });
+            // $(window).focus(function() {
+            //     ventana = 1;
+            //     increment = 1;
+            //     console.log('dentro de la ventana');
+            // });
+        }
+
+        function actualizarProgreso(curso, segundos) {
+
+            // console.log("curso " +curso);
+            // console.log("segundos "+segundos);
+            $.ajax({
+                url: "/Talleres/updateProgress",
+                type: "POST",
+                data: {
+                    curso,
+                    segundos
+                },
+                beforeSend: function() {
+                    console.log("Procesando....");
+                },
+                success: function(respuesta) {
+                    console.log(respuesta);
+                },
+                error: function(respuesta) {
+                    console.log(respuesta);
+                }
+            });
+        }
+
+        // function boton(){
+        //     $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Examen</button>');
+        // }
+        // boton();
+        countTime();
     });
-
-    setTimeout(agregarVista, 10000);
-
-    var vista = 0;
-
-    function agregarVista() {
-        vista++;
-        console.log("Vista nueva al video: " + vista);
-
-        clave_video = $('#clave_video').val();
-
-        $.ajax({
-            url: "/Talleres/Vistas",
-            type: "POST",
-            data: {
-                clave_video
-            },
-            beforeSend: function() {
-                console.log("Procesando....");
-            },
-            success: function(respuesta) {
-
-                console.log(respuesta);
-
-            },
-            error: function(respuesta) {
-                console.log(respuesta);
-            }
-        });
-    }
-
-    let inicio = $('#barra_progreso').val();
-    let duracion = $('#barra_progreso').attr('max');
-
-    let porcentaje_num = (inicio * 100) / parseInt(duracion);
-    let increment = 1;
-
-    let tiempo_total = 0;
-
-    function countTime() {
-        intervalo = setInterval(function() {
-            tiempo_total++;
-
-            if (inicio < duracion) {
-                inicio += increment;
-            }
-
-            if (tiempo_total % 60 == 0) {
-                console.log('Ejecutamos Ajax');
-                actualizarProgreso($('#id_curso').val(), inicio);
-
-            }
-
-            if (porcentaje_num >= 79) {
-                $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Examen</button>');
-            }
-
-            $('#barra_progreso').val(inicio);
-            porcentaje_num = (inicio * 100) / parseInt(duracion);
-            $('#porcentaje').html(porcentaje_num.toFixed(0) + ' %');
-
-
-        }, 1000);
-
-        // $(window).blur(function() {
-        //     ventana = 0;
-        //     increment = 0;
-        //     console.log('fuera de la ventana');
-        // });
-        // $(window).focus(function() {
-        //     ventana = 1;
-        //     increment = 1;
-        //     console.log('dentro de la ventana');
-        // });
-    }
-
-    function actualizarProgreso(curso, segundos) {
-        $.ajax({
-            url: "/Talleres/updateProgress",
-            type: "POST",
-            data: {
-                curso,
-                segundos
-            },
-            beforeSend: function() {
-                console.log("Procesando....");
-            },
-            success: function(respuesta) {
-                console.log(respuesta);
-            },
-            error: function(respuesta) {
-                console.log(respuesta);
-            }
-        });
-    }
-
-    // function boton(){
-    //     $('#btn-examen').html('<button type="button" class="btn btn-primary" style="background-color: orangered!important;" data-toggle="modal" data-target="#encuesta">Examen</button>');
-    // }
-    // boton();
-    countTime();
-});
 </script>

@@ -207,6 +207,18 @@ sql;
       return $mysqli->queryAll($query);
     }
 
+    public static function getPreguntasTriviaUsuario($curso){
+      $mysqli = Database::getInstance();
+      $query=<<<sql
+      SELECT *
+      FROM preguntas_encuesta_curso 
+      WHERE id_producto = $curso
+sql;
+      return $mysqli->queryAll($query);
+    }
+
+   
+
 //     public static function getTallerById($id){
 //       $mysqli = Database::getInstance(true);
 //       $query =<<<sql
@@ -581,6 +593,17 @@ sql;
         UPDATE progresos_productocursos 
         SET segundos = '$segundos', fecha_ultima_vista = NOW()
         WHERE id_producto = '$id_curso' 
+        AND user_id = '$registrado'
+sql;
+    return $mysqli->update($query);
+  } 
+
+  public static function updateProgresoFechaProductoCongreso($id_curso, $registrado, $segundos){
+    $mysqli = Database::getInstance();
+    $query=<<<sql
+        UPDATE progresos_productocongreso 
+        SET segundos = '$segundos', fecha_ultima_vista = NOW()
+        WHERE id_video_congreso = '$id_curso' 
         AND user_id = '$registrado'
 sql;
     return $mysqli->update($query);
