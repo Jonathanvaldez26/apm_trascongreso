@@ -534,7 +534,7 @@ html;
             }
 
             $data = new \stdClass();
-            $data->_tipo = 3;
+            $data->_tipo = 2;
             $data->_sala = 1;
             $data->_id_tipo = $id_curso;
 
@@ -549,7 +549,7 @@ html;
                 $cont_chat .= <<<html
             <div class="d-flex mt-3">
                 <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/form.jpg">
+                    <img alt="Image placeholder" class="avatar rounded-circle" src="../../../img/users_musa/{$value['avatar_img']}">
                 </div>
                 <div class="flex-grow-1 ms-3">
                     <h6 class="h5 mt-0">{$nombre_completo}</h6>
@@ -558,13 +558,11 @@ html;
                 </div>
             </div>
 html;
-                // $avatar = $value['avatar_img'];
-                $avatar = 'form.jpg';
+                $avatar = $value['avatar_img'];
             }
 
 
             // var_dump($preguntas)
-
 
             View::set('clave', $clave);
             View::set('encuesta', $encuesta);
