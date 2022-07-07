@@ -63,7 +63,7 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-sm-auto col-4">
                             <div class="avatar avatar-xl position-relative">
-                            <img src="/assets/img/Logo_SMNP.png">
+                            <!-- <img src="/assets/img/Logo_SMN.png"> -->
                             </div>
                         </div>
                         <div class="col-sm-auto col-8 my-auto">
@@ -225,16 +225,16 @@
                 $('#porcentaje').html(porcentaje_num.toFixed(0)+' %');
             },1000);
 
-            $(window).blur(function() {
-                ventana = 0;
-                increment = 0;
-                console.log('fuera de la ventana');
-            });
-            $(window).focus(function() {
-                ventana = 1;
-                increment = 1;
-                console.log('dentro de la ventana');
-            });
+            // $(window).blur(function() {
+            //     ventana = 0;
+            //     increment = 0;
+            //     console.log('fuera de la ventana');
+            // });
+            // $(window).focus(function() {
+            //     ventana = 1;
+            //     increment = 1;
+            //     console.log('dentro de la ventana');
+            // });
         }
 
         function actualizarProgreso(programa, segundos){

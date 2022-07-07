@@ -62,7 +62,7 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-sm-auto col-4">
                             <div class="avatar avatar-xl position-relative">
-                            <img src="/assets/img/Logo_SMNP.png">
+                            <img src="/assets/img/Logo_SMN.png">
                             </div>
                         </div>
                         <div class="col-sm-auto col-8 my-auto">
@@ -89,27 +89,27 @@
                                                 
                                             <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                                                 <li class="nav-item transmisiones px-3" data-transmision="1">
-                                                    <a class="nav-link mb-0 px-0 py-1 active" href="#m_18" data-bs-toggle="tab" role="tab" aria-selected="true">
+                                                    <a class="nav-link mb-0 px-0 py-1 active" href="#m_21" data-bs-toggle="tab" role="tab" aria-selected="true">
                                                         <span class="fa fa-calendar"></span>
-                                                        <span class="ms-1">18 de mayo</span>
+                                                        <span class="ms-1">21 de Junio</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item transmisiones px-3" data-transmision="2">
-                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_19" data-bs-toggle="tab" role="tab" aria-selected="false">
+                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_22" data-bs-toggle="tab" role="tab" aria-selected="false">
                                                         <span class="fa fa-calendar"></span>
-                                                        <span class="ms-1">19 de mayo</span>
+                                                        <span class="ms-1">22 de Junio</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item transmisiones px-3" data-transmision="2">
-                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_20" data-bs-toggle="tab" role="tab" aria-selected="false">
+                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_23" data-bs-toggle="tab" role="tab" aria-selected="false">
                                                         <span class="fa fa-calendar"></span>
-                                                        <span class="ms-1">20 de mayo</span>
+                                                        <span class="ms-1">23 de Junio</span>
                                                     </a>
                                                 </li>
                                                 <li class="nav-item transmisiones px-3" data-transmision="2">
-                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_21" data-bs-toggle="tab" role="tab" aria-selected="false">
+                                                    <a class="nav-link mb-0 px-0 py-1" href="#m_24" data-bs-toggle="tab" role="tab" aria-selected="false">
                                                         <span class="fa fa-calendar"></span>
-                                                        <span class="ms-1">21 de mayo</span>
+                                                        <span class="ms-1">24 de Junio</span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -128,54 +128,25 @@
 
             <div class="card col-lg-10 mt-lg-3 mt-1" >
                 <div class="tab-content" id="v-pills-tabContent">
-                    <div class="tab-pane fade show position-relative active border-radius-lg" id="m_18" role="tabpanel" aria-labelledby="m_18">
+                    <div class="tab-pane fade show position-relative active border-radius-lg" id="m_21" role="tabpanel" aria-labelledby="m_21">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
-                                <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt="">
+                                <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                             </div>
                         </div>
                         
 
-                        <div class="card-body p-3">
+                        <!-- <div class="card-body p-3">
                             <div class="row mt-3">
                                     <?php //echo $card_programa; ?>
                             </div>
-                        </div>
+                        </div> -->
                         
 
                         <div class="card-body p-3">
-                            <?php //echo $programa_fecha1; ?>
+                            <?php echo $programa_fecha1; ?>
 
-                            <div class="row">
-
-                                <div class="col-md-6  col-sm-12 my-md-3 my-sm-3">
-                                    <a href="/Programa/sala_uno">
-                                        <div class="card card-link btn-menu-home m-auto" style="background-image: url(/img/SMNP_Iconos/18.png)">
-                                            <div class="card-body mt-md-3 text-center content-card-home">
-                                                <div class="col-12 text-center">
-                                                   
-                                                </div>
-
-                                               
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="col-sm-12 col-md-6 my-md-3 my-sm-3">
-                                    <a href="/Programa/sala_dos">
-                                        <div class="card card-link btn-menu-home m-auto" style="background-image: url(/img/SMNP_Iconos/19.png)">
-                                            <div class="card-body mt-md-3 text-center content-card-home">
-                                                <div class="col-12 text-center">
-                                                
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
+                            
                             
 
                             <div class="row">
@@ -185,10 +156,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade position-relative border-radius-lg" id="m_19" role="tabpanel" aria-labelledby="m_19">
+                    <div class="tab-pane fade position-relative border-radius-lg" id="m_22" role="tabpanel" aria-labelledby="m_22">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
-                                <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt="">
+                                <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                             </div>
                         </div>
                         
@@ -201,10 +172,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade position-relative border-radius-lg" id="m_20" role="tabpanel" aria-labelledby="m_20">
+                    <div class="tab-pane fade position-relative border-radius-lg" id="m_23" role="tabpanel" aria-labelledby="m_23">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
-                                <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt="">
+                                <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                             </div>
                         </div>
                         
@@ -217,10 +188,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade position-relative border-radius-lg" id="m_21" role="tabpanel" aria-labelledby="m_21">
+                    <div class="tab-pane fade position-relative border-radius-lg" id="m_24" role="tabpanel" aria-labelledby="m_24">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
-                                <img src="/assets/img/cinta_menu.jpeg" style="border-radius: 20px; height: 38px;" alt="">
+                                <div style="background-color: rgb( 0 145 135 ); border-radius: 20px; height: 38px;"></div>
                             </div>
                         </div>
                         

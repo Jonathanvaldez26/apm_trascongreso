@@ -95,6 +95,17 @@ sql;
     return $mysqli->queryAll($query);
   }
 
+  public static function getUserRegisterByClave($clave,$id_producto){
+    $mysqli = Database::getInstance(true);
+    $query =<<<sql
+    SELECT ua.*,pp.* FROM utilerias_administradores ua 
+    INNER JOIN pendiente_pago pp ON ua.user_id = pp.user_id
+    WHERE ua.clave = '$clave' AND pp.id_producto = $id_producto;
+sql;
+
+  return $mysqli->queryAll($query);
+}
+
   public static function getStatus(){
       $mysqli = Database::getInstance();
       $query=<<<sql
