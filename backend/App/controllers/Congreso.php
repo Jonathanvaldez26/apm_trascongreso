@@ -1807,7 +1807,7 @@ html;
                     <progress class="barra_progreso_small" max="{$secs_totales}" value="{$progreso_total}"></progress>
                 </div>
                 
-                <span class="text-lg text-center text-dark opacity-8">Progreso <span class="porcentaje">{$porcentaje} %</span> </span>
+                <span class="text-lg text-center text-dark opacity-8">Progreso: <span class="porcentaje">{$progreso_horas} HORAS</span> </span>
                
             </td>
 

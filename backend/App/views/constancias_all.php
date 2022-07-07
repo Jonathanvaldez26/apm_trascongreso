@@ -173,8 +173,9 @@
            
             Swal.fire({
                 title: 'Su certificado se descargará al presionar el botón acepto',
-                text: "con un total de "+progreso+" hrs. usted no podrá volver a descargar el certificado.",
+                text: "con un total de "+progreso+" hrs." + "<p style='color:red'>" + " usted no podrá volver a descargar el certificado." + "</p>",
                 icon: 'warning',
+                html: "con un total de "+progreso+" hrs." + "<h4 style='color:red'>" + " usted no podrá volver a descargar el certificado." + "</h4>",
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
