@@ -172,8 +172,8 @@
             var progreso = $(this).attr('data-progreso');
            
             Swal.fire({
-                title: 'Su certificado se descargara al presionar el boton acepto',
-                text: "con un total de "+progreso+" hrs. usted no podra volver a descargar el ceritficado.",
+                title: 'Su certificado se descargará al presionar el botón acepto',
+                text: "con un total de "+progreso+" hrs. usted no podrá volver a descargar el certificado.",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

@@ -103,7 +103,7 @@
                     </div>
                     <hr class="horizontal dark">
                     <!-- Comments -->
-                    <div class="mb-1">
+                    <!-- <div class="mb-1">
                         <div class="col-12 col-md-12">
                             <span class="color-vine font-18 text-bold mb-2">
                                 Coordinador:
@@ -124,7 +124,7 @@
                                 <?php echo $desc_profesor;?>
                             </p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>

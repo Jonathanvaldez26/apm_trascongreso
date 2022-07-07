@@ -128,7 +128,7 @@ html;
                 <div class="card-body " style="height:235px;">
                     <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                     <div class="caratula-content">
-                       <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                       <!-- <a href="/Talleres/Video/{$value['clave']}/{$value['id_producto']}"> -->
                             <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
                         <!--</a>-->
                         <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
@@ -154,7 +154,7 @@ html;
                             </div>
                         </div>-->
                     </div>
-                    <a href="/Talleres/Video/{$value['clave']}">
+                    <a href="/Programa/Video/{$value['clave']}/{$value['id_producto']}">
                         <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p>               
                         
         
@@ -364,7 +364,7 @@ html;
                         <div class="card-body " style="height:235px;">
                             <input class="curso" hidden type="text" value="{$value['clave']}" readonly>
                             <div class="caratula-content">
-                            <!-- <a href="/Talleres/Video/{$value['clave']}"> -->
+                            <!-- <a href="/Talleres/Video/{$value['clave']}/{$value['id_producto']}"> -->
                                 <img class="caratula-img border-radius-15" src="/caratulas/{$value['caratula']}" style="object-fit: cover; object-position: center center; height: auto;">
                             <!--</a>-->
                             <!--<div class="duracion"><p>{$value['duracion']}</p></div>-->
