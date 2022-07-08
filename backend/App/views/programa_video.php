@@ -1,5 +1,5 @@
 <title>
-    Cursos - Neuropediatría 
+    Cursos - APM
 </title>
 <?php echo $header; ?>
 <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <hr class="horizontal dark">
-                    <!-- Comments -->
+                    <!-- COORDINADOR Y PROFESOR EN VIDEO -->
                     <!-- <div class="mb-1">
                         <div class="col-12 col-md-12">
                             <span class="color-vine font-18 text-bold mb-2">
