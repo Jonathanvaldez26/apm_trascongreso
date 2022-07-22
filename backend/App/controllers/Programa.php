@@ -175,7 +175,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items))){
+                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -299,7 +299,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items))){
+                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -738,7 +738,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items))){
+                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
