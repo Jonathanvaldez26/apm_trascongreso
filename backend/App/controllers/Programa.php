@@ -508,7 +508,7 @@ html;
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa','xytB8X','inwgC3','JulKUi','KdOXkB','qO9rWF','8PgQyM','u0VKDP'];
             
-                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items)) AND($value['url'] != '#')){
+                if(in_array($value['clave'],$claves_cursos) AND ($value_producto['user_id'] == $_SESSION['user_id']) AND (in_array($value['id_producto'],$items))){
                     $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
                     {$value['descripcion_subtitulo']}
@@ -528,7 +528,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items))){
+                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
