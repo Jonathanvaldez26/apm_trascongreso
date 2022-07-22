@@ -175,7 +175,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -299,7 +299,26 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
+                }else if($value['url'] == '#'){
+                    $submenu = <<<html
+                <span class="text-bold font-14 text-lg" readonly>
+                    {$value['descripcion_subtitulo']}
+                </span>
+                <br><br>
+html;
+                    $desc_sub = '';
+                    $sub = <<<html
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+html;
+                }
+                else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -528,7 +547,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -738,7 +757,7 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if((!in_array($value['id_producto'],$items)) || ($value['url'] == '#')){
+                }else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
