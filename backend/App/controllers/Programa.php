@@ -142,6 +142,11 @@ html;
 
             $hora_inicio =substr($value['hora_inicio'],0,strlen($value['hora_inicio'])-3);
             $hora_fin = substr($value['hora_fin'],0,strlen($value['hora_fin'])-3);
+            $horas = <<<html
+            <span class="color-yellow text-bold">
+                {$hora_inicio} - {$hora_fin}
+            </span>
+html;
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time,strlen($max_time)-2,2);
@@ -196,16 +201,9 @@ html;
                 }
                 else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
-                    $sub = <<<html
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-html;               $submenu = '';
+                    $sub = '';      
+                    $submenu = '';
+                    $horas = '';
                 }
                 else{
                     $submenu = '';
@@ -251,9 +249,7 @@ html;
             $programa_fecha1 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                        <span class="color-yellow text-bold">
-                            {$hora_inicio} - {$hora_fin}
-                        </span>
+                        {$horas}
                     </div>
                     <div class="col-12 col-md-6">
                             {$sub}
@@ -285,6 +281,11 @@ html;
 
             $hora_inicio =substr($value['hora_inicio'],0,strlen($value['hora_inicio'])-3);
             $hora_fin = substr($value['hora_fin'],0,strlen($value['hora_fin'])-3);
+            $horas = <<<html
+            <span class="color-yellow text-bold">
+                {$hora_inicio} - {$hora_fin}
+            </span>
+html;
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time,strlen($max_time)-2,2);
@@ -339,16 +340,9 @@ html;
                 }
                 else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
-                    $sub = <<<html
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-html;               $submenu = '';
+                    $sub = '';      
+                    $submenu = '';
+                    $horas = '';
                 }
                 else{
                     $submenu = '';
@@ -499,9 +493,7 @@ html;
             $programa_fecha2 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                        <span class="color-yellow text-bold">
-                            {$hora_inicio} - {$hora_fin}
-                        </span>
+                        {$horas}
                     </div>
                     <div class="col-12 col-md-6">
                             {$sub}
@@ -533,6 +525,11 @@ html;
 
             $hora_inicio =substr($value['hora_inicio'],0,strlen($value['hora_inicio'])-3);
             $hora_fin = substr($value['hora_fin'],0,strlen($value['hora_fin'])-3);
+            $horas = <<<html
+            <span class="color-yellow text-bold">
+                {$hora_inicio} - {$hora_fin}
+            </span>
+html;
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time,strlen($max_time)-2,2);
@@ -587,16 +584,9 @@ html;
                 }
                 else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
-                    $sub = <<<html
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-html;               $submenu = '';
+                    $sub = '';      
+                    $submenu = '';
+                    $horas = '';
                 }
                 else{
                     $submenu = '';
@@ -728,9 +718,7 @@ html;
             $programa_fecha3 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                        <span class="color-yellow text-bold">
-                            {$hora_inicio} - {$hora_fin}
-                        </span>
+                        {$horas}
                     </div>
                     <div class="col-12 col-md-6">
                             {$sub}
@@ -762,6 +750,11 @@ html;
 
             $hora_inicio =substr($value['hora_inicio'],0,strlen($value['hora_inicio'])-3);
             $hora_fin = substr($value['hora_fin'],0,strlen($value['hora_fin'])-3);
+            $horas = <<<html
+            <span class="color-yellow text-bold">
+                {$hora_inicio} - {$hora_fin}
+            </span>
+html;
 
             $max_time = $value['duracion'];
             $duracion_sec = substr($max_time,strlen($max_time)-2,2);
@@ -816,16 +809,9 @@ html;
                 }
                 else if((!in_array($value['id_producto'],$items))){
                     $desc_sub = '';
-                    $sub = <<<html
-                            <span class="color-green text-bold font-20 text-lg">
-                                {$value['descripcion']}
-                            </span>
-                            <br><br>
-                            <span class="text-bold font-18 text-lg">
-                            {$value['subtitulo']}
-                            </span>
-                            <br><br>
-html;               $submenu = '';
+                    $sub = '';      
+                    $submenu = '';
+                    $horas = '';
                 }
                 else{
                     $submenu = '';
@@ -975,9 +961,7 @@ html;
             $programa_fecha4 .= <<<html
                 <div class="row mb-3">
                     <div class="col-12 col-md-2">
-                        <span class="color-yellow text-bold">
-                            {$hora_inicio} - {$hora_fin}
-                        </span>
+                        {$horas}
                     </div>
                     <div class="col-12 col-md-6">
                             {$sub}
