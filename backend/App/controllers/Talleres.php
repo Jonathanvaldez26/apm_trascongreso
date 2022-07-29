@@ -213,7 +213,7 @@ html;
                             </div>
                         </div>-->
                     </div>
-                    <a href="/Talleres/Video/{$value['clave']}">
+                    <a href="/Programa/Video/{$value['clave']}/{$value['id_producto']}">
                         <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p>               
                         
         
@@ -603,7 +603,7 @@ html;
                             </div>
                         </div>-->
                     </div>
-                    <a href="/Talleres/Video/{$value['clave']}">
+                    <a href="/Programa/">
                         <p style="font-size: 14px;" class="text-left mx-3 mt-2" style="color: black;"><b>{$value['nombre']}</b></p>               
                         
         
