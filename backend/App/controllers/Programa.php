@@ -320,23 +320,21 @@ html;
                         </a>
 html;
                 }else if($value['url'] == '#'){
+
                     $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
-
-                    $submenu1 = '';
+                   
                     foreach($getSubtema as $value_s){
-
-                        $submenu1 .= <<<html
+                        $submenu .= <<<html
                         <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
                             <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
                         </a>
                         <br>
                         <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
-
                         <br>
-                        
+                     
 html;
                     }
-                    
+
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -357,24 +355,24 @@ html;
                 }
                 else{
                     $submenu = '';
-//                     $desc_sub = <<<html
-//                         <span class="text-bold font-14 text-lg" readonly>
-//                             {$value['descripcion_subtitulo']}
-//                         </span>
-//                         <br><br>
-// html;
-//                     $sub = <<<html
-//                         <a href="/Programa/Video/{$value['clave']}/{$value['id_producto']}">
-//                             <span class="color-green text-bold font-20 text-lg">
-//                                 {$value['descripcion']}
-//                             </span>
-//                             <br><br>
-//                             <span class="text-bold font-18 text-lg">
-//                             {$value['subtitulo']}
-//                             </span>
-//                             <br><br>
-//                         </a>
-// html;
+                    $desc_sub = <<<html
+                        <span class="text-bold font-14 text-lg" readonly>
+                            {$value['descripcion_subtitulo']}
+                        </span>
+                        <br><br>
+html;
+                    $sub = <<<html
+                        <a href="/Programa/Video/{$value['clave']}/{$value['id_producto']}">
+                            <span class="color-green text-bold font-20 text-lg">
+                                {$value['descripcion']}
+                            </span>
+                            <br><br>
+                            <span class="text-bold font-18 text-lg">
+                            {$value['subtitulo']}
+                            </span>
+                            <br><br>
+                        </a>
+html;
                 }
  
                 
@@ -508,7 +506,7 @@ html;
                     </div>
                     <div class="col-12 col-md-6">
                             {$sub}
-                            {$submenu1}
+                            {$submenu}
                             {$desc_sub}
                             <!--<span class="mt-4">
                                 <b>Progreso: $porcentaje %</b>
@@ -575,12 +573,21 @@ html;
                         </a>
 html;
                 }else if($value['url'] == '#'){
-                    $submenu = <<<html
-                <span class="text-bold font-14 text-lg" readonly>
-                    {$value['descripcion_subtitulo']}
-                </span>
-                <br><br>
+                    
+                    $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
+                   
+                    foreach($getSubtema as $value_s){
+                        $submenu .= <<<html
+                        <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
+                            <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
+                        </a>
+                        <br>
+                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
+                        <br>
+                     
 html;
+                    }
+
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
@@ -800,12 +807,21 @@ html;
                         </a>
 html;
                 }else if($value['url'] == '#'){
-                    $submenu = <<<html
-                <span class="text-bold font-14 text-lg" readonly>
-                    {$value['descripcion_subtitulo']}
-                </span>
-                <br><br>
+                   
+                    $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
+                   
+                    foreach($getSubtema as $value_s){
+                        $submenu .= <<<html
+                        <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
+                            <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
+                        </a>
+                        <br>
+                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
+                        <br>
+                     
 html;
+                    }
+                    
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
