@@ -334,17 +334,20 @@ html;
                     if($getSubtema > 0){                   
 
                    
-                    foreach($getSubtema as $value_s){
-                        $submenu .= <<<html
-                        <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
-                            <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
-                        </a>
-                        <br>
-                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
-                        <br>
-                     
-html;
-                    }
+                        foreach($getSubtema as $value_s){
+
+                            $url_ruta = ($value_s['url'] == '#' ) ? '#' : "/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}";
+    
+                            $submenu .= <<<html
+                            <a href="{$url_ruta}">
+                                <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
+                            </a>
+                            <br>
+                            <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
+                            <br>
+                         
+    html;
+                        }
                 }
 
                     $desc_sub = '';
@@ -600,18 +603,20 @@ html;
 
                     if($getSubtema > 0){                   
 
-                   
-                    foreach($getSubtema as $value_s){
-                        $submenu .= <<<html
-                        <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
-                            <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
-                        </a>
-                        <br>
-                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
-                        <br>
-                     
+                        foreach($getSubtema as $value_s){
+
+                            $url_ruta = ($value_s['url'] == '#' ) ? '#' : "/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}";
+    
+                            $submenu .= <<<html
+                            <a href="{$url_ruta}">
+                                <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
+                            </a>
+                            <br>
+                            <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
+                            <br>
+                         
 html;
-                    }
+                        }
                 }
 
                     $desc_sub = '';
@@ -848,8 +853,11 @@ html;
 
                    
                     foreach($getSubtema as $value_s){
+
+                        $url_ruta = ($value_s['url'] == '#' ) ? '#' : "/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}";
+
                         $submenu .= <<<html
-                        <a href="/Programa/VideoSub/{$value_s['clave']}/{$value_s['id_producto']}">
+                        <a href="{$url_ruta}">
                             <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
                         </a>
                         <br>
