@@ -319,9 +319,20 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if($value['url'] == '#'){
+                }else if($value['url'] == '#' || is_numeric(strpos($value['url'],"http"))){
+                    $submenu = '';
 
+                    $submenu .= <<<html
+                    <span class="text-bold font-14 text-lg" readonly>
+                        {$value['descripcion_subtitulo']}
+                    </span>
+                    
+html;
+                    
                     $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
+
+                    if($getSubtema > 0){                   
+
                    
                     foreach($getSubtema as $value_s){
                         $submenu .= <<<html
@@ -329,11 +340,12 @@ html;
                             <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
                         </a>
                         <br>
-                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
+                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
                         <br>
                      
 html;
                     }
+                }
 
                     $desc_sub = '';
                     $sub = <<<html
@@ -355,6 +367,8 @@ html;
                 }
                 else{
                     $submenu = '';
+                  
+
                     $desc_sub = <<<html
                         <span class="text-bold font-14 text-lg" readonly>
                             {$value['descripcion_subtitulo']}
@@ -572,9 +586,20 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if($value['url'] == '#'){
+                }else if($value['url'] == '#' || is_numeric(strpos($value['url'],"http"))){
+                    $submenu = '';
+
+                    $submenu .= <<<html
+                    <span class="text-bold font-14 text-lg" readonly>
+                        {$value['descripcion_subtitulo']}
+                    </span>
+                    
+html;
                     
                     $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
+
+                    if($getSubtema > 0){                   
+
                    
                     foreach($getSubtema as $value_s){
                         $submenu .= <<<html
@@ -582,11 +607,12 @@ html;
                             <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
                         </a>
                         <br>
-                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
+                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
                         <br>
                      
 html;
                     }
+                }
 
                     $desc_sub = '';
                     $sub = <<<html
@@ -806,9 +832,20 @@ html;
                             <br><br>
                         </a>
 html;
-                }else if($value['url'] == '#'){
-                   
+                }else if($value['url'] == '#' || is_numeric(strpos($value['url'],"http"))){
+                    $submenu = '';
+
+                    $submenu .= <<<html
+                    <span class="text-bold font-14 text-lg" readonly>
+                        {$value['descripcion_subtitulo']}
+                    </span>
+                    
+html;
+                    
                     $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
+
+                    if($getSubtema > 0){                   
+
                    
                     foreach($getSubtema as $value_s){
                         $submenu .= <<<html
@@ -816,12 +853,13 @@ html;
                             <span class="text-bold font-12 text-lg">{$value_s['subtitulo']}</span>
                         </a>
                         <br>
-                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']}</span>
+                        <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
                         <br>
                      
 html;
                     }
-                    
+                }
+
                     $desc_sub = '';
                     $sub = <<<html
                             <span class="color-green text-bold font-20 text-lg">
