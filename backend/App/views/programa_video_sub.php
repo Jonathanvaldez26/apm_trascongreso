@@ -63,25 +63,25 @@
                     <div class="row justify-content-center align-items-center">
                         <div class="col-sm-auto col-4">
                             <div class="avatar avatar-xl position-relative">
-                            <!-- <img src="/assets/img/Logo_SMN.png"> -->
+                                <!-- <img src="/assets/img/Logo_SMN.png"> -->
                             </div>
                         </div>
                         <div class="col-sm-auto col-8 my-auto">
                             <div class="h-100">
-                                <h4 class="mb-3 text-center color-green"><?php echo $nombre_programa;?></h4>
+                                <h4 class="mb-3 text-center color-green"><?php echo $nombre_programa; ?></h4>
                                 <div class="">
                                     <span class="color-yellow ">
-                                        Horario: 
-                                        <?php echo $hora_inicio.' - '.$hora_fin;?>
+                                        Horario:
+                                        <?php echo $hora_inicio . ' - ' . $hora_fin; ?>
                                     </span>
                                 </div>
 
-                                <input type="text" id="nombre_t1" value="<?php echo $transmision_1['nombre'];?>" readonly hidden>
-                                <input type="text" id="nombre_t2" value="<?php echo $transmision_2['nombre'];?>" readonly hidden>
-                            
+                                <input type="text" id="nombre_t1" value="<?php echo $transmision_1['nombre']; ?>" readonly hidden>
+                                <input type="text" id="nombre_t2" value="<?php echo $transmision_2['nombre']; ?>" readonly hidden>
+
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 me-4">
                             <a href="/Programa/">
                                 <span class="text-dark"><i class="fas fa-undo"></i> Regresar</span>
@@ -93,24 +93,24 @@
         </div>
 
         <div class="row mt-4">
-        <div class="col-12 col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-12 m-auto text-center">
-                            <?php echo $video_programa;?>
+            <div class="col-12 col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-12 m-auto text-center">
+                                <?php echo $video_programa; ?>
+                            </div>
                         </div>
-                    </div>
-                    <hr class="horizontal dark">
-                    <!-- COORDINADOR Y PROFESOR EN VIDEO -->
-                    <!-- <div class="mb-1">
+                        <hr class="horizontal dark">
+                        <!-- COORDINADOR Y PROFESOR EN VIDEO -->
+                        <!-- <div class="mb-1">
                         <div class="col-12 col-md-12">
                             <span class="color-vine font-18 text-bold mb-2">
                                 Coordinador:
                             </span>
                             <br>
                             <span class="color-vine font-14 text-bold">
-                                <?php echo $coordinador;?>
+                                <?php echo $coordinador; ?>
                             </span>
                             <br><br>
                             <span class="color-vine font-18 text-bold">
@@ -118,56 +118,60 @@
                             </span>
                             <br>
                             <span class="color-vine font-16 text-bold">
-                                <?php echo $profesor;?>
+                                <?php echo $profesor; ?>
                             </span><br><br>
                             <p class="color-vine font-14 text-sm">
-                                <?php echo $desc_profesor;?>
+                                <?php echo $desc_profesor; ?>
                             </p>
                         </div>
                     </div> -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-4">
-        <div class="card">
-            <div class="card blur shadow-blur max-height-vh-70">
-            <div class="card-header shadow-lg">
-                <div class="row">
-                <div class="col-md-12">
-                    <div class=" text-center">
-                    <!-- <img alt="Image" src="../../../assets/img/bruce-mars.jpg" class="avatar"> -->
-                        <div class="ms-0 text-center">
-                            <!-- <h6 class="mb-0 d-block"><?php echo $info_user['prefijo'].' '.$info_user['nombre'];?></h6> -->
-                            <span class="text-lg text-center text-dark opacity-8">Progreso <span id="porcentaje"><?php echo $porcentaje;?> %</span> </span>
+            <div class="col-12 col-lg-4">
+                <div class="card">
+                    <div class="card blur shadow-blur max-height-vh-70">
+                        <div class="card-header shadow-lg">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class=" text-center">
+                                      
+                                        <div class="ms-0 text-center">
+                                            
+                                            <span class="text-lg text-center text-dark opacity-8">Progreso <span id="porcentaje"><?php echo $porcentaje; ?> %</span> </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer d-block ">
+
+                            <progress class="<?=$hide_progress?>" id="barra_progreso" max="<?php echo $secs_totales; ?>" value="<?php echo $progreso_curso['segundos']; ?>"></progress>
+
+                            <?=$icon_complete?>
+
+                            <input type="text" name="" id="id_programa" hidden readonly value="<?php echo $id_programa; ?>">
                         </div>
                     </div>
                 </div>
-                </div>
-            </div>
-            <div class="card-footer d-block">
-                
-                <progress id="barra_progreso" max="<?php echo $secs_totales;?>" value="<?php echo $progreso_curso['segundos'];?>"></progress>
-                <input type="text" name="" id="id_programa" hidden readonly value="<?php echo $id_programa;?>">
-            </div>
             </div>
         </div>
+
+        <br>
+        <br>
+
+        <div class="fixed-bottom navbar-dark">
+            <!-- <a class="navbar-brand" href="#!">Footer</a> -->
+            <?php echo $footer; ?>
         </div>
-    </div>
-
-    <br>
-    <br>
-
-    <div class="fixed-bottom navbar-dark">
-        <!-- <a class="navbar-brand" href="#!">Footer</a> -->
-        <?php echo $footer; ?>
-    </div>
 
 </main>
 
 
 <script>
-    $(document).ready(function(){
-        
+    $(document).ready(function() {
+
         // setTimeout(mandarMensaje, 10000);
 
         // var vista = 0;
@@ -187,7 +191,7 @@
         //         success: function(respuesta) {
 
         //             console.log(respuesta);
-                    
+
         //         },
         //         error: function(respuesta) {
         //             console.log(respuesta);
@@ -202,12 +206,12 @@
         console.log(duracion);
         console.log($('#id_programa').val());
 
-        let porcentaje_num = (inicio*100)/parseInt(duracion);
+        let porcentaje_num = (inicio * 100) / parseInt(duracion);
         let increment = 1;
 
         let tiempo_total = 0;
 
-        function countTime(){
+        function countTime() {
             intervalo = setInterval(function() {
                 tiempo_total++;
 
@@ -217,13 +221,13 @@
 
                 if (tiempo_total % 60 == 0) {
                     console.log('Ejecutamos Ajax');
-                    actualizarProgreso($('#id_programa').val(),inicio);
+                    actualizarProgreso($('#id_programa').val(), inicio);
                 }
 
                 $('#barra_progreso').val(inicio);
-                porcentaje_num = (inicio*100)/parseInt(duracion);
-                $('#porcentaje').html(porcentaje_num.toFixed(0)+' %');
-            },1000);
+                porcentaje_num = (inicio * 100) / parseInt(duracion);
+                $('#porcentaje').html(porcentaje_num.toFixed(0) + ' %');
+            }, 1000);
 
             // $(window).blur(function() {
             //     ventana = 0;
@@ -237,18 +241,21 @@
             // });
         }
 
-        function actualizarProgreso(programa, segundos){
+        function actualizarProgreso(programa, segundos) {
             $.ajax({
                 url: "/Programa/updateProgressSub",
                 type: "POST",
-                data: {programa, segundos},
+                data: {
+                    programa,
+                    segundos
+                },
                 beforeSend: function() {
                     console.log("Procesando....");
                 },
                 success: function(respuesta) {
 
                     console.log(respuesta);
-                    
+
                 },
                 error: function(respuesta) {
                     console.log(respuesta);
@@ -257,14 +264,13 @@
         }
 
         countTime();
-    }); 
-    
+    });
 </script>
 
 
 
 
-                <!-- <p>1</p>
+<!-- <p>1</p>
 
                 <input type="checkbox" class="btn-face-green" id="btn-check-prueba">
                 <label for="btn-check-prueba" class="color-face-green">aaaaa

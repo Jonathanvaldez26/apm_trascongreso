@@ -1625,6 +1625,21 @@ html;
             </div>
 html;
         }
+
+        $icon_complete = '';
+        $hide_progress = '';
+
+        if($porcentaje >= 95){
+            
+            $hide_progress = 'd-none';
+            $icon_complete = <<<html
+            <div style='display: flex; justify-content: center;'>
+                <p style="font-size: 22px; color:green;">Video Completado
+                <span><i class="fas fa-check-circle"></i></span>
+                </p>
+            </div>
+html;
+        }
         
 
 
@@ -1641,6 +1656,8 @@ html;
         View::set('desc_profesor',$desc_profesor);
         View::set('progreso_curso',$progreso_curso);
         View::set('secs_totales',$secs_totales);
+        View::set('icon_complete',$icon_complete);
+        View::set('hide_progress',$hide_progress);
         View::set('header',$this->_contenedor->header($extraHeader));
         View::set('footer',$this->_contenedor->footer($extraFooter));
         View::render("programa_video");
@@ -1855,6 +1872,21 @@ html;
             </div>
 html;
         }
+
+        $icon_complete = '';
+        $hide_progress = '';
+
+        if($porcentaje >= 95){
+
+            $hide_progress = 'd-none';
+            $icon_complete = <<<html
+            <div style='display: flex; justify-content: center;'>
+                <p style="font-size: 22px; color:green;">Video Completado
+                <span><i class="fas fa-check-circle"></i></span>
+                </p>
+            </div>
+html;
+        }
         
 
 
@@ -1871,6 +1903,8 @@ html;
         View::set('desc_profesor',$desc_profesor);
         View::set('progreso_curso',$progreso_curso);
         View::set('secs_totales',$secs_totales);
+        View::set('icon_complete',$icon_complete);
+        View::set('hide_progress',$hide_progress);
         View::set('header',$this->_contenedor->header($extraHeader));
         View::set('footer',$this->_contenedor->footer($extraFooter));
         View::render("programa_video_sub");

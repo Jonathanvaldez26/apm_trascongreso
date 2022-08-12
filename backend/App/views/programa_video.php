@@ -146,7 +146,10 @@
             </div>
             <div class="card-footer d-block">
                 
-                <progress id="barra_progreso" max="<?php echo $secs_totales;?>" value="<?php echo $progreso_curso['segundos'];?>"></progress>
+                <progress class="<?=$hide_progress?>" id="barra_progreso" max="<?php echo $secs_totales;?>" value="<?php echo $progreso_curso['segundos'];?>"></progress>
+                
+                <?=$icon_complete?>
+
                 <input type="text" name="" id="id_programa" hidden readonly value="<?php echo $id_programa;?>">
             </div>
             </div>
