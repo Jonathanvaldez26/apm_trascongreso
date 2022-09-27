@@ -251,6 +251,18 @@ sql;
     return $mysqli->queryOne($query);
   }
 
+  public static function getProgresoSubPrograma($id,$num_curso){
+    $mysqli = Database::getInstance(true);
+    $query =<<<sql
+    SELECT SUM(segundos) as tiempo, ps.duracion,pr.id_programa FROM progresos_programa_sub pps
+    INNER JOIN programa_subtemas ps ON ps.id_programa_sub = pps.id_programa_sub
+    INNER JOIN programa pr ON pr.id_programa = ps.id_programa
+    WHERE pr.id_programa = $num_curso AND user_id = $id
+sql;
+
+    return $mysqli->queryOne($query);
+  }
+
   public static function getProgresoSub($id,$num_curso){
     $mysqli = Database::getInstance(true);
     $query =<<<sql

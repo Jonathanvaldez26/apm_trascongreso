@@ -143,6 +143,7 @@ html;
         }
 
         foreach ($info_fecha1 as $key => $value) {
+            $progreso_sub = ProgramaDao::getProgresoSubPrograma($_SESSION['user_id'], $value['id_programa']);
             $progreso = ProgramaDao::getProgreso($_SESSION['user_id'], $value['id_programa']);
 
             $hora_inicio = substr($value['hora_inicio'], 0, strlen($value['hora_inicio']) - 3);
@@ -158,9 +159,18 @@ html;
             $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
             $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
 
-            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $max_time2 = $progreso_sub['duracion'];
+            $duracion_sec2 = substr($max_time2, strlen($max_time2) - 2, 2);
+            $duracion_min2 = substr($max_time2, strlen($max_time2) - 5, 2);
+            $duracion_hrs2 = substr($max_time2, 0, strpos($max_time2, ':'));
 
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
+            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $secs_totales2 = (intval($duracion_hrs2) * 3600) + (intval($duracion_min2) * 60) + intval($duracion_sec2);
+
+            $secs_total = $secs_totales + $secs_totales2;
+
+            $progreso_total = $progreso['segundos'] + $progreso_sub['tiempo'];
+            $porcentaje = round(($progreso_total * 100) / $secs_total);
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa', 'xytB8X', 'inwgC3', 'JulKUi', 'KdOXkB', 'qO9rWF', '8PgQyM', 'u0VKDP'];
@@ -185,6 +195,12 @@ html;
                             <br><br>
                         </a>
 html;
+                $barra_progreso = <<<html
+                    <span class="mt-4">
+                        <b>Progreso tema general: $porcentaje %</b>
+                        <progress class="barra_progreso_small_green mt-2" max="$secs_total" value="{$progreso_total}"></progress>
+                    </span>                
+html;
             } else if ($value['url'] == '#') {
                 $submenu = <<<html
                 <span class="text-bold font-14 text-lg" readonly>
@@ -208,7 +224,14 @@ html;
                 $sub = '';
                 $submenu = '';
                 $horas = '';
+                $barra_progreso ='';
             } else {
+                $barra_progreso = <<<html
+                    <span class="mt-4">
+                        <b>Progreso tema general: $porcentaje %</b>
+                        <progress class="barra_progreso_small_green mt-2" max="$secs_total" value="{$progreso_total}"></progress>
+                    </span>                
+html;
                 $submenu = '';
                 $desc_sub = <<<html
                         <span class="text-bold font-14 text-lg" readonly>
@@ -257,10 +280,7 @@ html;
                             {$sub}
                             {$submenu}
                             {$desc_sub}
-                            <!--<span class="mt-4">
-                                <b>Progreso: $porcentaje %</b>
-                                <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </span>-->
+                            {$barra_progreso}
                     </div>
                     <div class="col-12 col-md-4">
 
@@ -279,6 +299,7 @@ html;
 html;
 
         foreach ($info_fecha2 as $key => $value) {
+            $progreso_sub = ProgramaDao::getProgresoSubPrograma($_SESSION['user_id'], $value['id_programa']);
             $progreso = ProgramaDao::getProgreso($_SESSION['user_id'], $value['id_programa']);
 
             $hora_inicio = substr($value['hora_inicio'], 0, strlen($value['hora_inicio']) - 3);
@@ -294,9 +315,18 @@ html;
             $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
             $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
 
-            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $max_time2 = $progreso_sub['duracion'];
+            $duracion_sec2 = substr($max_time2, strlen($max_time2) - 2, 2);
+            $duracion_min2 = substr($max_time2, strlen($max_time2) - 5, 2);
+            $duracion_hrs2 = substr($max_time2, 0, strpos($max_time2, ':'));
 
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
+            $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $secs_totales2 = (intval($duracion_hrs2) * 3600) + (intval($duracion_min2) * 60) + intval($duracion_sec2);
+
+            $secs_total = $secs_totales + $secs_totales2;
+
+            $progreso_total = $progreso['segundos'] + $progreso_sub['tiempo'];
+            $porcentaje = round(($progreso_total * 100) / $secs_total);
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa', 'xytB8X', 'inwgC3', 'JulKUi', 'KdOXkB', 'qO9rWF', '8PgQyM', 'u0VKDP'];
@@ -323,7 +353,7 @@ html;
 html;
             } else if ($value['url'] == '#' || is_numeric(strpos($value['url'], "http"))) {
                 $submenu = '';
-
+                $desc_sub = '';
                 $submenu .= <<<html
                     <span class="text-bold font-14 text-lg" readonly>
                         {$value['descripcion_subtitulo']}
@@ -332,9 +362,9 @@ html;
 html;
 
                 $getSubtema = ProgramaDao::getSubtemas($value['id_programa']);
-
+				
                 if ($getSubtema > 0) {
-
+				
 
                     foreach ($getSubtema as $value_s) {
 
@@ -348,7 +378,7 @@ html;
                             <span class="text-bold font-12 text-lg text-blue">{$value_s['descripcion_subtitulo']} </span>
                             <br>
                          
-    html;
+html;
                     }
                 }
 
@@ -369,11 +399,18 @@ html;
                             </span>
                             <br><br>
 html;
+                $barra_progreso = <<<html
+                        <span class="mt-4">
+                            <b>Progreso tema general: $porcentaje %</b>
+                            <progress class="barra_progreso_small_green mt-2" max="$secs_total" value="{$progreso_total}"></progress>
+                        </span>                
+html;
             } else if ((!in_array($value['id_producto'], $items))) {
                 $desc_sub = '';
                 $sub = '';
                 $submenu = '';
                 $horas = '';
+                $barra_progreso ='';
             } else {
                 $submenu = '';
 
@@ -523,11 +560,8 @@ html;
                     <div class="col-12 col-md-6">
                             {$sub}
                             {$submenu}
-                            {$desc_sub}
-                            <!--<span class="mt-4">
-                                <b>Progreso: $porcentaje %</b>
-                                <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </span>-->
+                            {$desc_sub}<br>
+                            {$barra_progreso}
                     </div>
                     <div class="col-12 col-md-4">
 
@@ -546,6 +580,7 @@ html;
 html;
 
         foreach ($info_fecha3 as $key => $value) {
+            $progreso_sub = ProgramaDao::getProgresoSubPrograma($_SESSION['user_id'], $value['id_programa']);
             $progreso = ProgramaDao::getProgreso($_SESSION['user_id'], $value['id_programa']);
 
             $hora_inicio = substr($value['hora_inicio'], 0, strlen($value['hora_inicio']) - 3);
@@ -560,10 +595,19 @@ html;
             $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
             $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
             $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
+            
+            $max_time2 = $progreso_sub['duracion'];
+            $duracion_sec2 = substr($max_time2, strlen($max_time2) - 2, 2);
+            $duracion_min2 = substr($max_time2, strlen($max_time2) - 5, 2);
+            $duracion_hrs2 = substr($max_time2, 0, strpos($max_time2, ':'));
 
             $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+            $secs_totales2 = (intval($duracion_hrs2) * 3600) + (intval($duracion_min2) * 60) + intval($duracion_sec2);
 
-            $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
+            $secs_total = $secs_totales + $secs_totales2;
+
+            $progreso_total = $progreso['segundos'] + $progreso_sub['tiempo'];
+            $porcentaje = round(($progreso_total * 100) / $secs_total);
 
             $id = $_SESSION['user_id'];
             $claves_cursos = ['5MrOZa', 'xytB8X', 'inwgC3', 'JulKUi', 'KdOXkB', 'qO9rWF', '8PgQyM', 'u0VKDP'];
@@ -590,7 +634,7 @@ html;
 html;
             } else if ($value['url'] == '#' || is_numeric(strpos($value['url'], "http"))) {
                 $submenu = '';
-
+                $desc_sub = '';
                 $submenu .= <<<html
                     <span class="text-bold font-14 text-lg" readonly>
                         {$value['descripcion_subtitulo']}
@@ -633,11 +677,18 @@ html;
                         </span>
                         <br><br>
 html;
+                $barra_progreso = <<<html
+                <span class="mt-4">
+                    <b>Progreso tema general: $porcentaje %</b>
+                    <progress class="barra_progreso_small_green mt-2" max="$secs_total" value="{$progreso_total}"></progress>
+                </span>                
+html;
             } else if ((!in_array($value['id_producto'], $items))) {
                 $desc_sub = '';
                 $sub = '';
                 $submenu = '';
                 $horas = '';
+                $barra_progreso ='';
             } else {
                 $submenu = '';
                 $desc_sub = <<<html
@@ -768,10 +819,7 @@ html;
                             {$sub}
                             {$submenu}
                             {$desc_sub}
-                            <!--<span class="mt-4">
-                                <b>Progreso: $porcentaje %</b>
-                                <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </span>-->
+                            {$barra_progreso}
                     </div>
                     <div class="col-12 col-md-4">
 
@@ -790,6 +838,7 @@ html;
 
         if ($info_fecha4) {
             foreach ($info_fecha4 as $key => $value) {
+                $progreso_sub = ProgramaDao::getProgresoSubPrograma($_SESSION['user_id'], $value['id_programa']);
                 $progreso = ProgramaDao::getProgreso($_SESSION['user_id'], $value['id_programa']);
 
                 $hora_inicio = substr($value['hora_inicio'], 0, strlen($value['hora_inicio']) - 3);
@@ -804,10 +853,19 @@ html;
                 $duracion_sec = substr($max_time, strlen($max_time) - 2, 2);
                 $duracion_min = substr($max_time, strlen($max_time) - 5, 2);
                 $duracion_hrs = substr($max_time, 0, strpos($max_time, ':'));
+                
+                $max_time2 = $progreso_sub['duracion'];
+                $duracion_sec2 = substr($max_time2, strlen($max_time2) - 2, 2);
+                $duracion_min2 = substr($max_time2, strlen($max_time2) - 5, 2);
+                $duracion_hrs2 = substr($max_time2, 0, strpos($max_time2, ':'));
 
                 $secs_totales = (intval($duracion_hrs) * 3600) + (intval($duracion_min) * 60) + intval($duracion_sec);
+                $secs_totales2 = (intval($duracion_hrs2) * 3600) + (intval($duracion_min2) * 60) + intval($duracion_sec2);
 
-                $porcentaje = round(($progreso['segundos'] * 100) / $secs_totales);
+                $secs_total = $secs_totales + $secs_totales2;
+
+                $progreso_total = $progreso['segundos'] + $progreso_sub['tiempo'];
+                $porcentaje = round(($progreso_total * 100) / $secs_total);
 
                 $id = $_SESSION['user_id'];
                 $claves_cursos = ['5MrOZa', 'xytB8X', 'inwgC3', 'JulKUi', 'KdOXkB', 'qO9rWF', '8PgQyM', 'u0VKDP'];
@@ -834,7 +892,7 @@ html;
 html;
                 } else if ($value['url'] == '#' || is_numeric(strpos($value['url'], "http"))) {
                     $submenu = '';
-
+                    $desc_sub = '';
                     $submenu .= <<<html
                     <span class="text-bold font-14 text-lg" readonly>
                         {$value['descripcion_subtitulo']}
@@ -878,12 +936,19 @@ html;
                             </span>
                             <br><br>
 html;
+                $barra_progreso = <<<html
+                    <span class="mt-4">
+                        <b>Progreso tema general: $porcentaje %</b>
+                        <progress class="barra_progreso_small_green mt-2" max="$secs_total" value="{$progreso_total}"></progress>
+                    </span>                
+html;
                 
                 } else if ((!in_array($value['id_producto'], $items))) {
                     $desc_sub = '';
                     $sub = '';
                     $submenu = '';
                     $horas = '';
+                    $barra_progreso ='';
                 } else {
                     $submenu = '';
                     $desc_sub = <<<html
@@ -1031,10 +1096,7 @@ html;
                             {$sub}
                             {$submenu}
                             {$desc_sub}
-                            <!--<span class="mt-4">
-                                <b>Progreso: $porcentaje %</b>
-                                <progress class="barra_progreso_small_green mt-2" max="$secs_totales" value="{$progreso['segundos']}"></progress>
-                            </span>-->
+                            {$barra_progreso}
                     </div>
                     <div class="col-12 col-md-4">
 
